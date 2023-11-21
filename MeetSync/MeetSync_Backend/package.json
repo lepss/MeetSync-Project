@@ -21,5 +21,11 @@
   "bugs": {
     "url": "https://github.com/lepss/MeetSync-Project/issues"
   },
-  "homepage": "https://github.com/lepss/MeetSync-Project#readme"
+  "homepage": "https://github.com/lepss/MeetSync-Project#readme",
+  "dependencies": {
+    "bcrypt": "^5.1.1",
+    "cors": "^2.8.5",
+    "express": "^4.18.2",
+    "nodemon": "^3.0.1"
+  }
 }
