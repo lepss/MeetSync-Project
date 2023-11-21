@@ -1,0 +1,25 @@
+{
+  "name": "meetsync_backend",
+  "version": "1.0.0",
+  "description": "Meetsync is a web application to oragnize meetup during event",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/lepss/MeetSync-Project.git"
+  },
+  "keywords": [
+    "meetsync",
+    "web",
+    "app"
+  ],
+  "author": "Adrien Miotton",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/lepss/MeetSync-Project/issues"
+  },
+  "homepage": "https://github.com/lepss/MeetSync-Project#readme"
+}
