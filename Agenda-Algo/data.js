@@ -15,7 +15,9 @@ const organizerData = [
   const clientData = [
     {
       client_id: 1,
-      appointment_session_id: 101
+      appointment_session_id: 101,
+      available_appointment: [{ day: "", start_time: "", end_time: ""}],
+      booked_appointment: [{ day: "", start_time: "", end_time: "", participant_id: ""}]
     },
     {
       client_id: 2,
