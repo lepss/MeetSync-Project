@@ -1,4 +1,4 @@
-class Schedule{
+export class Schedule{
     constructor(planning, appointmentDurartion, breakDuration){
         this.planning = planning;
         this.appointmentDurartion = appointmentDurartion;
