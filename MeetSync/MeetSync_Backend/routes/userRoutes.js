@@ -79,5 +79,9 @@ module.exports = (app, db) =>{
                 }
             }
         })
+
+        app.put("/api/user/updateRole/:id", withAuth, async(req, res, next)=>{
+            //TODO
+        })
     })
 }
