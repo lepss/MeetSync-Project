@@ -14,12 +14,12 @@ export class MeetingPool{
         this.participants = [];
 
         this.clientsData.forEach(client =>{
-            let c = new MeetingParticipant(client.client_id, this.availableSlot);
+            let c = new MeetingParticipant(client, this.availableSlot);
             this.clients.push(c);
         })
         
         this.participantsData.forEach(participant =>{
-            let p = new MeetingParticipant(participant.participant_id, this.availableSlot);
+            let p = new MeetingParticipant(participant, this.availableSlot);
             this.participants.push(p);
         })
     }

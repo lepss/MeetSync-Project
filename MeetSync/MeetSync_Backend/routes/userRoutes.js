@@ -1,7 +1,7 @@
 const bcrypt = require("bcrypt")
 const jwt = require("jsonwebtoken")
 const secret = 'fsjs30' //TODO stocké dans env
-const withAuth = require("../middleware/withAuth")
+const authentication = require("../middleware/authentication")
 
 module.exports = (app, db) =>{
     const UserModel = require("../models/UserModel")(db)
@@ -56,7 +56,7 @@ module.exports = (app, db) =>{
             }
         })
 
-        app.put("/api/user/update/:id", withAuth, async(req, res, next)=>{
+        app.put("/api/user/update/:id", authentication, async(req, res, next)=>{
             const updateUser = await UserModel.updateUser(req, req.params.id)
             if(updateUser.code){
                 res.json({status: 500, msg: "Update user failed due to server errror", err: updateUser})
@@ -72,7 +72,7 @@ module.exports = (app, db) =>{
                         lastname: newUser[0].lastname,
                         email: newUser[0].email,
                         phone: newUser[0].phone,
-                        role: newUser[0].role,
+                        role: newUser[0].role, // TODO Garder l'ancien role et ne pas le modifié par cette route
                         avatar_url: newUser[0].avatar_url //TODO Gerer l'import d'image depuis le front et dans UserModel
                     }
                     res.json({status: 200, msg: "User updated", user: userInfo})
@@ -80,7 +80,7 @@ module.exports = (app, db) =>{
             }
         })
 
-        app.put("/api/user/updateRole/:id", withAuth, async(req, res, next)=>{
+        app.put("/api/user/updateRole/:id", authentication, async(req, res, next)=>{
             //TODO
         })
     })

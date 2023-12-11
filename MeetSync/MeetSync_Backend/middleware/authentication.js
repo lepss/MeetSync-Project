@@ -1,7 +1,7 @@
 const jwt = require('jsonwebtoken')
 const secret = "fsjs30" //TODO stocké dans env
 
-const withAuth = (req, res, next) =>{
+const authentication = (req, res, next) =>{
     const token = req.headers["x-access-token"]
 
     if(token === undefined){
@@ -18,4 +18,4 @@ const withAuth = (req, res, next) =>{
     }
 }
 
-module.exports = withAuth
+module.exports = authentication
