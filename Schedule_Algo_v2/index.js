@@ -1,11 +1,17 @@
-import fakeData from "./fake-data.js";
+import fakeData from "./fakeData.js";
 import { Event } from "./event.js";
-import { MeetingPool } from "./meeting-pool.js";
+import { MeetingPool } from "./meetingPool.js";
+import { FakeDataGenerator } from "./fakeDataGenerator.js";
+
+//Step 0: Génération des fake datas
+const fakeDataGenerator = new FakeDataGenerator()
 
 // Step 1: Collecte des Informations
 const eventData = fakeData.eventData[0];
-const organizersData = fakeData.organizerData;
-const participantsData = fakeData.participantData;
+// const organizersData = fakeData.organizerData;
+const organizersData = fakeDataGenerator.generateOrganizerData(30)
+// const participantsData = fakeData.participantData;
+const participantsData = fakeDataGenerator.generateParticipantData(10, 25)
 
 // Step 2 : Setup agenda event
 const event = new Event(eventData);
@@ -20,10 +26,10 @@ const organizersSetup = meetingPoolSetup.organizers
 const participantsSetup = meetingPoolSetup.participants
 console.log("All Appointments", eventAppointments);
 console.log("Organizers", organizersSetup);
-console.log("Participants", participantsSetup); // TODO
+console.log("Participants", participantsSetup);
 
 // Step 4 : Draw agenda
-const test = participantsSetup[1]
+const test = participantsSetup[0]
 const events = []
 test.bookSlots.map((appointment, index) => {
     let event = {
@@ -31,16 +37,22 @@ test.bookSlots.map((appointment, index) => {
         allDay: false,
         start : new Date(appointment.start),
         end : new Date(appointment.end),
-        title: `Rdv with ${appointment.participant_id}`,
+        title: `Rdv with ${appointment.organizer_id}`,
         editable: false,
-        display: "auto"
+        // display: "auto"
     }
     events.push(event)
 })
 
 let ec = new EventCalendar(document.getElementById('calendar'), {
     view: 'timeGridWeek',
+    headerToolBar:{
+        start: 'prev, next today',
+        center: 'title',
+        end: 'dayGridMonth, timeGridWeek,timeGridDay,listWeek'
+    },
+    scrollTime: '08:00:00',
     date: new Date("2023-01-01"),
-    slotDuration: "00:30",
+    slotDuration: "00:10",
     events: events
 });

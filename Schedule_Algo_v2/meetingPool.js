@@ -22,25 +22,6 @@ export class MeetingPool{
         return {organizers : organizers, participants : participants}
     }
 
-    findEarliestAvailableCommonSlot = (slots1, slots2) => {
-        let i = 0, j = 0;
-    
-        while (i < slots1.length && j < slots2.length){
-            if(slots1[i].start < slots2[j].start ){
-                i++
-            }else if(slots1[i].start  > slots2[j].start ){
-                j++
-            }else{
-                return{
-                    date: slots1[i],
-                    index1 : i,
-                    index2: j
-                } 
-            }
-        }
-        return null
-    }
-
     generateMeetingPool(){
         const meetingPoolSetup = this.setupMeetingPool() //Setup un agenda vide pour tout les participants
         const organizers = JSON.parse(JSON.stringify(meetingPoolSetup.organizers)) //Recupére les agendas des organisateurs
@@ -85,17 +66,21 @@ export class MeetingPool{
                                 sessionOrganizer.availableSlots.splice(earliestCommonSlot.index1, 1)
 
                                 randomParticipant.data.accepted_appointments.splice(randomIndexSessionId, 1)
+                                console.log("Matching success");
                             }else{
+                                // 
                                 console.log(`Error, no matching slot find for ${sessionOrganizer} and  ${randomParticipant}`);
                             }
-
                         }else{
+                            // TODO remove accepted_appointment and add appointment to rejected_appointment
                             console.log(`Error, ${sessionOrganizer[0]} doesnt have any avaible slots`);
                         }
                     }else{
+                        // TODO remove accepted_appointment and add appointment to rejected_appointment
                         console.log(`Error, ${sessionId} doesnt exist`);
                     }
                 }else{
+                    // TODO Remove participant and add all appointement left to rejected_appointment
                     console.log(`${randomParticipant} has no available slots`);
                 }
             }else{
@@ -107,5 +92,26 @@ export class MeetingPool{
             organizers : organizers, 
             participants : participantsSetup
         }
+    }
+
+    findEarliestAvailableCommonSlot = (slots1, slots2) => {
+        let i = 0, j = 0;
+        // Optimisation -> Tester dans les deux sens si le premier creneau de disponible chez chacun des participant est disponible chez l'autre, afin d'eviter de parcourir tout le tableau
+        while (i < slots1.length && j < slots2.length){
+            const date1 = new Date(slots1[i].start).getTime()
+            const date2 = new Date(slots2[j].start).getTime()
+            if(date1 < date2 ){
+                i++
+            }else if(date1  > date2 ){
+                j++
+            }else{
+                return{
+                    date: slots1[i],
+                    index1 : i,
+                    index2: j
+                } 
+            }
+        }
+        return null
     }
 }
