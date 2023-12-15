@@ -29,7 +29,7 @@ console.log("Organizers", organizersSetup);
 console.log("Participants", participantsSetup);
 
 // Step 4 : Draw agenda
-const test = participantsSetup[0]
+const test = organizersSetup[0]
 const events = []
 test.bookSlots.map((appointment, index) => {
     let event = {
@@ -53,6 +53,6 @@ let ec = new EventCalendar(document.getElementById('calendar'), {
     },
     scrollTime: '08:00:00',
     date: new Date("2023-01-01"),
-    slotDuration: "00:10",
+    slotDuration: "00:30",
     events: events
 });
