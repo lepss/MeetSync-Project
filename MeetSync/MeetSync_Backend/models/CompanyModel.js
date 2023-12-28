@@ -79,6 +79,6 @@ class CompanyModel{
     }
 
     static deleteCompany(id){
-
+        //TODO delete 
     }
 }

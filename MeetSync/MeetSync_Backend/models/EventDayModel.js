@@ -65,6 +65,6 @@ class EventDayModel{
     }   
 
     static deleteEventDay(id){
-
+        //TODO delete 
     }
 }

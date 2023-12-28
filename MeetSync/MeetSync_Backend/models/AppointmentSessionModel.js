@@ -80,6 +80,6 @@ class AppointmentSessionModel{
     }
 
     static deleteAppointmentSession(id){
-        
+        //TODO delete with request / appointment if exist
     }
 }

@@ -94,6 +94,6 @@ class EventModel{
     }
 
     static deleteEvent(id){
-
+        //TODO delete with event days / session / request / appointment if exist
     }
 }

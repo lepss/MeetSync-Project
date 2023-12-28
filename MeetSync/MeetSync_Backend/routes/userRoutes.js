@@ -10,6 +10,7 @@ const secret = process.env.SECRET_USER || config.token.secret_user;
 
 module.exports = (app, db) =>{
     const UserModel = require("../models/UserModel")(db)
+    const CompanyModel = require("../models/CompanyModel")(db)
 
     app.post("/api/user/save", async (req, res, next) =>{
         const check = await UserModel.getUserByEmail(req.body.email)
@@ -25,9 +26,9 @@ module.exports = (app, db) =>{
             }else{
                 const user = await UserModel.saveOneUser(req)
                 if(user.code){
-                    res.json({status: 500, msg: "Register failed due to server error", err: user})
+                    res.json({status: 500, msg: "Register failed due to a server error", err: user})
                 } else {
-                    //TODO Send mail to verify email
+                    //TODO Send mail to verify account
                     res.json({status: 200, msg: "User registered"})
                 }
             }
@@ -67,6 +68,7 @@ module.exports = (app, db) =>{
 
     app.put("/api/user/update/:key_id", authentication, async(req, res, next)=>{
         const updateUser = await UserModel.updateUser(req, req.params.key_id)
+        //TODO test if a company is set and add it to db
         if(updateUser.code){
             res.json({status: 500, msg: "Update user failed due to server errror", err: updateUser})
         }else{
