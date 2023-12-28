@@ -1,5 +1,10 @@
 const jwt = require('jsonwebtoken')
-const secret = "fsjs30" //TODO stocké dans env
+if(!process.env.HOST_DB) {
+	config = require('../config_offline');
+} else {
+	config = require('../config_online');
+}
+const secret = process.env.SECRET_USER || config.token.secret_user;
 
 const authentication = (req, res, next) =>{
     const token = req.headers["x-access-token"]
@@ -11,6 +16,7 @@ const authentication = (req, res, next) =>{
             if(err){
                 res.json({status: 401, msg: "Error, your token is invalid!"})
             }else{
+                req.email = decoded.email
                 req.id = decoded.id
                 next()
             }

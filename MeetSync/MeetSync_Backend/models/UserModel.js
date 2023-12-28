@@ -10,7 +10,11 @@ module.exports = (_db) => {
 }
 
 class UserModel{
-
+    /**
+     * Save one user with minimum parameters
+     * @param {request} req 
+     * @returns {(response|error)} Response of db query or error 
+     */
     static saveOneUser(req){
         let key_id  = randomId(len, pattern)
         return bcrypt.hash(req.body.password, saltRounds)
@@ -18,19 +22,25 @@ class UserModel{
             return db.query(`
             INSERT INTO users
             (email, password, role, key_id, created_at, account_validate, avatar_url)
-            VALUES (?, ?, ?, ?, NOW(), ?, ?)`, 
-            [req.body.email, hash, "user", randomId, false, "no-pict.jpg"])
+            VALUES (?, ?, "user", ?, NOW(), ?, "no-pict.jpg")`, 
+            [req.body.email, hash, key_id, false])
             .then((res)=>{
                 res.key_id = key_id;
                 return res;
             })
             .catch((err)=>{
+                console.log(err);
                 return err;
             })
         })
         .catch(err=>console.log(err))    
     }
 
+    /**
+     * Validate user account 
+     * @param {string} key_id - Unique user id
+     * @returns {(response|error)} Response or error of db query
+     */
     static updateAccountValidateUser(key_id){
 		return db.query(`
         UPDATE users 
@@ -45,6 +55,11 @@ class UserModel{
         })
 	}
 
+    /**
+     *  Update user key id
+     * @param {string} email 
+     * @returns {(response|error)} Response or error of db query
+     */
     static updateKeyId(email){
         let randomKey_id = randomId(len, pattern)
 		return db.query(`
@@ -61,6 +76,12 @@ class UserModel{
         })
 	}
 
+    /**
+     * Update new user password
+     * @param {string} newPassword 
+     * @param {string} key_id 
+     * @returns {(response|error)} Response or error of db query
+     */
     static updatePassword(newPassword, key_id){
 	    return bcrypt.hash(newPassword, saltRounds)
         .then((hash)=>{
@@ -80,6 +101,11 @@ class UserModel{
 	    
 	}
 
+    /**
+     * Get one user by his email
+     * @param {string} email 
+     * @returns {(response|error)} Response or error of db query
+     */
     static getUserByEmail(email){
         return db.query(`
         SELECT *
@@ -94,6 +120,11 @@ class UserModel{
         })
     }
 
+    /**
+     * Get user by his key id
+     * @param {string} key_id 
+     * @returns {(response|error)} Response or error of db query
+     */
     static getUserById(key_id){
         return db.query(`
         SELECT *
@@ -108,6 +139,7 @@ class UserModel{
         })
     }
 
+    
     static updateUserPict(img_url, key_id){
         return db.query(`
         UPDATE users
