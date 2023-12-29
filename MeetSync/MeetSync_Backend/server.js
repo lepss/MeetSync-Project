@@ -15,7 +15,7 @@ app.use(cors())
 app.use(express.static(__dirname + '/public'))
 
 let config;
-if(!process.env.HOST){
+if(process.env.USERNAME = "amiot"){
     config = require("./config_offline")
 }else{
     config = require("./config_online")
@@ -53,5 +53,6 @@ mysql.createConnection({ //TODO Modifier pour publication sur wecode
 //Server running
 const PORT = process.env.PORT || 8080
 app.listen(PORT, ()=>{
+    console.log(process.env);
     console.log(`MeetSync server running on http://localhost:${PORT}/ ... `)
 })
