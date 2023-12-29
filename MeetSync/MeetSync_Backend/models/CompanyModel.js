@@ -79,6 +79,15 @@ class CompanyModel{
     }
 
     static deleteCompany(id){
-        //TODO delete 
+        return db.query(`
+        DELETE FROM companies
+        WHERE id = ?`
+        , [id])
+        .then((res)=>{
+            return res
+        })
+        .catch((err)=>{
+            return err
+        })
     }
 }

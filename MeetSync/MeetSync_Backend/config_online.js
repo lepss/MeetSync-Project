@@ -2,8 +2,8 @@ module.exports = {
 	db: {
 		host: "db.3wa.io",
 		database: "meetsync",
-		user: "amiotton",
-		password: "c0b7990cb05833d15b0d5001963aa61a"
+		user: "adrienmiotton",
+		password: "3bc5db98f87b8f4bf8e2443c530f5602"
 	},
 	token: {
 		secret: "fsjs30",

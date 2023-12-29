@@ -65,6 +65,15 @@ class EventDayModel{
     }   
 
     static deleteEventDay(id){
-        //TODO delete 
+        return db.query(`
+        DELETE FROM event_days
+        WHERE id = ?`
+        , [id])
+        .then((res)=>{
+            return res
+        })
+        .catch((err)=>{
+            return err
+        })
     }
 }
