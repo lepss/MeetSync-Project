@@ -15,7 +15,7 @@ app.use(cors())
 app.use(express.static(__dirname + '/public'))
 
 let config;
-if(process.env.USERNAME = "amiot"){
+if(process.env.EDITOR !== "vi"){
     config = require("./config_offline")
 }else{
     config = require("./config_online")
