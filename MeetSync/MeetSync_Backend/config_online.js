@@ -1,7 +1,7 @@
 module.exports = {
 	db: {
 		host: "db.3wa.io",
-		database: "meetsync",
+		database: "adrienmiotton_meetsync",
 		user: "adrienmiotton",
 		password: "3bc5db98f87b8f4bf8e2443c530f5602"
 	},
