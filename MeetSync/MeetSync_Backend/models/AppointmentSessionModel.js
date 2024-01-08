@@ -4,12 +4,12 @@ module.exports = (_db) => {
 }
 
 class AppointmentSessionModel{
-    static saveOneAppointmentSession(req){
+    static saveOneAppointmentSession(req, event_id){
         return db.query(`
         INSERT INTO appointment_sessions
         (description, created_at, event_id, user_id)
         VALUES (?, NOW(), ?, ?)`
-        , [req.body.description, req.body.event_id, req.body.user_id])
+        , [req.body.description, event_id, req.body.user_id])
         .then((res)=>{
             return res;
         })

@@ -10,7 +10,7 @@ class AppointmentModel{
         INSERT INTO appointments
         (date_start, date_end, appointment_request_id, appointment_session_id)
         VALUES (?, ?, ?, ?)`
-        , [req.body.request, req.body.user_id, req.body.appointment_session_id])
+        , [req.body.request, req.body.user_id, req.body.appointment_session_id]) //TODO correction
         .then((res)=>{
             return res;
         })

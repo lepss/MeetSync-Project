@@ -14,8 +14,8 @@ export class MeetingPool{
             organizers.push(o)
         })
 
-        this.participantsData.map((organizer) =>{
-            let o = {data: organizer, availableSlots: this.eventSchedule.slice(), bookSlots: []}
+        this.participantsData.map((participant) =>{
+            let o = {data: participant, availableSlots: this.eventSchedule.slice(), bookSlots: []}
             participants.push(o)
         })
 

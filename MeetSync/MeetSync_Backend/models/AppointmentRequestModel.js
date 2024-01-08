@@ -5,12 +5,12 @@ module.exports = (_db) => {
 
 class AppointmentRequestModel{
 
-    static saveOneAppointmentRequest(req){
+    static saveOneAppointmentRequest(req, appointmentSessionId){
         return db.query(`
         INSERT INTO appointment_requests
         (request, created_at, accepted_status, user_id, appointment_session_id)
         VALUES (?, NOW(), "pending", ?, ?)`
-        , [req.body.request, req.body.user_id, req.body.appointment_session_id])
+        , [req.body.request, req.body.user_id, appointmentSessionId])
         .then((res)=>{
             return res;
         })
@@ -84,7 +84,7 @@ class AppointmentRequestModel{
         })
     }
 
-    static updateAppointmentRequest(id){
+    static updateAppointmentRequest(req, id){
         return db.query(`
         UPDATE appointment_requests
         SET request = ?

@@ -15,7 +15,7 @@ app.use(cors())
 app.use(express.static(__dirname + '/public'))
 
 let config;
-if(process.env.EDITOR !== "vi"){
+if(process.env.EDITOR !== "vi"){ // Check if server running on wecode
     config = require("./config_offline")
 }else{
     config = require("./config_online")
@@ -28,6 +28,10 @@ const password = process.env.PASSWORD_DB || config.db.password
 
 //Get routes
 const userRoutes = require("./routes/userRoutes")
+const eventRoutes = require("./routes/eventRoutes")
+const appointmentRequestRoutes = require("./routes/appointmentRequestRoutes")
+const appointmentSessionRoutes = require("./routes/appointmentSessionRoutes")
+const appointmentRoutes = require("./routes/appointmentRoutes")
 
 //Database connection
 mysql.createConnection({ //TODO Modifier pour publication sur wecode
@@ -47,12 +51,23 @@ mysql.createConnection({ //TODO Modifier pour publication sur wecode
     })
 
     userRoutes(app, db);
+    eventRoutes(app, db);
+    appointmentRequestRoutes(app, db);
+    appointmentSessionRoutes(app, db);
+    appointmentRoutes(app, db);
+
 })
 .catch(err=>console.log(err))
 
-//Server running
+//Server port running
 const PORT = process.env.PORT || 8080
+
+// Gestion des erreurs serveur
+app.use((err, req, res, next) => {
+    console.error(err.stack);
+    res.status(500).json({ msg: 'Error server'});
+  });
+
 app.listen(PORT, ()=>{
-    console.log(process.env);
     console.log(`MeetSync server running on http://localhost:${PORT}/ ... `)
 })
