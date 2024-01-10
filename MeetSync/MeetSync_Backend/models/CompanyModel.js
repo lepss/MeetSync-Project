@@ -4,12 +4,12 @@ module.exports = (_db) => {
 }
 
 class CompanyModel{
-    static saveOneCompany(req){
+    static saveOneCompany(req, user_id){
         return db.query(`
         INSERT INTO companies
         (name, country, city, website, user_id)
         VALUES (?, ?, ?, ?, ?)`
-        , [req.body.name, req.body.country, req.body.city, req.body.website, req.body.user_id])
+        , [req.body.name, req.body.country, req.body.city, req.body.website, user_id])
         .then((res)=>{
             return res;
         })

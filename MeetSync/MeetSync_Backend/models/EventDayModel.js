@@ -4,7 +4,7 @@ module.exports = (_db) => {
 }
 
 class EventDayModel{
-    static saveOneEventDay(res){
+    static saveOneEventDay(req){
         return db.query(`
         INSERT INTO event_days
         (start_time, end_time, lunch_start_time, lunch_end_time, event_id)
