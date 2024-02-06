@@ -140,9 +140,9 @@ class UserModel{
     static updateUser(req, key_id){
         return db.query(`
         UPDATE users
-        SET username = ?, firstname = ?, lastname = ?, email = ?, phone = ?, avatar_url = ?
+        SET username = ?, firstname = ?, lastname = ?, phone = ?
         WHERE key_id = ?
-        `, [req.body.username, req.body.firstname, req.body.lastname, req.body.email, req.body.phone, req.body.avatar_url, key_id])
+        `, [req.body.username, req.body.firstname, req.body.lastname, req.body.phone, key_id])
         .then((res)=>{
             return res
         })

@@ -69,6 +69,26 @@ class UserController {
         }
     }
 
+    static async checkToken(req, res){
+        const user = await UserModel.getUserByEmail(req.email)
+        if(user.code){
+            res.status(500).json({msg: "User check error", err : user})
+        }else{
+            const myUser = {
+                id: user[0].id,
+                username: user[0].username,
+                firstname: user[0].firstname,
+                lastname: user[0].lastname,
+                email: user[0].email,
+                phone: user[0].phone,
+                role: user[0].role,
+                avatar_url: user[0].avatar_url,
+                key_id: user[0].key_id
+            }
+            res.status(200).json({msg: "User find", user: myUser})
+        }
+    }
+
     static async updateUser(req, res){
         const updateUser = await UserModel.updateUser(req, req.params.key_id)
         if(updateUser.code){

@@ -32,6 +32,7 @@ const eventRoutes = require("./routes/eventRoutes")
 const appointmentRequestRoutes = require("./routes/appointmentRequestRoutes")
 const appointmentSessionRoutes = require("./routes/appointmentSessionRoutes")
 const appointmentRoutes = require("./routes/appointmentRoutes")
+const authRoutes = require("./routes/authRoutes")
 
 //Database connection
 mysql.createConnection({ //TODO Modifier pour publication sur wecode
@@ -55,6 +56,7 @@ mysql.createConnection({ //TODO Modifier pour publication sur wecode
     appointmentRequestRoutes(app, db);
     appointmentSessionRoutes(app, db);
     appointmentRoutes(app, db);
+    authRoutes(app, db);
 
 })
 .catch(err=>console.log(err))
