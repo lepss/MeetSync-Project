@@ -1,0 +1,223 @@
+/**** VARIABLES ****/
+// DEFAULT
+    // Generalites
+    $default-font-size: 1.8rem;
+    $h1-font-size: 4.3rem;
+    $h2-font-size: 3.6rem;
+    $h3-font-size: 2.2rem;
+    $container-max-width: 1600px;
+    $container-min-width: 320px;
+    $line-height: 1.5;
+
+    // Fonts
+    $default-font: Helvetica, Avenir, Inter, system-ui,;
+
+    // Colors
+    $default-1-background-color: #fafdfe;
+    $default-2-sublte-background-color: #f2fafb;
+    $default-3-ui-background: #def7f9;
+    $default-4-hover-ui-background: #caf1f6;
+    $default-5-active-selected-ui-background: #b5e9f0;
+    $default-6-subtle-border-separator: #9ddde7;
+    $default-7-ui-focus-border: #7dcedc;
+    $default-8-hovered-ui-border: #3db9cf;
+    $default-9-solid-background: #00a2c7;
+    $default-10-hovered-solid-background: #0797b9;
+    $default-11-low-contrast-text: #107d98;
+    $default-12-high-contrast-text: #0d3c48;
+
+/**** GLOBAL ****/
+*{
+    box-sizing: border-box;
+}
+
+html{
+    font-size: 62.5%;
+    margin: 0;
+    min-width: $container-min-width;
+}
+
+body{
+    margin: 0;
+    background-color: $default-1-background-color;
+}
+
+img { 
+    max-width: 100%; 
+    height: auto; 
+}
+figure { 
+    margin: 0; 
+}
+
+header{
+    margin: 0 auto;
+    background-color: $default-9-solid-background;
+    max-width: $container-max-width;
+    color: $default-12-high-contrast-text;
+    margin-bottom: 100px;
+    a{
+        color: $default-12-high-contrast-text;
+        text-decoration: none;
+    }
+    nav{
+        margin: 0 auto;
+        ul{
+            padding: 0;
+            margin: 0 auto;
+            list-style-type: none;
+            li{
+                text-align: center;
+                padding:  1.5rem;
+            }
+        }
+    }
+}
+
+footer{
+    margin: 0 auto;
+    background-color: $default-9-solid-background;
+    max-width: $container-max-width;
+    color: $default-12-high-contrast-text;
+    padding: 3rem;
+    text-align: center;
+}
+
+/**** FONT ****/
+body{
+    font-size: $default-font-size;
+    line-height: $line-height;
+    font-family: $default-font;
+    color: $default-11-low-contrast-text;
+}
+
+h1, h2, h3{
+    font-family: $default-font;
+    color: $default-12-high-contrast-text;
+    font-weight: 700;
+}
+
+h1{
+    font-size: $h1-font-size;
+}
+
+h2{
+    font-size: $h2-font-size;
+}
+
+h3{
+    font-size: $h3-font-size;
+}
+
+/**** FORMS ****/
+.container {
+    width: 90%;
+    background: #fff;
+    margin: 0 auto;
+    box-shadow:0px 15px 16.83px 0.17px rgba(0, 0, 0, 0.05);
+    border-radius: 20px;
+}
+
+/**** Signup ****/
+.signup {
+    margin-bottom: 150px;
+}
+.signup-content {
+    display: flex;
+    padding: 75px 0;
+    flex-wrap: wrap;
+}
+.signup-form, .signup-image, .signin-form, .signin-image{
+    width: 45%;
+    overflow: hidden;
+}
+.signup-image {
+    margin: 0 auto;
+    margin-top: 45px;
+}
+.form-title {
+    margin-bottom: 33px;
+}
+
+figure {
+    margin-bottom: 50px;
+    text-align: center;
+}
+.form-submit {
+    display: inline-block;
+    background: $default-9-solid-background;
+    color: #fff;
+    border-bottom: none;
+    width: auto;
+    padding: 15px 39px;
+    border-radius: 5px;
+    border-radius: 5px;
+    margin-top: 25px;
+    cursor: pointer;
+    &:hover {
+        background: darken($default-9-solid-background, 10%);
+    }
+}
+.signup-form {
+    margin: 0 auto;
+    margin-left: 75px;
+    padding-left: 34px;
+}
+.register-form {
+    width: 100%;
+}
+.form-group {
+    position: relative;
+    margin-bottom: 25px;
+    overflow: hidden;
+    &:last-child {
+        margin-bottom: 0px;
+    }
+}
+
+input {
+    width: 100%;
+    display: block;
+    border: none;
+    border-bottom: 1px solid $default-11-low-contrast-text;
+    padding: 6px 30px;
+    box-sizing: border-box;
+    outline: none;
+    &::-webkit-input-placeholder {
+		color: $default-11-low-contrast-text;
+	}
+    &:focus {
+        border-bottom: 1px solid $default-12-high-contrast-text;
+        &::-webkit-input-placeholder {
+            color: $default-12-high-contrast-text;
+        }
+    }
+}
+
+label {
+    position: absolute;
+    left: 0;
+    top: 50%;
+    transform:translateY(-50%);
+    color: $default-8-hovered-ui-border;
+}
+
+/**** Login ****/
+.sign-in {
+    margin-bottom: 150px;
+}
+.signin-content {
+    display: flex;
+    padding: 75px 0;
+    flex-wrap: wrap;
+}
+.signin-form {
+    margin: 0 auto;
+    margin-right: 75px;
+    padding-right: 34px;
+}
+
+.signin-image {
+    margin: 0 auto;
+    margin-top: 45px;
+}

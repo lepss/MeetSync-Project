@@ -41,7 +41,7 @@ const Header = () => {
                 <ul>
                     <li>
                         <Link to="/profil">
-                            <FontAwesomeIcon icon={faUserTie} /> {user.infos.firstName}
+                            <FontAwesomeIcon icon={faUserTie} /> {user.infos.firstname}
                         </Link>
                     </li>
                     {user.infos.role === "admin" && 
@@ -53,7 +53,7 @@ const Header = () => {
                     }
                     <li>
                         <Link to="/logout">
-                            <FontAwesomeIcon icon={faPowerOff} />
+                            <FontAwesomeIcon icon={faPowerOff} /> Logout
                         </Link>
                     </li>
                 </ul>

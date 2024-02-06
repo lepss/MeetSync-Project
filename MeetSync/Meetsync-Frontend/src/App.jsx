@@ -1,7 +1,8 @@
-import './App.css'
+import './css/style.css'
 import {Routes, Route} from 'react-router-dom'
 
 import Header from "./components/header";
+import Footer from './components/footer';
 import Home from "./containers/home";
 import RequireAuth from "./containers/helpers/require-auth";
 import Login from './containers/user/login';
@@ -31,6 +32,7 @@ function App() {
                     />
                 </Routes>
             </main>
+            <Footer/>
         </div>
     )
 }
