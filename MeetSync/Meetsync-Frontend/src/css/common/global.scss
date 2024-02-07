@@ -1,0 +1,47 @@
+/************* LAYOUT *************/
+*{ box-sizing: border-box; }
+html{
+    font-size: 62.5%;
+    margin: 0;
+    min-width: $container-min-width;
+}
+body{
+    margin: 0;
+    background-color: $default-2-sublte-background-color
+}
+img { max-width: 100%; height: auto; }
+figure { margin: 0; }
+input, select, textarea { outline: none; }
+a:focus, a:active { text-decoration: none; outline: none; }
+input:focus, select:focus, textarea:focus { outline: none; }
+
+.container {
+    width: 90%;
+    background: $default-white;
+    margin: 0 auto;
+    box-shadow:0px 15px 16.83px 0.17px rgba(0, 0, 0, 0.05);
+    border-radius: 20px;
+    max-width: $container-max-width;
+}
+/************* FONT *************/
+body{
+    font-size: $default-font-size;
+    line-height: $line-height;
+    font-family: $default-font;
+    color: $default-black;
+    font-weight: 400;
+}
+h1, h2, h3{
+    font-family: $default-font; //Set title font
+    color: $default-11-low-contrast-text;
+    font-weight: 700;
+}
+h1{
+    font-size: $h1-font-size;
+}
+h2{
+    font-size: $h2-font-size;
+}
+h3{
+    font-size: $h3-font-size;
+}

@@ -2,6 +2,11 @@ import { useForm } from "react-hook-form"
 import {useState} from "react"
 import { Navigate } from "react-router-dom"
 import { registerUser } from "../../api/user"
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import {
+  faLock,
+  faEnvelope
+} from "@fortawesome/free-solid-svg-icons";
 
 const Register = () => {
     const [redirect, setRedirect] = useState(false)
@@ -38,7 +43,7 @@ const Register = () => {
                         {error !== null && <p className="form-error">{error}</p>} 
                         <form onSubmit={handleSubmit(onSubmit)} className="register-form" id="register-form">
                             <div className="form-group">
-                                <label htmlFor="email">E</label>
+                                <label htmlFor="email"><FontAwesomeIcon icon={faEnvelope}/></label>
                                 <input type="email" placeholder="Email" id="email" 
                                     {...register("email", {
                                         required: "This field is required",
@@ -51,7 +56,7 @@ const Register = () => {
                             </div>
                             {errors.email && <p className="form-error">{errors.email.message}</p>}
                             <div className="form-group">
-                            <label htmlFor="password">P</label>
+                            <label htmlFor="password"><FontAwesomeIcon icon={faLock}/></label>
                                 <input type="password" placeholder="Password" id="password"
                                     {...register("password", {
                                         required: "This field is required",
@@ -64,7 +69,7 @@ const Register = () => {
                             </div>
                             {errors.password && <p className="form-error">{errors.password.message}</p>}
                             <div className="form-group">
-                            <label htmlFor="repassword">R</label>
+                            <label htmlFor="repassword"><FontAwesomeIcon icon={faLock}/></label>
                                 <input type="password" placeholder="Confirm password" id="repassword"
                                     {...register("confirm_password", {
                                         required: "This field is required",

@@ -44,25 +44,44 @@ const Profil = () =>{
     }, [user])
 
     return(
-        <section className="form-container">
-            <h2 className="form-title">Profil</h2>
-            {error !== null && <p className="form-error">{error}</p>}
-            {msg !== null && <p className="form-msg">{msg}</p>}
-            <form onSubmit={handleSubmit(onSubmit)}>
-                <input type="text" defaultValue={user.infos.firstname} placeholder="firstname" {...register("firstname")} />
-                <input type="text" defaultValue={user.infos.lastname} placeholder="lastname" {...register("lastname")} />
-                <input type="text" defaultValue={user.infos.username} placeholder="username" {...register("username")} />
-                <input type="tel" defaultValue={user.infos.phone} placeholder="phone" 
-                    {...register("phone", {
-                        pattern: {
-                            value: /^[\+]?[(]?[0-9]{3}[)]?[-\s\.]?[0-9]{3}[-\s\.]?[0-9]{4,6}$/,
-                            message: "Invalid phone number"
-                        }
-                    })} 
-                />
-                {errors.phone && <p className="form-error">{errors.phone.message}</p>}
-                <input type="submit"/>
-            </form>
+        <section className="profil">
+            <div className="container">
+                <div className="profil-content">
+                    <div className="profil-form">
+                        <h2 className="form-title">Profil</h2>
+                        {error !== null && <p className="form-error">{error}</p>}
+                        {msg !== null && <p className="form-msg">{msg}</p>}
+                        <form onSubmit={handleSubmit(onSubmit)} className="register-form" id="profil-form">
+                            <div className="form-group">
+                                <input type="text" defaultValue={user.infos.firstname} placeholder="firstname" {...register("firstname")} />
+                            </div>
+                            <div className="form-group">
+                                <input type="text" defaultValue={user.infos.lastname} placeholder="lastname" {...register("lastname")} />
+                            </div>
+                            <div className="form-group">
+                                <input type="text" defaultValue={user.infos.username} placeholder="username" {...register("username")} />
+                            </div>
+                            <div className="form-group">
+                                <input type="tel" defaultValue={user.infos.phone} placeholder="phone" 
+                                {...register("phone", {
+                                    pattern: {
+                                        value: /^[\+]?[(]?[0-9]{3}[)]?[-\s\.]?[0-9]{3}[-\s\.]?[0-9]{4,6}$/,
+                                        message: "Invalid phone number"
+                                    }
+                                })} 
+                                />
+                            </div>
+                            {errors.phone && <p className="form-error">{errors.phone.message}</p>}
+                            <div className="form-group form-button">
+                                <input type="submit" name="submit" id="profil-submit" className="form-submit" value="Submit"/>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+                <div className="profil-image">
+                    <figure><img src="https://placehold.co/200x200" alt="profil image"/></figure>
+                </div>
+            </div>
         </section>
     )
 }

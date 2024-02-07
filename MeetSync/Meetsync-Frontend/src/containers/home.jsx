@@ -1,7 +1,7 @@
 const Home = () =>{
     return(
         <section>
-            <h2>Welcome to MeetSync</h2>
+            <h2>Welcome to MeetSync, a smart event schedule web app</h2>
             <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Possimus dicta delectus tempora eum in doloremque voluptatum nihil fugiat rerum ipsum aperiam recusandae, consectetur fuga quam pariatur quis corrupti sed eveniet?</p>
             <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Commodi, nemo nihil, amet, sit eaque quia velit delectus cumque deleniti illum ullam illo atque voluptatem rem nostrum? Eius hic tenetur voluptates!
             Necessitatibus ratione dolore minus debitis aperiam tenetur magni atque expedita, quod fuga tempora ullam quasi, doloribus reprehenderit ut id ipsa eligendi numquam temporibus iste est nemo? Commodi inventore consectetur accusantium?

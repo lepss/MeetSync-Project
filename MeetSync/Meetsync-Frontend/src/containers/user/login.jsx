@@ -4,6 +4,11 @@ import { Navigate } from "react-router-dom"
 import { loginUser } from "../../api/user"
 import { useDispatch } from "react-redux"
 import { connectUser } from "../../slices/userSlice"
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import {
+  faLock,
+  faEnvelope
+} from "@fortawesome/free-solid-svg-icons";
 
 const Login = () =>{
     const dispatch = useDispatch()
@@ -12,7 +17,7 @@ const Login = () =>{
     const {
         register,
         handleSubmit,
-        formState: {errorForm},
+        formState: {errors},
     } = useForm()
 
     const onSubmit = (data) =>{
@@ -40,7 +45,7 @@ const Login = () =>{
             <div className="container">
                 <div className="signin-content">
                     <div className="signin-image">
-                        <figure><img src="https://placehold.co/200x200" alt="sing up image"/></figure>
+                        <figure><img src="https://placehold.co/200x200" alt="sing in image"/></figure>
                         {/* <a href="#" class="signup-image-link">Create an account</a> */}
                     </div>
                     <div className="signin-form">
@@ -48,11 +53,11 @@ const Login = () =>{
                         {error !== null && <p className="form-error">{error}</p>}
                         <form onSubmit={handleSubmit(onSubmit)} className="register-form" id="login-form">
                             <div className="form-group">
-                                <label htmlFor="email">E</label>
+                                <label htmlFor="email"><FontAwesomeIcon icon={faEnvelope}/></label>
                                 <input type="email" placeholder="Email" {...register("email")} />
                             </div>
                             <div className="form-group">
-                                <label htmlFor="password">P</label>
+                                <label htmlFor="password"><FontAwesomeIcon icon={faLock}/></label>
                                 <input type="password" placeholder="Password" {...register("password")} />
                             </div>
                             <div className="form-group form-button">
