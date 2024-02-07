@@ -35,16 +35,16 @@ const Register = () => {
     }
 
     return(
-        <section className="signup">
+        <section className="section">
             <div className="container">
-                <div className="signup-content">
-                    <div className="signup-form">
-                        <h2 className="form-title">Sign up</h2>
+                <div className="content">
+                    <div className="sub-content">
+                        <h2 className="sub-content-title">Sign up</h2>
                         {error !== null && <p className="form-error">{error}</p>} 
                         <form onSubmit={handleSubmit(onSubmit)} className="register-form" id="register-form">
-                            <div className="form-group">
+                            <div className="sub-group">
                                 <label htmlFor="email"><FontAwesomeIcon icon={faEnvelope}/></label>
-                                <input type="email" placeholder="Email" id="email" 
+                                <input className="form-input" type="email" placeholder="Email" id="email" 
                                     {...register("email", {
                                         required: "This field is required",
                                         pattern: {
@@ -55,9 +55,9 @@ const Register = () => {
                                 />
                             </div>
                             {errors.email && <p className="form-error">{errors.email.message}</p>}
-                            <div className="form-group">
-                            <label htmlFor="password"><FontAwesomeIcon icon={faLock}/></label>
-                                <input type="password" placeholder="Password" id="password"
+                            <div className="sub-group">
+                                <label htmlFor="password"><FontAwesomeIcon icon={faLock}/></label>
+                                <input className="form-input" type="password" placeholder="Password" id="password"
                                     {...register("password", {
                                         required: "This field is required",
                                         minLength: {
@@ -68,9 +68,9 @@ const Register = () => {
                                 />
                             </div>
                             {errors.password && <p className="form-error">{errors.password.message}</p>}
-                            <div className="form-group">
+                            <div className="sub-group">
                             <label htmlFor="repassword"><FontAwesomeIcon icon={faLock}/></label>
-                                <input type="password" placeholder="Confirm password" id="repassword"
+                                <input className="form-input" type="password" placeholder="Confirm password" id="repassword"
                                     {...register("confirm_password", {
                                         required: "This field is required",
                                         validate: value => value === watch('password') || "Passwords do not match"
@@ -78,13 +78,15 @@ const Register = () => {
                                 />
                             </div>
                             {errors.confirm_password && <p className="form-error">{errors.confirm_password.message}</p>}
-                            <div className="form-group form-button">
-                                <input type="submit" name="Signup" id="signup" className="form-submit" value="Register"/>
+                            <div className="sub-group">
+                                <input type="submit" name="Signup" id="signup" className="button" value="Register"/>
                             </div>
                         </form>
                     </div>
-                    <div className="signup-image">
-                        <figure><img src="https://placehold.co/200x200" alt="sing up image"/></figure>
+                    <div className="sub-content signup-image">
+                        <figure>
+                            <img src="https://placehold.co/200x200" alt="sing up image"/>
+                        </figure>
                     </div>
                 </div>
             </div>

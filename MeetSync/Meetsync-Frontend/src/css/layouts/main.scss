@@ -127,105 +127,27 @@ footer{
 }
 
 /************* FORMS *************/
-    // Global
-    .signup-form, .signup-image, .signin-form, .signin-image, .profil-form, .profil-image{
-        width: 65%;
-        overflow: hidden;
-    }
-    .form-title {
-        color: $default-black;
-        margin-bottom: 60px;
-    }
-    .form-submit {
-        display: inline-block;
-        background: $default-9-solid-background;
-        color: $default-white;
-        border-bottom: none;
-        width: auto;
-        padding: 15px 39px;
-        border-radius: 5px;
-        border-radius: 5px;
-        margin-top: 25px;
-        cursor: pointer;
-        &:hover {
-            background: darken($default-9-solid-background, 10%);
-        }
-    }
-    .form-group {
-        position: relative;
-        margin-bottom: 35px;
-        overflow: hidden;
-        &:last-child {
-            margin-bottom: 0px;
-        }
-    }
-    input {
-        width: 100%;
-        display: block;
-        border: none;
-        border-bottom: 1px solid $default-grey;
-        padding: 6px 30px;
-        box-sizing: border-box;
-        outline: none;
-        &::-webkit-input-placeholder {
-            color: $default-grey;
-        }
-        &:focus {
-            border-bottom: 1px solid $default-black;
-            &::-webkit-input-placeholder {
-                color: $default-black;
-            }
-        }
-    }
-    label {
-        position: absolute;
-        left: 0;
-        top: 50%;
-        transform:translateY(-50%);
-        color: $default-black;
-    }
-    .register-form{
-        width: 100%;
-    }
+label {
+    position: absolute;
+    left: 0;
+    top: 50%;
+    transform:translateY(-50%);
+    color: $default-black;
+}
+.signup-image, .signin-image{
+    display: none;
+}
 
-    // Singup
-    .signup {
-        margin-bottom: 150px;
+/************* PAGE *************/
+.event-list{
+    ul{
+        padding: 0;
+        margin: 0;
     }
-    .signup-content {
-        padding: 75px 0;
+    p{
+        margin: 2px;
     }
-    .signup-image {
-        display: none;
+    svg{
+        margin-right: 10px;
     }
-    .signup-form {
-        margin: 0 auto;
-    }
-
-    // Signin
-    .sign-in {
-        margin-bottom: 100px;
-    }
-    .signin-content {
-        padding: 75px 0;
-    }
-    .signin-form {
-        margin: 0 auto;
-    }
-    .signin-image {
-        display: none;
-    }
-
-    // profil
-    .profil {
-        margin-bottom: 100px;
-    }
-    .profil-content {
-        padding: 75px 0;
-    }
-    .profil-form {
-        margin: 0 auto;
-    }
-    .profil-image {
-        display: none;
-    }
+}

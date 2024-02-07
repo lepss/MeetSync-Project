@@ -1,4 +1,4 @@
-/************* LAYOUT *************/
+/************* GLOBAL *************/
 * {
   box-sizing: border-box;
 }
@@ -27,22 +27,14 @@ input, select, textarea {
   outline: none;
 }
 
-a:focus, a:active {
+a, a:focus, a:active {
   text-decoration: none;
   outline: none;
+  color: #000000;
 }
 
 input:focus, select:focus, textarea:focus {
   outline: none;
-}
-
-.container {
-  width: 90%;
-  background: #FFFFFF;
-  margin: 0 auto;
-  box-shadow: 0px 15px 16.83px 0.17px rgba(0, 0, 0, 0.05);
-  border-radius: 20px;
-  max-width: 1600px;
 }
 
 /************* FONT *************/
@@ -70,6 +62,79 @@ h2 {
 
 h3 {
   font-size: 2.2rem;
+}
+
+/************* MAIN LAYOUT *************/
+.section {
+  margin-bottom: 150px;
+}
+.section .section-title {
+  margin-left: 5%;
+  margin-bottom: 20px;
+}
+.section .container {
+  width: 90%;
+  background: #FFFFFF;
+  margin: 0 auto;
+  box-shadow: 0px 15px 16.83px 0.17px rgba(0, 0, 0, 0.05);
+  border-radius: 20px;
+  max-width: 1600px;
+}
+.section .container .content {
+  padding: 75px 0;
+}
+.section .container .content .sub-content {
+  width: 65%;
+  overflow: hidden;
+  margin: 0 auto;
+}
+.section .container .content .sub-content .sub-content-title {
+  color: #000000;
+  margin-bottom: 30px;
+}
+.section .container .content .sub-content .sub-group {
+  position: relative;
+  margin-bottom: 35px;
+  overflow: hidden;
+}
+.section .container .content .sub-content .sub-group:last-child {
+  margin-bottom: 0px;
+}
+
+/************* ELEMENTS *************/
+.button {
+  background: #6e56cf;
+  color: #FFFFFF;
+  border-bottom: none;
+  border: none;
+  width: auto;
+  padding: 15px 39px;
+  border-radius: 5px;
+  border-radius: 5px;
+  margin-top: 25px;
+  cursor: pointer;
+}
+.button:hover {
+  background: #5036bc;
+}
+
+.form-input {
+  width: 100%;
+  display: block;
+  border: none;
+  border-bottom: 1px solid #B2B2BF;
+  padding: 6px 30px;
+  box-sizing: border-box;
+  outline: none;
+}
+.form-input::-webkit-input-placeholder {
+  color: #B2B2BF;
+}
+.form-input:focus {
+  border-bottom: 1px solid #000000;
+}
+.form-input:focus::-webkit-input-placeholder {
+  color: #000000;
 }
 
 /************* GLOBAL *************/
@@ -196,60 +261,6 @@ footer {
 }
 
 /************* FORMS *************/
-.signup-form, .signup-image, .signin-form, .signin-image, .profil-form, .profil-image {
-  width: 65%;
-  overflow: hidden;
-}
-
-.form-title {
-  color: #000000;
-  margin-bottom: 60px;
-}
-
-.form-submit {
-  display: inline-block;
-  background: #6e56cf;
-  color: #FFFFFF;
-  border-bottom: none;
-  width: auto;
-  padding: 15px 39px;
-  border-radius: 5px;
-  border-radius: 5px;
-  margin-top: 25px;
-  cursor: pointer;
-}
-.form-submit:hover {
-  background: #5036bc;
-}
-
-.form-group {
-  position: relative;
-  margin-bottom: 35px;
-  overflow: hidden;
-}
-.form-group:last-child {
-  margin-bottom: 0px;
-}
-
-input {
-  width: 100%;
-  display: block;
-  border: none;
-  border-bottom: 1px solid #B2B2BF;
-  padding: 6px 30px;
-  box-sizing: border-box;
-  outline: none;
-}
-input::-webkit-input-placeholder {
-  color: #B2B2BF;
-}
-input:focus {
-  border-bottom: 1px solid #000000;
-}
-input:focus::-webkit-input-placeholder {
-  color: #000000;
-}
-
 label {
   position: absolute;
   left: 0;
@@ -258,56 +269,20 @@ label {
   color: #000000;
 }
 
-.register-form {
-  width: 100%;
-}
-
-.signup {
-  margin-bottom: 150px;
-}
-
-.signup-content {
-  padding: 75px 0;
-}
-
-.signup-image {
+.signup-image, .signin-image {
   display: none;
 }
 
-.signup-form {
-  margin: 0 auto;
+/************* PAGE *************/
+.event-list ul {
+  padding: 0;
+  margin: 0;
 }
-
-.sign-in {
-  margin-bottom: 100px;
+.event-list p {
+  margin: 2px;
 }
-
-.signin-content {
-  padding: 75px 0;
-}
-
-.signin-form {
-  margin: 0 auto;
-}
-
-.signin-image {
-  display: none;
-}
-
-.profil {
-  margin-bottom: 100px;
-}
-
-.profil-content {
-  padding: 75px 0;
-}
-
-.profil-form {
-  margin: 0 auto;
-}
-
-.profil-image {
-  display: none;
+.event-list svg {
+  margin-right: 10px;
 }
 
 /*# sourceMappingURL=style.css.map */

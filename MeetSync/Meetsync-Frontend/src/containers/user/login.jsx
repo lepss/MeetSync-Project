@@ -41,27 +41,27 @@ const Login = () =>{
     }
 
     return(
-        <section className="sign-in">
+        <section className="section">
             <div className="container">
-                <div className="signin-content">
-                    <div className="signin-image">
+                <div className="content">
+                    <div className="sub-content signin-image">
                         <figure><img src="https://placehold.co/200x200" alt="sing in image"/></figure>
                         {/* <a href="#" class="signup-image-link">Create an account</a> */}
                     </div>
-                    <div className="signin-form">
-                        <h2 className="form-title">Sign in</h2>
+                    <div className="sub-content">
+                        <h2 className="sub-content-title">Sign in</h2>
                         {error !== null && <p className="form-error">{error}</p>}
                         <form onSubmit={handleSubmit(onSubmit)} className="register-form" id="login-form">
-                            <div className="form-group">
+                            <div className="sub-group">
                                 <label htmlFor="email"><FontAwesomeIcon icon={faEnvelope}/></label>
-                                <input type="email" placeholder="Email" {...register("email")} />
+                                <input className="form-input" type="email" placeholder="Email" {...register("email")} />
                             </div>
-                            <div className="form-group">
+                            <div className="sub-group">
                                 <label htmlFor="password"><FontAwesomeIcon icon={faLock}/></label>
-                                <input type="password" placeholder="Password" {...register("password")} />
+                                <input className="form-input" type="password" placeholder="Password" {...register("password")} />
                             </div>
-                            <div className="form-group form-button">
-                                <input type="submit" name="signin" id="sigin" className="form-submit" value="Log in"/>
+                            <div className="sub-group">
+                                <input type="submit" name="signin" id="sigin" className="button" value="Log in"/>
                             </div>
                         </form>
                     </div>

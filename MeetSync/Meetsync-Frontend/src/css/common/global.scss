@@ -1,4 +1,4 @@
-/************* LAYOUT *************/
+/************* GLOBAL *************/
 *{ box-sizing: border-box; }
 html{
     font-size: 62.5%;
@@ -12,17 +12,9 @@ body{
 img { max-width: 100%; height: auto; }
 figure { margin: 0; }
 input, select, textarea { outline: none; }
-a:focus, a:active { text-decoration: none; outline: none; }
+a, a:focus, a:active { text-decoration: none; outline: none; color: $default-black;}
 input:focus, select:focus, textarea:focus { outline: none; }
 
-.container {
-    width: 90%;
-    background: $default-white;
-    margin: 0 auto;
-    box-shadow:0px 15px 16.83px 0.17px rgba(0, 0, 0, 0.05);
-    border-radius: 20px;
-    max-width: $container-max-width;
-}
 /************* FONT *************/
 body{
     font-size: $default-font-size;
@@ -32,7 +24,7 @@ body{
     font-weight: 400;
 }
 h1, h2, h3{
-    font-family: $default-font; //Set title font
+    font-family: $default-font; //TODO Set title font
     color: $default-11-low-contrast-text;
     font-weight: 700;
 }
@@ -44,4 +36,77 @@ h2{
 }
 h3{
     font-size: $h3-font-size;
+}
+
+/************* MAIN LAYOUT *************/
+.section{
+    margin-bottom: 150px;
+    .section-title{
+        margin-left: 5%;
+        margin-bottom: 20px;
+    }
+    .container{
+        width: 90%;
+        background: $default-white;
+        margin: 0 auto;
+        box-shadow:0px 15px 16.83px 0.17px rgba(0, 0, 0, 0.05);
+        border-radius: 20px;
+        max-width: $container-max-width;
+        .content{
+            padding: 75px 0;
+            .sub-content{
+                width: 65%;
+                overflow: hidden;
+                margin: 0 auto;
+                .sub-content-title{
+                    color: $default-black;
+                    margin-bottom: 30px;
+                }
+                .sub-group{
+                    position: relative;
+                    margin-bottom: 35px;
+                    overflow: hidden;
+                    &:last-child {
+                        margin-bottom: 0px;
+                    }
+                }
+            }
+        }
+    }
+}
+
+/************* ELEMENTS *************/
+.button{
+    background: $default-9-solid-background;
+    color: $default-white;
+    border-bottom: none;
+    border: none;
+    width: auto;
+    padding: 15px 39px;
+    border-radius: 5px;
+    border-radius: 5px;
+    margin-top: 25px;
+    cursor: pointer;
+    &:hover {
+        background: darken($default-9-solid-background, 10%);
+    }
+}
+
+.form-input{
+    width: 100%;
+    display: block;
+    border: none;
+    border-bottom: 1px solid $default-grey;
+    padding: 6px 30px;
+    box-sizing: border-box;
+    outline: none;
+    &::-webkit-input-placeholder {
+        color: $default-grey;
+    }
+    &:focus {
+        border-bottom: 1px solid $default-black;
+        &::-webkit-input-placeholder {
+            color: $default-black;
+        }
+    }
 }

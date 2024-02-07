@@ -3,6 +3,11 @@ import { useForm } from "react-hook-form"
 import {useSelector, useDispatch} from "react-redux"
 import { selectUser, connectUser } from "../../slices/userSlice"
 import { checkMyToken, updateUserProfil } from "../../api/user"
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import {
+  faUser,
+  faPhone
+} from "@fortawesome/free-solid-svg-icons";
 
 const Profil = () =>{
     const user = useSelector(selectUser)
@@ -44,25 +49,29 @@ const Profil = () =>{
     }, [user])
 
     return(
-        <section className="profil">
+        <section className="section">
             <div className="container">
-                <div className="profil-content">
-                    <div className="profil-form">
-                        <h2 className="form-title">Profil</h2>
+                <div className="content">
+                    <div className="sub-content">
+                        <h2 className="sub-content-title">Profil</h2>
                         {error !== null && <p className="form-error">{error}</p>}
                         {msg !== null && <p className="form-msg">{msg}</p>}
                         <form onSubmit={handleSubmit(onSubmit)} className="register-form" id="profil-form">
-                            <div className="form-group">
-                                <input type="text" defaultValue={user.infos.firstname} placeholder="firstname" {...register("firstname")} />
+                            <div className="sub-group">
+                                <label htmlFor="firstname"><FontAwesomeIcon icon={faUser}/></label>
+                                <input className="form-input" type="text" defaultValue={user.infos.firstname} placeholder="firstname" name="firstname" {...register("firstname")} />
                             </div>
-                            <div className="form-group">
-                                <input type="text" defaultValue={user.infos.lastname} placeholder="lastname" {...register("lastname")} />
+                            <div className="sub-group">
+                                <label htmlFor="lastname"><FontAwesomeIcon icon={faUser}/></label>
+                                <input className="form-input" type="text" defaultValue={user.infos.lastname} placeholder="lastname" name="lastname" {...register("lastname")} />
                             </div>
-                            <div className="form-group">
-                                <input type="text" defaultValue={user.infos.username} placeholder="username" {...register("username")} />
+                            <div className="sub-group">
+                                <label htmlFor="username"><FontAwesomeIcon icon={faUser}/></label>
+                                <input className="form-input" type="text" defaultValue={user.infos.username} placeholder="username" name="username" {...register("username")} />
                             </div>
-                            <div className="form-group">
-                                <input type="tel" defaultValue={user.infos.phone} placeholder="phone" 
+                            <div className="sub-group">
+                                <label htmlFor="phone"><FontAwesomeIcon icon={faPhone}/></label>
+                                <input className="form-input" type="tel" defaultValue={user.infos.phone} placeholder="phone" name="phone"
                                 {...register("phone", {
                                     pattern: {
                                         value: /^[\+]?[(]?[0-9]{3}[)]?[-\s\.]?[0-9]{3}[-\s\.]?[0-9]{4,6}$/,
@@ -72,14 +81,11 @@ const Profil = () =>{
                                 />
                             </div>
                             {errors.phone && <p className="form-error">{errors.phone.message}</p>}
-                            <div className="form-group form-button">
-                                <input type="submit" name="submit" id="profil-submit" className="form-submit" value="Submit"/>
+                            <div className="sub-group">
+                                <input type="submit" name="submit" id="profil-submit" className="button" value="Submit"/>
                             </div>
                         </form>
                     </div>
-                </div>
-                <div className="profil-image">
-                    <figure><img src="https://placehold.co/200x200" alt="profil image"/></figure>
                 </div>
             </div>
         </section>
