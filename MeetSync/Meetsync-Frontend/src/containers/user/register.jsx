@@ -43,7 +43,7 @@ const Register = () => {
                         {error !== null && <p className="form-error">{error}</p>} 
                         <form onSubmit={handleSubmit(onSubmit)} className="register-form" id="register-form">
                             <div className="sub-group">
-                                <label htmlFor="email"><FontAwesomeIcon icon={faEnvelope}/></label>
+                                <label htmlFor="email" className="icon-label"><FontAwesomeIcon icon={faEnvelope}/></label>
                                 <input className="form-input" type="email" placeholder="Email" id="email" 
                                     {...register("email", {
                                         required: "This field is required",
@@ -56,7 +56,7 @@ const Register = () => {
                             </div>
                             {errors.email && <p className="form-error">{errors.email.message}</p>}
                             <div className="sub-group">
-                                <label htmlFor="password"><FontAwesomeIcon icon={faLock}/></label>
+                                <label htmlFor="password" className="icon-label"><FontAwesomeIcon icon={faLock}/></label>
                                 <input className="form-input" type="password" placeholder="Password" id="password"
                                     {...register("password", {
                                         required: "This field is required",
@@ -69,7 +69,7 @@ const Register = () => {
                             </div>
                             {errors.password && <p className="form-error">{errors.password.message}</p>}
                             <div className="sub-group">
-                            <label htmlFor="repassword"><FontAwesomeIcon icon={faLock}/></label>
+                            <label htmlFor="repassword" className="icon-label"><FontAwesomeIcon icon={faLock}/></label>
                                 <input className="form-input" type="password" placeholder="Confirm password" id="repassword"
                                     {...register("confirm_password", {
                                         required: "This field is required",

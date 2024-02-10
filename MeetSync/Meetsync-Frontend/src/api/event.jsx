@@ -65,7 +65,7 @@ export function deleteEvent(id) {
 
 //Event day
 export function addEventDay(datas) {
-    return axios.post(`${config.api_url}/api/event/add`, datas, {headers: {"x-access-token": token}})
+    return axios.post(`${config.api_url}/api/event/eventday/add`, datas, {headers: {"x-access-token": token}})
         .then((res)=>{
             return res
         })

@@ -10,7 +10,7 @@ class EventController{
         if(event.code){
             res.status(500).json({msg:"Failed to save event due to a server error", error: event})
         }else{
-            res.status(200).json({msg: "Event saved"})
+            res.status(200).json({msg: "Event saved", insertId: event.insertId})
             //TODO add all eventDay (getEvent id => addDay(id) )
         }
     }

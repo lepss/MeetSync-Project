@@ -262,7 +262,7 @@ footer {
 }
 
 /************* FORMS *************/
-.form label {
+.form .icon-label {
   position: absolute;
   left: 0;
   top: 50%;

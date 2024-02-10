@@ -60,19 +60,19 @@ const Profil = () =>{
                         {msg !== null && <p className="form-succes">{msg}</p>}
                         <form onSubmit={handleSubmit(onSubmit)} className="register-form" id="profil-form">
                             <div className="sub-group">
-                                <label htmlFor="firstname"><FontAwesomeIcon icon={faUser}/></label>
+                                <label htmlFor="firstname" className="icon-label"><FontAwesomeIcon icon={faUser}/></label>
                                 <input className="form-input" type="text" defaultValue={user.infos.firstname} placeholder="firstname" name="firstname" {...register("firstname")} />
                             </div>
                             <div className="sub-group">
-                                <label htmlFor="lastname"><FontAwesomeIcon icon={faUser}/></label>
+                                <label htmlFor="lastname" className="icon-label"><FontAwesomeIcon icon={faUser}/></label>
                                 <input className="form-input" type="text" defaultValue={user.infos.lastname} placeholder="lastname" name="lastname" {...register("lastname")} />
                             </div>
                             <div className="sub-group">
-                                <label htmlFor="username"><FontAwesomeIcon icon={faUser}/></label>
+                                <label htmlFor="username" className="icon-label"><FontAwesomeIcon icon={faUser}/></label>
                                 <input className="form-input" type="text" defaultValue={user.infos.username} placeholder="username" name="username" {...register("username")} />
                             </div>
                             <div className="sub-group">
-                                <label htmlFor="phone"><FontAwesomeIcon icon={faPhone}/></label>
+                                <label htmlFor="phone" className="icon-label"><FontAwesomeIcon icon={faPhone}/></label>
                                 <input className="form-input" type="tel" defaultValue={user.infos.phone} placeholder="phone" name="phone"
                                 {...register("phone", {
                                     pattern: {

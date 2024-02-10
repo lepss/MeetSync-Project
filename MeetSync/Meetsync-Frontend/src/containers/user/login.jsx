@@ -53,11 +53,11 @@ const Login = () =>{
                         {error !== null && <p className="form-error">{error}</p>}
                         <form onSubmit={handleSubmit(onSubmit)} className="register-form" id="login-form">
                             <div className="sub-group">
-                                <label htmlFor="email"><FontAwesomeIcon icon={faEnvelope}/></label>
+                                <label htmlFor="email" className="icon-label"><FontAwesomeIcon icon={faEnvelope}/></label>
                                 <input className="form-input" type="email" placeholder="Email" {...register("email")} />
                             </div>
                             <div className="sub-group">
-                                <label htmlFor="password"><FontAwesomeIcon icon={faLock}/></label>
+                                <label htmlFor="password" className="icon-label"><FontAwesomeIcon icon={faLock}/></label>
                                 <input className="form-input" type="password" placeholder="Password" {...register("password")} />
                             </div>
                             <div className="sub-group">
