@@ -17,7 +17,7 @@ const Login = () =>{
     const {
         register,
         handleSubmit,
-        formState: {errors},
+        // formState: {errors},
     } = useForm()
 
     const onSubmit = (data) =>{
@@ -41,7 +41,7 @@ const Login = () =>{
     }
 
     return(
-        <section className="section">
+        <section className="section form">
             <div className="container">
                 <div className="content">
                     <div className="sub-content signin-image">

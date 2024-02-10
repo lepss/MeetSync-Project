@@ -4,13 +4,28 @@ import {Routes, Route} from 'react-router-dom'
 import Header from "./components/header";
 import Footer from './components/footer';
 import Home from "./containers/home";
+
 import RequireAuth from "./containers/helpers/require-auth";
+
 import Login from './containers/user/login';
 import Logout from './containers/user/logout';
 import Register from './containers/user/register';
 import Profil from './containers/user/profil';
+import Dashboard from './containers/user/dashboard';
+import AdminDashboard from './containers/admin/admin-dashboard';
+
 import EventList from './containers/event/event-list';
 import EventDetail from './containers/event/event-detail';
+import AddEvent from './containers/event/add-event';
+
+import AddAppointmentSession from './containers/appointmentSession/add-appointment-session';
+import AppointmentSessionDetail from './containers/appointmentSession/appointment-session-detail';
+import AppointmentSessionList from './containers/appointmentSession/appointment-session-list';
+
+import AddAppointmentRequest from './containers/appointmentRequest/add-appointment-request';
+import AppointmentRequestDetail from './containers/appointmentRequest/appointment-request-detail';
+import AppointmentRequestList from './containers/appointmentRequest/appointment-request-list';
+
 import Layout from './components/layout';
 
 function App() {
@@ -41,6 +56,22 @@ function App() {
                     <Route
                         path="/event/:id"
                         element={<RequireAuth child={EventDetail} auth={false} admin={false} />}
+                    />
+                    <Route
+                        path="/addEvent"
+                        element={<RequireAuth child={AddEvent} auth={true} admin={false} />}
+                    />
+                    <Route
+                        path="/appointmentSession/:event_id"
+                        element={<RequireAuth child={AppointmentSessionList} auth={true} admin={false} />}
+                    />
+                    <Route
+                        path="/addAppointmentSession/:event_id"
+                        element={<RequireAuth child={AddAppointmentSession} auth={true} admin={false} />}
+                    />
+                    <Route
+                        path="/appointmentSession/:id"
+                        element={<RequireAuth child={AppointmentSessionDetail} auth={true} admin={false} />}
                     />
                 </Routes>
             </main>

@@ -15,7 +15,7 @@ footer{
 
 /************* MENU *************/
 .menuContainer{
-    Display: flex;
+    display: flex;
     justify-content: center;
     align-items: center;
     a{
@@ -127,13 +127,26 @@ footer{
 }
 
 /************* FORMS *************/
-label {
-    position: absolute;
-    left: 0;
-    top: 50%;
-    transform:translateY(-50%);
-    color: $default-black;
+.form{
+    label {
+        position: absolute;
+        left: 0;
+        top: 50%;
+        transform:translateY(-50%);
+        color: $default-black;
+    }
+    .form-error{
+        font-size: $default-small-font-size;
+        margin-top: -20px;
+        color: rgb(196, 29, 29);
+    }
+    .form-succes{
+        font-size: $default-small-font-size;
+        margin-bottom: 20px;
+        color: $default-11-low-contrast-text;
+    }
 }
+
 .signup-image, .signin-image{
     display: none;
 }
@@ -149,5 +162,25 @@ label {
     }
     svg{
         margin-right: 10px;
+    }
+}
+
+.event-detail{
+    .banner{
+        position: relative;
+        text-align: center;
+        margin-bottom: 20px;
+        img{
+            width: 90%;
+            display: block;
+            margin: 0 auto;
+        }
+        h2{
+            margin: 0;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%,-50%);
+        }
     }
 }

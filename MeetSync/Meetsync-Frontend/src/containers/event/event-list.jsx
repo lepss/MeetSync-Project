@@ -40,6 +40,18 @@ const EventList = () =>{
                     }
                 </div>
             </div>
+            <div className="container">
+                <div className="content">
+                    <div className="sub-content">
+                        <div className="sub-group">
+                            <p>Want to add your event to Meetsync ?</p>
+                            <Link to="/addEvent">
+                                <button className="button">Add your event !</button>
+                            </Link>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </section>
     )
 }

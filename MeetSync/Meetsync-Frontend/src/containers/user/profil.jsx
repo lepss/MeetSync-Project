@@ -28,8 +28,10 @@ const Profil = () =>{
                 .then((res)=>{
                     if(res.status === 200){
                         const token = window.localStorage.getItem("meetsync-token")
+
                         let newUser = res.data.user
                         newUser.token = token
+                        console.log(token);
                         dispatch(connectUser(newUser))
                         setMsg("Profil modified with success")
                     }else{
@@ -49,13 +51,13 @@ const Profil = () =>{
     }, [user])
 
     return(
-        <section className="section">
+        <section className="section form">
             <div className="container">
                 <div className="content">
                     <div className="sub-content">
                         <h2 className="sub-content-title">Profil</h2>
                         {error !== null && <p className="form-error">{error}</p>}
-                        {msg !== null && <p className="form-msg">{msg}</p>}
+                        {msg !== null && <p className="form-succes">{msg}</p>}
                         <form onSubmit={handleSubmit(onSubmit)} className="register-form" id="profil-form">
                             <div className="sub-group">
                                 <label htmlFor="firstname"><FontAwesomeIcon icon={faUser}/></label>
