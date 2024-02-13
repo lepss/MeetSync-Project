@@ -5,6 +5,7 @@ import { selectUser } from "../../slices/userSlice"
 import { loadAllUserEvents } from "../../api/event";
 import { loadAllUserAppointmentSession } from "../../api/appointmentSession";
 import { loadAllUserAppointmentRequest } from "../../api/appointmentRequest";
+import Agenda from "../../components/admin/agenda";
 
 const Dashboard = () =>{
     const user = useSelector(selectUser)
@@ -52,8 +53,7 @@ const Dashboard = () =>{
                 <div className="content">
                     <div className="sub-content">
                         <h3 className="sub-content-title">My Schedule</h3>
-                        {/* {events.length > 0 &&
-                        } */}
+                        <Agenda />
                         <div className="sub-group">
                         </div>
                     </div>

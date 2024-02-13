@@ -1,11 +1,20 @@
+// const EventController = require('../controllers/EventController');
+
 module.exports = (_db) => {
     db = _db
     AppointmentModel = require('../models/AppointmentModel')(db);
+    EventController = require("../controllers/EventController")(db)
     return AppointmentController
 }
 
 class AppointmentController{
     static async generateEventAppointments(req, res){
+        console.log("hello");
+        // EventController.getEvent(req)
+        // .then((response) =>{
+        //     console.log(response);
+        // })
+        //req.params.event_id
         //TODO
     } 
 
