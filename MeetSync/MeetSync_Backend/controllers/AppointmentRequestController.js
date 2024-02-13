@@ -7,6 +7,7 @@ module.exports = (_db) => {
 class AppointmentRequestController{
     static async addAppointmentRequest(req, res){
         const appointmentRequest = await AppointmentRequestModel.saveOneAppointmentRequest(req, req.params.appointment_session_id);
+        console.log(req.params);
         if(appointmentRequest.code){
             res.status(500).json({msg:"Failed to save appointment request due to a server error", error: appointmentRequest})
         }else{

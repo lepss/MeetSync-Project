@@ -7,7 +7,8 @@ import {
   faScrewdriverWrench,
   faLock,
   faCircleUser,
-  faPowerOff
+  faPowerOff,
+  faPersonShelter
 } from "@fortawesome/free-solid-svg-icons";
 import { useSelector } from "react-redux";
 import { selectUser } from "../slices/userSlice";
@@ -41,8 +42,9 @@ const Header = () => {
                                     <li><Link to="/login" onClick={handleLinkClick}><FontAwesomeIcon icon={faCircleUser}/>Log in</Link></li>
                                 </>                                     
                                 ) : (
-                                <>                  
-                                    <li><Link to="/profil" onClick={handleLinkClick}><FontAwesomeIcon icon={faUserTie}/>{user.infos.firstname}</Link></li>
+                                <>  
+                                    <li><Link to="/dashboard" onClick={handleLinkClick}><FontAwesomeIcon icon={faPersonShelter}/>Dashboard</Link></li>
+                                    <li><Link to="/profil" onClick={handleLinkClick}><FontAwesomeIcon icon={faUserTie}/>Profil</Link></li>
                                     {user.infos.role === "admin" && 
                                         <li><Link to="/admin" onClick={handleLinkClick}><FontAwesomeIcon icon={faScrewdriverWrench}/>Admin</Link></li>
                                     }

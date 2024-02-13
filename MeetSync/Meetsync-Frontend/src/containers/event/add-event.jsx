@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import { useForm } from "react-hook-form"
 import { Navigate } from "react-router-dom"
 import { addOneEvent, addEventDay } from "../../api/event";
-import {useSelector, useDispatch} from "react-redux"
+import { useSelector } from "react-redux"
 import { selectUser } from "../../slices/userSlice"
 
 const AddEvent = () =>{

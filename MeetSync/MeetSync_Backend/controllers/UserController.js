@@ -178,7 +178,7 @@ class UserController {
             let myUser = {
                 id: user[0].id,
                 email: user[0].email,
-                username: newUser[0].username,
+                username: user[0].username,
                 firstName: user[0].firstName,
                 lastName: user[0].lastName,
                 role: user[0].role,

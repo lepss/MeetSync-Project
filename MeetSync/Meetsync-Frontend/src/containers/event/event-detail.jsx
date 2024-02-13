@@ -7,6 +7,7 @@ import {
     faLocationDot,
     faCalendar
 } from "@fortawesome/free-solid-svg-icons";
+import moment from "moment";
 
 const EventDetail = () =>{
     const params = useParams();
@@ -18,12 +19,12 @@ const EventDetail = () =>{
         .then((res)=>{
             if(res.status === 200){
                 setEvent(res.data.result[0])
-                console.log(res.data.result[0]);
+                // console.log(res.data.result[0]);
                 getEventDays(res.data.result[0].id)
                 .then((res)=>{
                     if(res.status === 200){
                         setEventDay(res.data.result)
-                        console.log(res.data.result);
+                        // console.log(res.data.result);
                     }else{
                         console.log(res.response.data.msg);
                     }
@@ -50,9 +51,9 @@ const EventDetail = () =>{
                                     {eventDay.length > 0 &&
                                     <>
                                         {eventDay.length > 1 ? (
-                                            <p><FontAwesomeIcon icon={faCalendar}/>From {eventDay[0].start_time} to {eventDay[eventDay.length - 1].start_time}</p>
+                                            <p><FontAwesomeIcon icon={faCalendar}/>From {moment(eventDay[0].start_time).format('LLL')} to {moment(eventDay[eventDay.length - 1].start_time).format('LLL')}</p>
                                         ) : (
-                                            <p><FontAwesomeIcon icon={faCalendar}/>{eventDay[0].start_time}</p>
+                                            <p><FontAwesomeIcon icon={faCalendar}/>{moment(eventDay[0].start_time).format('LLL')}</p>
                                         )}
                                     </>
                                     }
@@ -77,8 +78,8 @@ const EventDetail = () =>{
                         <div className="content">
                             <div className="sub-content">
                                 <div className="sub-group">
-                                    <p>Want to meet people during this event ? Join us !</p>                                   
-                                    <Link to={`/appointmentSession/${event.id}`}>
+                                    <p>Want to meet people during this event ? Join us !</p>
+                                    <Link to={`/appointmentSessions/${event.id}`}>
                                         <button className="button">Join meetings</button>
                                     </Link>
                                 </div>

@@ -50,6 +50,10 @@ function App() {
                         element={<RequireAuth child={Profil} auth={true} admin={false} />}
                     />
                     <Route
+                        path="/dashboard"
+                        element={<RequireAuth child={Dashboard} auth={true} admin={false} />}
+                    />
+                    <Route
                         path="/event"
                         element={<RequireAuth child={EventList} auth={false} admin={false} />}
                     />
@@ -62,7 +66,7 @@ function App() {
                         element={<RequireAuth child={AddEvent} auth={true} admin={false} />}
                     />
                     <Route
-                        path="/appointmentSession/:event_id"
+                        path="/appointmentSessions/:event_id"
                         element={<RequireAuth child={AppointmentSessionList} auth={true} admin={false} />}
                     />
                     <Route
@@ -70,8 +74,12 @@ function App() {
                         element={<RequireAuth child={AddAppointmentSession} auth={true} admin={false} />}
                     />
                     <Route
-                        path="/appointmentSession/:id"
+                        path="/appointmentSession/:session_id"
                         element={<RequireAuth child={AppointmentSessionDetail} auth={true} admin={false} />}
+                    />
+                    <Route
+                        path="/addAppointmentRequest/:session_id"
+                        element={<RequireAuth child={AddAppointmentRequest} auth={true} admin={false} />}
                     />
                 </Routes>
             </main>

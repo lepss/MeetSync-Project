@@ -7,6 +7,7 @@ import {
     faLocationDot,
     faCalendar
 } from "@fortawesome/free-solid-svg-icons";
+import moment from "moment";
 
 const EventListItem = ({
     name,
@@ -38,9 +39,9 @@ const EventListItem = ({
                 {eventDays.length > 0 &&
                     <>
                         {eventDays.length > 1 ? (
-                            <p><FontAwesomeIcon icon={faCalendar}/>{eventDays[0].start_time} - {eventDays[eventDays.length - 1].start_time}</p>
+                            <p><FontAwesomeIcon icon={faCalendar}/>{moment(eventDays[0].start_time).format('LLL')} - {moment(eventDays[eventDays.length - 1].start_time).format('LLL')}</p>
                         ) : (
-                            <p><FontAwesomeIcon icon={faCalendar}/>{eventDays[0].start_time}</p>
+                            <p><FontAwesomeIcon icon={faCalendar}/>{moment(eventDays[0].start_time).format('LLL')}</p>
                         )}
                     </>
                 }

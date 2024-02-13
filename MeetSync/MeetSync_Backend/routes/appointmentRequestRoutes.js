@@ -3,7 +3,7 @@ const authentication = require("../middleware/authentication")
 module.exports = (app, db) =>{
     const AppointmentRequestController = require("../controllers/AppointmentRequestController")(db)
 
-    app.post("/api/appointmentRequest/add/:appointmentSession_id", authentication, AppointmentRequestController.addAppointmentRequest)
+    app.post("/api/appointmentRequest/add/:appointment_session_id", authentication, AppointmentRequestController.addAppointmentRequest)
     app.get("/api/appointmentRequest/all/event/:event_id", authentication, AppointmentRequestController.getAllEventAppointmentRequest)
     app.get("/api/appointmentRequest/all/appointmentSession/:appointmentSession_id", authentication, AppointmentRequestController.getAllSessionAppointmentRequest)
     app.get("/api/appointmentRequest/all/user/:user_id", authentication, AppointmentRequestController.getAllUserAppointmentRequest)

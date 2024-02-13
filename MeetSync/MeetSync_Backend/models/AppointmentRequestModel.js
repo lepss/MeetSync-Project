@@ -8,9 +8,9 @@ class AppointmentRequestModel{
     static saveOneAppointmentRequest(req, appointmentSessionId){
         return db.query(`
         INSERT INTO appointment_requests
-        (request, created_at, accepted_status, user_id, appointment_session_id)
-        VALUES (?, NOW(), "pending", ?, ?)`
-        , [req.body.request, req.body.user_id, appointmentSessionId])
+        (request, created_at, accepted_status, user_id, user_key_id, appointment_session_id)
+        VALUES (?, NOW(), "pending", ?, ?, ?)`
+        , [req.body.request, req.body.user_id, req.body.user_key_id, appointmentSessionId])
         .then((res)=>{
             return res;
         })
