@@ -5,6 +5,9 @@ import { Navigate } from "react-router-dom"
 import { addOneEvent, addEventDay } from "../../api/event";
 import { useSelector } from "react-redux"
 import { selectUser } from "../../slices/userSlice"
+import moment from "moment"
+import "moment/locale/fr";
+moment.locale("fr");
 
 const AddEvent = () =>{
 

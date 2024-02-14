@@ -3,7 +3,7 @@ import {config} from "../config"
 const token = window.localStorage.getItem("meetsync-token")
 
 export function generateAppointment(event_id) {
-    return axios.post(`${config.api_url}/api/appointment/generate/${event_id}`, {headers: {"x-access-token": token}})
+    return axios.get(`${config.api_url}/api/appointment/generate/${event_id}`, {headers: {"x-access-token": token}})
     .then((res)=>{
         return res
     })

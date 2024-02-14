@@ -1,4 +1,4 @@
-import { generateAppointment } from "../api/appointment"
+import { generateAgenda } from "../api/agenda"
 import { useForm } from "react-hook-form"
 
 const Home = () =>{
@@ -10,7 +10,7 @@ const Home = () =>{
     } = useForm()
 
     const onSubmit = () =>{
-        generateAppointment(1)
+        generateAgenda(1)
         .then((res)=>{
             if(res.status === 200){
                 console.log(res);

@@ -1,9 +1,7 @@
-// const EventController = require('../controllers/EventController');
-
 module.exports = (_db) => {
     db = _db
     AppointmentModel = require('../models/AppointmentModel')(db);
-    EventController = require("../controllers/EventController")(db)
+    // EventController = require("../controllers/EventController")(db)
     return AppointmentController
 }
 
