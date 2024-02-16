@@ -30,7 +30,7 @@ const EventList = () =>{
                                         <EventListItem
                                             name={event.name}
                                             description={event.description}
-                                            location={"Palais des congrès, Paris"}
+                                            location={event.location}
                                             event_id={event.id}
                                         />
                                     </li>

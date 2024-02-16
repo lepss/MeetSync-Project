@@ -30,7 +30,7 @@ const AppointmentSessionListItem = ({
                 <p>{description}</p>
                 <p>{location}</p>
                 {user !== null &&
-                    <p>Organize by {user.email}</p>
+                    <p>Organize by {user.username}</p>
                 }
             </Link>
         </>

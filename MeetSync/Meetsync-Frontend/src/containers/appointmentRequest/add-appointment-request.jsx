@@ -26,6 +26,7 @@ const AddAppointmentRequest= () =>{
             if(res.status === 200){
                 setAppointmentSession(res.data.result[0])
             }else{
+                setError(res.response.data.msg);
                 console.log(res.response.data.msg);
             }
         })
@@ -41,6 +42,7 @@ const AddAppointmentRequest= () =>{
                 console.log("Request added");
                 setRedirect(true);
             }else{
+                setError(res.response.data.msg)
                 console.log(res.response.data.msg);
             }
         })
@@ -52,7 +54,7 @@ const AddAppointmentRequest= () =>{
     }
 
     return(
-        <section className="section">
+        <section className="section form">
             <div className="container">
                 <div className="content">
                     {appointmentSession !== null &&

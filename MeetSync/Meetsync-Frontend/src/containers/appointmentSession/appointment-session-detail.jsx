@@ -43,7 +43,7 @@ const AppointmentSessionDetail = () =>{
                                     <p>{appointmentSession.description}</p>
                                     <p>Created at {moment(appointmentSession.created_at).format("LLL")}</p>
                                     {user !== null &&
-                                        <p>From {user.email}</p>
+                                        <p>Organize by {user.username}</p>
                                     }
                                     <Link to={`/addAppointmentRequest/${params.session_id}`}>
                                         <button className="button">Join Session</button>

@@ -1,4 +1,5 @@
 import { generateAgenda } from "../api/agenda"
+import { deleteAllAppointmentInEvent } from "../api/appointment"
 import { useForm } from "react-hook-form"
 
 const Home = () =>{
@@ -9,8 +10,20 @@ const Home = () =>{
         watch
     } = useForm()
 
-    const onSubmit = () =>{
-        generateAgenda(1)
+    const handleClickGenerateAgenda = () =>{
+        generateAgenda(19)
+        .then((res)=>{
+            if(res.status === 200){
+                console.log(res);
+            }else{
+                console.log(res);
+            }
+        })
+        .catch(err=>console.log(err))
+    }
+
+    const handleClickDeleteAgenda = () =>{
+        deleteAllAppointmentInEvent(19)
         .then((res)=>{
             if(res.status === 200){
                 console.log(res);
@@ -30,11 +43,12 @@ const Home = () =>{
             Inventore iste expedita veniam doloribus cumque eum ut quidem commodi explicabo quisquam fuga aut libero beatae porro illum amet optio necessitatibus, vel, eveniet veritatis fugit? Animi, eaque nostrum. Id, dolores!
             Ex ipsum delectus, incidunt, optio accusantium eos nihil quo sint nulla fuga necessitatibus quod animi eum, placeat earum vero. Pariatur nam nobis voluptatem distinctio eum voluptatibus laudantium quae cupiditate amet?</p>
             <div>
-            <form onSubmit={handleSubmit(onSubmit)} id="session-form">
-                <div className="sub-group">
-                    <input type="submit" name="submit" id="test-generate-submit" className="button" value="Test generate"/>
-                </div>
-            </form>
+            <button className="button" onClick={handleClickGenerateAgenda}>
+                Generate Agenda
+            </button>
+            <button className="button" onClick={handleClickDeleteAgenda}>
+                Delete Agenda
+            </button>
         </div>
         </section>
 

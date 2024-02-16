@@ -94,6 +94,16 @@ class EventModel{
     }
 
     static deleteEvent(id){
-        //TODO delete with event days / session / request / appointment if exist
+        return db.query (`
+        DELETE FROM events
+        WHERE id = ?
+        `, [id])
+        .then((res)=>{
+            return res
+        })
+        .catch((err)=>{
+            console.log(err);
+            return err
+        })
     }
 }

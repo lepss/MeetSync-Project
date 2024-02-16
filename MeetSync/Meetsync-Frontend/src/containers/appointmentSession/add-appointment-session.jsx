@@ -29,6 +29,7 @@ const AddAppointmentSession = () =>{
                 console.log("Sesion added");
                 setRedirect(true);
             }else{
+                setError(res.response.data.msg)
                 console.log(res.response.data.msg);
             }
         })

@@ -5,12 +5,36 @@ module.exports = (_db) => {
 
 class AppointmentModel{
 
-    static saveOneAppointment(req){
+    static saveOneAppointment(data){
         return db.query(`
         INSERT INTO appointments
-        (date_start, date_end, appointment_request_id, appointment_session_id)
-        VALUES (?, ?, ?, ?)`
-        , [req.body.request, req.body.user_id, req.body.appointment_session_id]) //TODO correction get apoointment object
+        (date_start, date_end, appointment_request_id, appointment_session_id, organizer_id, participant_id)
+        VALUES (?, ?, ?, ?, ?, ?)`
+        , [data.start, data.end, data.appointment_request_id, data.apointment_session_id, data.organizer_id, data.participant_id]) 
+        .then((res)=>{
+            return res;
+        })
+        .catch((err)=>{
+            console.log(err);
+            return err;
+        })
+    }
+
+    static saveMultipleAppointments(datas){
+        const values = datas.map(data => [
+            new Date(data.start),
+            new Date(data.end),
+            data.appointment_request_id,
+            data.appointment_session_id,
+            data.organizer_id,
+            data.participant_id
+        ]);
+
+        return db.query(`
+        INSERT INTO appointments
+        (date_start, date_end, appointment_request_id, appointment_session_id, organizer_id, participant_id)
+        VALUES ?`
+        , [values]) 
         .then((res)=>{
             return res;
         })
@@ -73,6 +97,34 @@ class AppointmentModel{
     }
 
     static deleteAppointment(id){
-        //TODO delete 
+        return db.query (`
+        DELETE FROM appointments
+        WHERE id = ?
+        `, [id])
+        .then((res)=>{
+            return res
+        })
+        .catch((err)=>{
+            console.log(err);
+            return err
+        })
+    }
+
+    static deleteAllAppointmentInEvent(event_id){
+        return db.query (`
+        DELETE FROM appointments
+        WHERE appointment_session_id IN (
+            SELECT id
+            FROM appointment_sessions
+            WHERE event_id = ?
+        )
+        `, [event_id])
+        .then((res)=>{
+            return res
+        })
+        .catch((err)=>{
+            console.log(err);
+            return err
+        })
     }
 }

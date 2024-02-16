@@ -12,13 +12,14 @@ module.exports = (_db) => {
 class UserModel{
     static saveOneUser(req){
         let key_id  = randomId(len, pattern)
+        let username = req.body.email.split("@")[0]
         return bcrypt.hash(req.body.password, saltRounds)
         .then((hash)=>{
             return db.query(`
             INSERT INTO users
-            (email, password, role, key_id, created_at, account_validate, avatar_url)
-            VALUES (?, ?, "user", ?, NOW(), ?, "no-pict.jpg")`, 
-            [req.body.email, hash, key_id, false])
+            (email, password, role, key_id, created_at, account_validate, avatar_url, username)
+            VALUES (?, ?, "user", ?, NOW(), ?, "no-pict.jpg", ?)`, 
+            [req.body.email, hash, key_id, false, username])
             .then((res)=>{
                 res.key_id = key_id;
                 return res;

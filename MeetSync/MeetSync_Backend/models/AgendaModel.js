@@ -37,7 +37,7 @@ class AgendaModel{
 
     static getAllEventAppointmentRequest(event_id){
         return db.query (`
-        SELECT ar.user_id, ar.appointment_session_id
+        SELECT ar.user_id, ar.appointment_session_id, ar.id
         FROM appointment_requests ar
         JOIN appointment_sessions ass ON ar.appointment_session_id = ass.id
         WHERE ar.accepted_status = 'accepted'

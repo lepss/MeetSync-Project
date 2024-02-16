@@ -79,7 +79,47 @@ class AppointmentSessionModel{
         })
     }
 
+    static getUserAppointmentSessionInEvent(user_id, event_id){
+        return db.query (`
+        SELECT *
+        FROM appointment_sessions
+        WHERE event_id = ? AND user_id = ?
+        `, [event_id, user_id])
+        .then((res)=>{
+            return res
+        })
+        .catch((err)=>{
+            console.log(err);
+            return err
+        })
+    }
+
+    static getEventIdOfAppointmentSession(session_id){
+        return db.query(`
+        SELECT event_id
+        FROM appointment_sessions
+        WHERE id = ?
+        `, [session_id])
+        .then((res)=>{
+            return res
+        })
+        .catch((err)=>{
+            console.log(err);
+            return err
+        })
+    }
+
     static deleteAppointmentSession(id){
-        //TODO delete with request / appointment if exist
+        return db.query (`
+        DELETE FROM appointment_sessions
+        WHERE id = ?
+        `, [id])
+        .then((res)=>{
+            return res
+        })
+        .catch((err)=>{
+            console.log(err);
+            return err
+        })
     }
 }

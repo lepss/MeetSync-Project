@@ -66,10 +66,20 @@ export function loadOneAppointment(id){
 
 export function deleteAppointment(id) {
     return axios.delete(`${config.api_url}/api/appointment/delete/${id}`, {headers: {"x-access-token": token}})
-        .then((res)=>{
-            return res
-        })
-        .catch((err) => {
-            return err
-        })
+    .then((res)=>{
+        return res
+    })
+    .catch((err) => {
+        return err
+    })
+}
+
+export function deleteAllAppointmentInEvent(event_id) {
+    return axios.delete(`${config.api_url}/api/appointment/delete/all/${event_id}`, {headers: {"x-access-token": token}})
+    .then((res)=>{
+        return res
+    })
+    .catch((err) => {
+        return err
+    })
 }

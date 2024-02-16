@@ -6,16 +6,6 @@ module.exports = (_db) => {
 }
 
 class AppointmentController{
-    static async generateEventAppointments(req, res){
-        console.log("hello");
-        // EventController.getEvent(req)
-        // .then((response) =>{
-        //     console.log(response);
-        // })
-        //req.params.event_id
-        //TODO
-    } 
-
     static async saveOneAppointment(req, res){
         const appointment = await AppointmentModel.saveOneAppointment(req); //Todo set appointment object
         if(appointment.code){
@@ -87,11 +77,20 @@ class AppointmentController{
     }
 
     static async deleteAppointment(req, res){
-        const deleteAppointment = await AppointmentModel.getOneAppointment(req.params.id);
+        const deleteAppointment = await AppointmentModel.deleteAppointment(req.params.id);
         if(deleteAppointment.code){
             res.status(500).json({msg:"Failed to delete appointment due to a server error", error: deleteAppointment})
         }else{
             res.status(200).json({msg: "Appointment deleted", result: deleteAppointment})
+        }
+    }
+
+    static async deleteAllAppointmentInEvent(req, res){
+        const deleteAppointments = await AppointmentModel.deleteAllAppointmentInEvent(req.params.event_id);
+        if(deleteAppointments.code){
+            res.status(500).json({msg:"Failed to delete appointment due to a server error", error: deleteAppointments})
+        }else{
+            res.status(200).json({msg: "Appointment deleted", result: deleteAppointments})
         }
     }
 }

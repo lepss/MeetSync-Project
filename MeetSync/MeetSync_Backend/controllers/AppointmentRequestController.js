@@ -1,17 +1,44 @@
 module.exports = (_db) => {
     db = _db
     AppointmentRequestModel = require('../models/AppointmentRequestModel')(db);
+    AppointmentSessionModel = require('../models/AppointmentSessionModel')(db);
     return AppointmentRequestController
 }
 
 class AppointmentRequestController{
     static async addAppointmentRequest(req, res){
-        const appointmentRequest = await AppointmentRequestModel.saveOneAppointmentRequest(req, req.params.appointment_session_id);
-        console.log(req.params);
-        if(appointmentRequest.code){
-            res.status(500).json({msg:"Failed to save appointment request due to a server error", error: appointmentRequest})
+        //Get event id
+        const eventId = await AppointmentSessionModel.getEventIdOfAppointmentSession(req.params.appointment_session_id)
+        if(eventId.code){
+            res.status(500).json({msg:"Failed to save appointment request due to a server error", error: eventId})
         }else{
-            res.status(200).json({msg: "Appointment request saved"})
+            // Check if user have already a session register in this event
+            const checkSession = await AppointmentSessionModel.getUserAppointmentSessionInEvent(req.body.user_id, eventId[0].event_id) 
+            if(checkSession.code){
+                res.status(500).json({msg: "Request verification server error", error: checkSession})
+            }else{
+                if(checkSession.length > 0){
+                    res.status(401).json({msg: "You already have a session register in this event, you can't request an appointment as an oragnizer"})
+                }else{
+                    //check if a request is already done in this session
+                    const checkRequest = await AppointmentRequestModel.getUserAppointmentRequestInSession(req.body.user_id, req.params.appointment_session_id)
+                    if(checkRequest.code){
+                        res.status(500).json({msg: "Request verification server error", error: checkRequest})
+                    }else{
+                        if(checkRequest.length > 0){
+                            res.status(401).json({msg: "You already have a request register in this session, you can't have multiple request in the same session"})
+                        }else{
+                            const appointmentRequest = await AppointmentRequestModel.saveOneAppointmentRequest(req, req.params.appointment_session_id);
+                            console.log(req.params);
+                            if(appointmentRequest.code){
+                                res.status(500).json({msg:"Failed to save appointment request due to a server error", error: appointmentRequest})
+                            }else{
+                                res.status(200).json({msg: "Appointment request saved"})
+                            }
+                        }
+                    }
+                }
+            }
         }
     }
 
@@ -82,7 +109,7 @@ class AppointmentRequestController{
     }
 
     static async deleteAppointmentRequest(req, res){
-        const deleteAppoinmentRequest = await AppointmentRequestModel.updateAppointmentRequest(req.params.id);
+        const deleteAppoinmentRequest = await AppointmentRequestModel.deleteAppointmentRequest(req.params.id);
         if(deleteAppoinmentRequest.code){
             res.status(500).json({msg:"Failed to delete appointment request due to a server error", error: deleteAppoinmentRequest})
         }else{
