@@ -1,11 +1,13 @@
 import {useState, useEffect} from "react"
-import { Link } from "react-router-dom";
 import {useSelector} from "react-redux"
 import { selectUser } from "../../slices/userSlice"
 import { loadAllUserEvents } from "../../api/event";
 import { loadAllUserAppointmentSession } from "../../api/appointmentSession";
 import { loadAllUserAppointmentRequest } from "../../api/appointmentRequest";
 import Agenda from "../../components/admin/agenda";
+import TableRowRequest from "../../components/admin/table-row-request";
+import TableRowSession from "../../components/admin/table-row-session";
+import TableRowEvent from "../../components/admin/table-row-event";
 
 const Dashboard = () =>{
     const user = useSelector(selectUser)
@@ -15,139 +17,153 @@ const Dashboard = () =>{
 
     useEffect(()=>{
         if(user.infos.id !== undefined){
-            loadAllUserEvents(user.infos.id)
-            .then((res)=>{
-                if(res.status === 200){
-                    setEvents(res.data.result)
-                }else{
-                    console.log(res.response.data.msg);
-                }
-            })
-            .catch(err=>console.log(err))
-            loadAllUserAppointmentSession(user.infos.id)
-            .then((res)=>{
-                if(res.status === 200){
-                    setSessions(res.data.result)
-                }else{
-                    console.log(res.response.data.msg);
-                }
-            })
-            .catch(err=>console.log(err))
-            loadAllUserAppointmentRequest(user.infos.id)
-            .then((res)=>{
-                if(res.status === 200){
-                    console.log(res.data.result);
-                    setRequests(res.data.result)
-                }else{
-                    console.log(res.response.data.msg);
-                }
-            })
-            .catch(err=>console.log(err))
+            getAllUserEvent();
+            getAllUserSession();
+            getAllUserRequest();
         }
     }, [user])
 
+    const getAllUserEvent = () =>{
+        loadAllUserEvents(user.infos.id)
+        .then((res)=>{
+            if(res.status === 200){
+                setEvents(res.data.result)
+            }else{
+                console.log(res.response.data.msg);
+            }
+        })
+        .catch(err=>console.log(err))
+    }
+
+    const getAllUserSession = () => {
+        loadAllUserAppointmentSession(user.infos.id)
+        .then((res)=>{
+            if(res.status === 200){
+                setSessions(res.data.result)
+            }else{
+                console.log(res.response.data.msg);
+            }
+        })
+        .catch(err=>console.log(err))
+    }
+
+    const getAllUserRequest = () => {
+        loadAllUserAppointmentRequest(user.infos.id)
+        .then((res)=>{
+            if(res.status === 200){
+                setRequests(res.data.result)
+            }else{
+                console.log(res.response.data.msg);
+            }
+        })
+        .catch(err=>console.log(err))
+    }
+
     return(
-        <section className="section">
+        <section className="section dashboard">
             <h2 className="section-title">Dashboard</h2>
             <div className="container">
                 <div className="content">
-                    <div className="sub-content">
-                        <h3 className="sub-content-title">My Schedule</h3>
-                        <Agenda />
-                        <div className="sub-group">
-                        </div>
+                    <h3 className="sub-content-title">My Schedule</h3>
+                    <Agenda />
+                </div>
+            </div>
+            <div className="container dashboard">
+                <div className="content">
+                    <h3 className="sub-content-title">My Events</h3>
+                    <div className="table-wrapper">
+                        <table className="dashboard-table">
+                            <thead>
+                                <tr>
+                                    <th>Event</th>
+                                    <th>Description</th>
+                                    <th>Location</th>
+                                    <th>Appointment duration</th>
+                                    <th>Break duration</th>
+                                    <th>Nb days</th>
+                                    <th>Actions</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                            {events.length > 0 && events.map((event, id)=>{
+                                return(
+                                    <TableRowEvent 
+                                        key={id}
+                                        eventId={event.id}
+                                        name={event.name}
+                                        description={event.description}
+                                        location={event.location}
+                                        appointmentDuration={event.appointment_duration}
+                                        breakDuration={event.break_duration}
+                                        handleDelete={getAllUserEvent}
+                                    />
+                                )
+                            })}
+                            </tbody>
+                        </table>
                     </div>
                 </div>
             </div>
-            <div className="container">
+            <div className="container dashboard">
                 <div className="content">
-                    <div className="sub-content">
-                        <h3 className="sub-content-title">My Events</h3>
-                            <div className="sub-group">
-                                <table>
-                                    <thead>
-                                        <tr>
-                                            <th>Event</th>
-                                            <th>Description</th>
-                                            <th>Location</th>
-                                            <th>Appointment duration</th>
-                                            <th>Break duration</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                    {events.length > 0 && events.map((event)=>{
-                                        return(
-                                            <tr key={event.id}>
-                                                <td>{event.name}</td>
-                                                <td>{event.description}</td>
-                                                <td>{event.location}</td>
-                                                <td>{event.appointment_duration}</td>
-                                                <td>{event.break_duration}</td>
-                                            </tr>
-                                        )
-                                    })}
-                                    </tbody>
-                                </table>
-                            </div>
+                    <h3 className="sub-content-title">My Sessions</h3>
+                    <div className="table-wrapper">
+                        <table className="dashboard-table">
+                            <thead>
+                                <tr>
+                                    <th>Event</th>
+                                    <th>Session</th>
+                                    <th>Request number</th>
+                                    <th>Actions</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                            {sessions.length > 0 && sessions.map((session, id)=>{
+                                return(
+                                    <TableRowSession
+                                        key={id}
+                                        sessionId={session.id}
+                                        eventId={session.event_id}
+                                        sessionDescription={session.description}
+                                        handleDelete={getAllUserSession}
+                                    />
+                                )
+                            })}
+                            </tbody>
+                        </table>
                     </div>
                 </div>
             </div>
-            <div className="container">
+            <div className="container dashboard">
                 <div className="content">
-                    <div className="sub-content">
-                        <h3 className="sub-content-title">My Sessions</h3>
-                        <div className="sub-group">
-                            <table>
-                                <thead>
-                                    <tr>
-                                        <th>Event</th>
-                                        <th>Session</th>
-                                        <th>Request number</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                {sessions.length > 0 && sessions.map((session)=>{
-                                    return(
-                                        <tr key={session.id}>
-                                            <td>Event name</td>
-                                            <td>{session.description}</td>
-                                            <td>12</td>
-                                        </tr>
-                                    )
-                                })}
-                                </tbody>
-                            </table>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div className="container">
-                <div className="content">
-                    <div className="sub-content">
-                        <h3 className="sub-content-title">My Request</h3>
-                        <div className="sub-group">
-                            <table>
-                                <thead>
-                                    <tr>
-                                        <th>Event</th>
-                                        <th>Request</th>
-                                        <th>Status</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                {requests.length > 0 && requests.map((request)=>{
-                                    return(
-                                        <tr key={request.id}>
-                                            <td>Event name</td>
-                                            <td>{request.request}</td>
-                                            <td>{request.accepted_status}</td>
-                                        </tr>
-                                    )
-                                })}
-                                </tbody>
-                            </table>
-                        </div>
-                    </div>
+                    <h3 className="sub-content-title">My Request</h3>
+                    <div className="table-wrapper">
+                        <table className="dashboard-table">
+                            <thead>
+                                <tr>
+                                    <th>Event</th>
+                                    <th>Session</th>
+                                    <th>Request</th>
+                                    <th>Status</th>
+                                    <th>Actions</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                            {requests.length > 0 && requests.map((request, id)=>{
+                                return(
+                                    <TableRowRequest 
+                                        key={id}
+                                        requestId={request.id}
+                                        request={request.request}
+                                        status={request.accepted_status}
+                                        sessionId={request.appointment_session_id}
+                                        handleDelete={getAllUserRequest}
+                                    />
+                                )
+                            })}
+                            </tbody>
+                        </table>
+                    </div>  
                 </div>
             </div>
         </section>

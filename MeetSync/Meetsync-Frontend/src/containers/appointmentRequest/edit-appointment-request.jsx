@@ -1,44 +1,25 @@
-import {useState, useEffect} from "react"
 import { useParams } from "react-router-dom";
-import { useForm } from "react-hook-form"
+import {useState, useEffect} from "react"
 import { Navigate } from "react-router-dom"
-import { addAppointmentRequest } from "../../api/appointmentRequest";
-import { loadOneAppointmentSession } from "../../api/appointmentSession";
-import {useSelector} from "react-redux"
-import { selectUser } from "../../slices/userSlice"
+import { updateOneAppointmentRequest, loadOneAppointmentRequest } from "../../api/appointmentRequest";
+import { useForm } from "react-hook-form"
 
-const AddAppointmentRequest= () =>{
-    const user = useSelector(selectUser);
-    const params = useParams();
+const EditAppointmentRequest = () =>{
+    const params = useParams()
     const [redirect, setRedirect] = useState(null)
     const [error, setError] = useState(null)
+    const [request, setRequest] = useState(null)
     const {
         register,
         handleSubmit,
-        formState: {errors},
+        formState: {errors}
     } = useForm()
-    const [appointmentSession, setAppointmentSession] = useState(null)
-
-    useEffect(()=>{
-        loadOneAppointmentSession(params.session_id)
-        .then((res)=>{
-            if(res.status === 200){
-                setAppointmentSession(res.data.result[0])
-            }else{
-                setError(res.response.data.msg);
-                console.log(res.response.data.msg);
-            }
-        })
-        .catch(err=>console.log(err))
-    }, [])
 
     const onSubmit = (data) =>{
-        data.user_id = user.infos.id
-        data.user_key_id = user.infos.key_id
-        addAppointmentRequest(data, params.session_id)
+        updateOneAppointmentRequest(params.request_id, data)
         .then((res)=>{
             if(res.status === 200){
-                console.log("Request added");
+                console.log("Request updated");
                 setRedirect(true);
             }else{
                 setError(res.response.data.msg)
@@ -48,6 +29,17 @@ const AddAppointmentRequest= () =>{
         .catch(err=>console.log(err))
     }
 
+    useEffect(()=>{
+        if(isNaN(parseInt(params.request_id))){
+            setRedirect(true);
+        }
+        loadOneAppointmentRequest(params.request_id)
+        .then((res) => {
+            setRequest(res.data.result[0])
+        })
+        .catch((err) => console.log(err));
+    }, [])
+
     if(redirect){
         return <Navigate to={`/dashboard` }/>
     }
@@ -56,14 +48,14 @@ const AddAppointmentRequest= () =>{
         <section className="section form">
             <div className="container">
                 <div className="content">
-                    {appointmentSession !== null &&
+                    {request !== null &&
                         <div className="sub-content">
-                            <h3 className="sub-content-title">Join {appointmentSession.description}</h3>
+                            <h3 className="sub-content-title">Edit request</h3>
                             {error !== null && <p className="form-error">{error}</p>}
-                            <form onSubmit={handleSubmit(onSubmit)} id="session-form">
+                            <form onSubmit={handleSubmit(onSubmit)} id="request-form">
                                 <div className="sub-group">
                                     <label htmlFor="request" className="text-label">Request</label>
-                                    <input className="form-input" type="text" placeholder="Session Request" name="request" id="request" 
+                                    <input className="form-input" type="text" defaultValue={request.request} placeholder="Session Request" name="request" id="request"
                                         {...register("request", {
                                             required: "This field is required"
                                         })} 
@@ -71,7 +63,7 @@ const AddAppointmentRequest= () =>{
                                 </div>
                                 {errors.request && <p className="form-error">{errors.request.message}</p>}
                                 <div className="sub-group">
-                                    <input type="submit" name="submit" id="request-submit" className="button" value="Request Session"/>
+                                    <input type="submit" name="submit" id="request-submit" className="button" value="Edit Request"/>
                                 </div>
                             </form>
                         </div>
@@ -82,4 +74,4 @@ const AddAppointmentRequest= () =>{
     )
 }
 
-export default AddAppointmentRequest
+export default EditAppointmentRequest

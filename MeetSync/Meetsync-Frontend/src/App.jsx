@@ -12,19 +12,22 @@ import Logout from './containers/user/logout';
 import Register from './containers/user/register';
 import Profil from './containers/user/profil';
 import Dashboard from './containers/user/dashboard';
-import AdminDashboard from './containers/admin/admin-dashboard';
+// import AdminDashboard from './containers/admin/admin-dashboard';
 
 import EventList from './containers/event/event-list';
 import EventDetail from './containers/event/event-detail';
 import AddEvent from './containers/event/add-event';
+import EditEvent from './containers/event/edit-event';
 
 import AddAppointmentSession from './containers/appointmentSession/add-appointment-session';
 import AppointmentSessionDetail from './containers/appointmentSession/appointment-session-detail';
 import AppointmentSessionList from './containers/appointmentSession/appointment-session-list';
+import EditAppointmentSession from './containers/appointmentSession/edit-appointment-session';
 
 import AddAppointmentRequest from './containers/appointmentRequest/add-appointment-request';
-import AppointmentRequestDetail from './containers/appointmentRequest/appointment-request-detail';
-import AppointmentRequestList from './containers/appointmentRequest/appointment-request-list';
+// import AppointmentRequestDetail from './containers/appointmentRequest/appointment-request-detail';
+// import AppointmentRequestList from './containers/appointmentRequest/appointment-request-list';
+import EditAppointmentRequest from './containers/appointmentRequest/edit-appointment-request';
 
 import Layout from './components/layout';
 
@@ -66,6 +69,10 @@ function App() {
                         element={<RequireAuth child={AddEvent} auth={true} admin={false} />}
                     />
                     <Route
+                        path="/editEvent/:event_id"
+                        element={<RequireAuth child={EditEvent} auth={true} admin={false} />}
+                    />
+                    <Route
                         path="/appointmentSessions/:event_id"
                         element={<RequireAuth child={AppointmentSessionList} auth={true} admin={false} />}
                     />
@@ -78,8 +85,16 @@ function App() {
                         element={<RequireAuth child={AppointmentSessionDetail} auth={true} admin={false} />}
                     />
                     <Route
+                        path="/editAppointmentSession/:session_id"
+                        element={<RequireAuth child={EditAppointmentSession} auth={true} admin={false} />}
+                    />
+                    <Route
                         path="/addAppointmentRequest/:session_id"
                         element={<RequireAuth child={AddAppointmentRequest} auth={true} admin={false} />}
+                    />
+                    <Route
+                        path="/editAppointmentRequest/:request_id"
+                        element={<RequireAuth child={EditAppointmentRequest} auth={true} admin={false} />}
                     />
                 </Routes>
             </main>

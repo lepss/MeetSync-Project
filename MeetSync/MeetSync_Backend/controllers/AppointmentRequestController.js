@@ -78,7 +78,7 @@ class AppointmentRequestController{
     }
 
     static async getAllSessionAppointmentRequest(req, res){
-        const appointmentRequests = await AppointmentRequestModel.getAllSessionAppointmentRequest(req.params.appointment_session_id);
+        const appointmentRequests = await AppointmentRequestModel.getAllSessionAppointmentRequest(req.params.session_id);
         if(appointmentRequests.code){
             res.status(500).json({msg:"Failed to get appointment request due to a server error", error: appointmentRequests})
         }else{
@@ -100,11 +100,11 @@ class AppointmentRequestController{
     }
 
     static async updateAppointmentRequest(req, res){
-        const updateAppoinmentRequest = await AppointmentRequestModel.updateAppointmentRequest(req, req.body.id);
+        const updateAppoinmentRequest = await AppointmentRequestModel.updateAppointmentRequest(req, req.params.id);
         if(updateAppoinmentRequest.code){
             res.status(500).json({msg:"Failed to validate appointment request due to a server error", error: updateAppoinmentRequest})
         }else{
-            res.status(200).json({msg:`Appointment request set to ${req.body.validate}`, result: updateAppoinmentRequest})  
+            res.status(200).json({msg:`Appointment request updated`, result: updateAppoinmentRequest})  
         }
     }
 

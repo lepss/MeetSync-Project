@@ -93,12 +93,18 @@ h3{
     }
 }
 
+.login, .register{
+    .form-input{
+        padding: 6px 30px;
+    }
+}
+
 .form-input{
     width: 100%;
     display: block;
     border: none;
     border-bottom: 1px solid $default-grey;
-    padding: 6px 30px;
+    padding: 10px 0px 6px 3px;
     box-sizing: border-box;
     outline: none;
     &::-webkit-input-placeholder {

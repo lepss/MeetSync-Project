@@ -51,7 +51,7 @@ class EventController{
     }
 
     static async updateEvent(req, res){
-        const updateEvent = await EventModel.updateEvent(req, req.params.id)
+        const updateEvent = await EventModel.updateEvent(req, req.params.event_id)
         if(updateEvent.code){
             res.status(500).json({msg:"Failed to update event due to a server error", error: updateEvent})
         }else{
@@ -60,7 +60,7 @@ class EventController{
     }
 
     static async deleteEvent(req, res){
-        const deleteEvent = await deleteEvent(req.params.id);
+        const deleteEvent = await EventModel.deleteEvent(req.params.id);
         if(deleteEvent.code){
             res.status(500).json({msg:"Failed to delete event due to a server error", error: deleteEvent})
         }else{

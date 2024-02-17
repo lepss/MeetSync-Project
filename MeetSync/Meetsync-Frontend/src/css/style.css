@@ -119,12 +119,16 @@ h3 {
   background: #5036bc;
 }
 
+.login .form-input, .register .form-input {
+  padding: 6px 30px;
+}
+
 .form-input {
   width: 100%;
   display: block;
   border: none;
   border-bottom: 1px solid #B2B2BF;
-  padding: 6px 30px;
+  padding: 10px 0px 6px 3px;
   box-sizing: border-box;
   outline: none;
 }
@@ -269,6 +273,11 @@ footer {
   transform: translateY(-50%);
   color: #000000;
 }
+.form .text-label {
+  font-size: 1.6rem;
+  font-weight: 700;
+  color: #000000;
+}
 .form .form-error {
   font-size: 1.2rem;
   margin-top: -20px;
@@ -312,6 +321,55 @@ footer {
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
+}
+
+/************* TABLE DASHBOARD *************/
+.dashboard h3 {
+  text-align: center;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+.dashboard .table-wrapper {
+  margin: 10px 70px 70px;
+  overflow-x: auto;
+  display: block;
+}
+.dashboard .dashboard-table {
+  border-radius: 5px;
+  font-size: 12px;
+  font-weight: normal;
+  border: none;
+  border-collapse: collapse;
+  width: 100%;
+  max-width: 100%;
+  white-space: nowrap;
+}
+.dashboard .dashboard-table td, .dashboard .dashboard-table th {
+  text-align: center;
+  padding: 8px;
+}
+.dashboard .dashboard-table td {
+  border: 1px solid #e1d9ff;
+  font-size: 12px;
+}
+.dashboard .dashboard-table thead th {
+  color: #FFFFFF;
+  background: #6e56cf;
+}
+.dashboard .dashboard-table tr:nth-child(even) {
+  background: #ebe4ff;
+}
+.dashboard .dashboard-table a, .dashboard .dashboard-table button {
+  margin-left: 10px;
+}
+.dashboard .dashboard-table button {
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 0;
+  outline: inherit;
+  color: inherit;
+  font: inherit;
 }
 
 /*# sourceMappingURL=style.css.map */

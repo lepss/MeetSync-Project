@@ -54,8 +54,8 @@ export function loadOneAppointmentRequest(id){
     })
 }
 
-export function updateOneAppointmentRequest(id){
-    return axios.put(`${config.api_url}/api/appointmentRequest/update/${id}`, {headers: {"x-access-token": token}})
+export function updateOneAppointmentRequest(id, datas){
+    return axios.put(`${config.api_url}/api/appointmentRequest/update/${id}`, datas, {headers: {"x-access-token": token}})
     .then((res)=>{
         return res
     })

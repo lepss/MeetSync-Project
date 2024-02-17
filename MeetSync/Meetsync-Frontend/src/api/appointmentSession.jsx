@@ -44,8 +44,18 @@ export function loadOneAppointmentSession(id){
     })
 }
 
-export function updateOneAppointmentSession(id){
-    return axios.put(`${config.api_url}/api/appointmentSession/update/${id}`, {headers: {"x-access-token": token}})
+export function getEventIdOfAppointmentSession(session_id){
+    return axios.get(`${config.api_url}/api/appointmentSession/event/id/${session_id}`, {headers: {"x-access-token": token}})
+    .then((res)=>{
+        return res
+    })
+    .catch((err)=>{
+        return err
+    })
+}
+
+export function updateOneAppointmentSession(event_id, datas){
+    return axios.put(`${config.api_url}/api/appointmentSession/update/${event_id}`, datas, {headers: {"x-access-token": token}})
     .then((res)=>{
         return res
     })

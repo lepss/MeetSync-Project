@@ -67,7 +67,7 @@ class AppointmentSessionModel{
     static updateAppointmentSession(req, id){
         return db.query(`
         UPDATE appointment_sessions
-        description = ?
+        SET description = ?
         WHERE id = ?`
         , [req.body.description, id])
         .then((res)=>{

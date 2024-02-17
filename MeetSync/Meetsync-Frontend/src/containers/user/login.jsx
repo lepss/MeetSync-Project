@@ -41,7 +41,7 @@ const Login = () =>{
     }
 
     return(
-        <section className="section form">
+        <section className="section form login">
             <div className="container">
                 <div className="content">
                     <div className="sub-content signin-image">

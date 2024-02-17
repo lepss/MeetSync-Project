@@ -43,8 +43,8 @@ export function loadOneEvent(id){
     })
 }
 
-export function updateEvent(datas, id) {
-    return axios.put(`${config.api_url}/api/event/update/${id}`, datas, {headers: {"x-access-token": token}})
+export function updateEvent(datas, event_id) {
+    return axios.put(`${config.api_url}/api/event/update/${event_id}`, datas, {headers: {"x-access-token": token}})
         .then((res)=>{
             return res
         })

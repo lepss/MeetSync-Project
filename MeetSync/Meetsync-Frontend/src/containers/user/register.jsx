@@ -35,7 +35,7 @@ const Register = () => {
     }
 
     return(
-        <section className="section form">
+        <section className="section form register">
             <div className="container">
                 <div className="content">
                     <div className="sub-content">

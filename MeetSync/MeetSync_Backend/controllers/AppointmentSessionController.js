@@ -47,6 +47,19 @@ class AppointmentSessionController{
         }
     }
 
+    static async getEventIdOfAppointmentSession(req, res){
+        const eventId = await AppointmentSessionModel.getEventIdOfAppointmentSession(req.params.session_id);
+        if(eventId.code){
+            res.status(500).json({msg:"Failed to get event id due to a server error", error: eventId})
+        }else{
+            if(eventId.length === 0){
+                res.status(400).json({msg : "No event id found"})
+            }else{
+                res.status(200).json({msg: "Event id found", result: eventId[0].event_id})
+            }
+        }
+    }
+
     static async getAllUserAppointmentSession(req, res){
         const appointmentSessions = await AppointmentSessionModel.getAllUserAppointmentSession(req.params.user_id);
         if(appointmentSessions.code){
@@ -70,7 +83,7 @@ class AppointmentSessionController{
     }
 
     static async updateAppointmentSession(req, res){
-        const updateAppointmentSession = await AppointmentSessionModel.updateAppointmentSession(req, req.params.id);
+        const updateAppointmentSession = await AppointmentSessionModel.updateAppointmentSession(req, req.params.session_id);
         if(updateAppointmentSession.code){
             res.status(500).json({msg:"Failed to update appointment session due to a server error", error: updateAppointmentSession})
         }else{
@@ -79,7 +92,7 @@ class AppointmentSessionController{
     }
 
     static async deleteAppointmentSession(req, res){
-        const deleteAppointmentSession = await deleteAppointmentSession.deleteAppointmentSession(req.params.id);
+        const deleteAppointmentSession = await AppointmentSessionModel.deleteAppointmentSession(req.params.id);
         if(deleteAppointmentSession.code){
             res.status(500).json({msg:"Failed to delete appointment session due to a server error", error: deleteAppointmentSession})
         }else{

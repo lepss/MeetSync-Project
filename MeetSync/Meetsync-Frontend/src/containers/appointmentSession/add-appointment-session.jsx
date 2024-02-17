@@ -1,7 +1,7 @@
-import {useState, useEffect} from "react"
+import {useState} from "react"
 import { useForm } from "react-hook-form"
 import { Navigate } from "react-router-dom"
-import { Link, useParams } from "react-router-dom";
+import { useParams } from "react-router-dom";
 import { addAppointmentSession } from "../../api/appointmentSession"
 import {useSelector} from "react-redux"
 import { selectUser } from "../../slices/userSlice"
@@ -16,7 +16,6 @@ const AddAppointmentSession = () =>{
         register,
         handleSubmit,
         formState: {errors},
-        watch
     } = useForm()
 
     const onSubmit = (data) =>{
@@ -49,8 +48,14 @@ const AddAppointmentSession = () =>{
                         {error !== null && <p className="form-error">{error}</p>}
                         <form onSubmit={handleSubmit(onSubmit)} id="session-form">
                             <div className="sub-group">
-                                <input className="form-input" type="text" placeholder="Session description" name="description" {...register("description")} />
+                                <label htmlFor="description" className="text-label">Session description</label>
+                                <input className="form-input" type="text" placeholder="Session description" name="description" id="description" 
+                                    {...register("description", {
+                                        required: "This field is required"
+                                    })} 
+                                />
                             </div>
+                            {errors.description && <p className="form-error">{errors.description.message}</p>}
                             <div className="sub-group">
                                 <input type="submit" name="submit" id="session-submit" className="button" value="Create Session"/>
                             </div>
