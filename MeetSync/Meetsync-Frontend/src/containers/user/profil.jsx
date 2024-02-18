@@ -1,13 +1,8 @@
-import {useState, useEffect} from "react"
+import {useState} from "react"
 import { useForm } from "react-hook-form"
 import {useSelector, useDispatch} from "react-redux"
 import { selectUser, connectUser } from "../../slices/userSlice"
 import { checkMyToken, updateUserProfil } from "../../api/user"
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import {
-  faUser,
-  faPhone
-} from "@fortawesome/free-solid-svg-icons";
 
 const Profil = () =>{
     const user = useSelector(selectUser)
@@ -45,10 +40,6 @@ const Profil = () =>{
         })
         .catch(err=>console.log(err))
     }
-
-    useEffect(()=>{
-
-    }, [user])
 
     return(
         <section className="section form">

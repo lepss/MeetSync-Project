@@ -14,7 +14,7 @@ export function addAppointmentRequest(datas, session_id) {
 }
 
 export function loadAllEventAppointmentRequests(event_id){
-    return axios.get(`${config.api_url}/api/appointmentRequest/all/event/${event_id}`)
+    return axios.get(`${config.api_url}/api/appointmentRequest/all/event/${event_id}`, {headers: {"x-access-token": token}})
     .then((res)=>{
         return res
     })
@@ -64,8 +64,8 @@ export function updateOneAppointmentRequest(id, datas){
     })
 }
 
-export function validateOneAppointmentRequest(id){
-    return axios.put(`${config.api_url}/api/appointmentRequest/validate/${id}`, {headers: {"x-access-token": token}})
+export function validateOneAppointmentRequest(id, data){
+    return axios.put(`${config.api_url}/api/appointmentRequest/validate/${id}`, data, {headers: {"x-access-token": token}})
     .then((res)=>{
         return res
     })

@@ -8,8 +8,8 @@ const EditEvent = () => {
     const params = useParams()
     const [redirect, setRedirect] = useState(null)
     const [error, setError] = useState(null)
-    const [event, setEvent] = useState(null)
-    const [eventDays, setEventDays] = useState([])
+    const [event, setEvent] = useState({})
+    const [eventDays, setEventDays] = useState([{}])
     const {
         register,
         handleSubmit,
@@ -34,17 +34,30 @@ const EditEvent = () => {
         if(isNaN(parseInt(params.event_id))){
             setRedirect(true);
         }
-        loadOneEvent(params.event_id)
-        .then((res) => {
-            setEvent(res.data.result[0])
-            getEventDays(params.event_id)
-            .then((dayRes)=>{
-                setEventDays(dayRes.data.result)
+
+        let isMounted = true;
+        const fetchData = () => {
+            loadOneEvent(params.event_id)
+            .then((res) => {
+                if(res.status === 200 && isMounted){
+                    setEvent(res.data.result[0])
+                    getEventDays(params.event_id)
+                    .then((dayRes)=>{
+                        if(res.status === 200 && isMounted){
+                            setEventDays(dayRes.data.result)
+                        }
+                    })
+                    .catch((dayErr) => console.log(dayErr));
+                }
             })
-            .catch((dayErr) => console.log(dayErr));
-        })
-        .catch((err) => console.log(err));
-    }, [])
+            .catch((err) => console.log(err));
+        }
+        fetchData();
+        return () => {
+            isMounted = false;
+        }
+        
+    }, [params.event_id])
 
     if(redirect){
         return <Navigate to={`/dashboard` }/>
@@ -54,8 +67,7 @@ const EditEvent = () => {
         <section className="section form">
             <div className="container">
                 <div className="content">
-                    {event !== null && eventDays.length > 0 && 
-                        <div className="sub-content">
+                    <div className="sub-content">
                         <h3 className="sub-content-title">Edit event</h3>
                         {error !== null && <p className="form-error">{error}</p>}
                         <form onSubmit={handleSubmit(onSubmit)} id="event-form">
@@ -150,7 +162,6 @@ const EditEvent = () => {
                             </div>
                         </form>
                     </div>
-                    }
                 </div>
             </div>
         </section>

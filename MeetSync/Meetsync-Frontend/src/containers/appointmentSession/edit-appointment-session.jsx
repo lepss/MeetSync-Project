@@ -8,7 +8,7 @@ const EditAppointmentSession = () => {
     const params = useParams()
     const [redirect, setRedirect] = useState(null)
     const [error, setError] = useState(null)
-    const [session, setSession] = useState(null)
+    const [session, setSession] = useState({})
     const {
         register,
         handleSubmit,
@@ -33,12 +33,22 @@ const EditAppointmentSession = () => {
         if(isNaN(parseInt(params.session_id))){
             setRedirect(true);
         }
-        loadOneAppointmentSession(params.session_id)
-        .then((res) => {
-            setSession(res.data.result[0])
-        })
-        .catch((err) => console.log(err));
-    }, [])
+
+        let isMounted = true;
+        const fetchData = () => {
+            loadOneAppointmentSession(params.session_id)
+            .then((res) => {
+                if(res.status === 200 && isMounted){
+                    setSession(res.data.result[0])
+                }
+            })
+            .catch((err) => console.log(err));
+        }
+        fetchData();
+        return () => {
+            isMounted = false;
+        }
+    }, [params.session_id])
 
     if(redirect){
         return <Navigate to={`/dashboard` }/>
@@ -48,26 +58,24 @@ const EditAppointmentSession = () => {
         <section className="section form">
             <div className="container">
                 <div className="content">
-                    {session !== null &&
-                        <div className="sub-content">
-                            <h3 className="sub-content-title">Edit session</h3>
-                            {error !== null && <p className="form-error">{error}</p>}
-                            <form onSubmit={handleSubmit(onSubmit)} id="session-form">
-                                <div className="sub-group">
-                                    <label htmlFor="description" className="text-label">Session description</label>
-                                    <input className="form-input" type="text" defaultValue={session.description} placeholder="Session description" name="description" id="description" 
-                                        {...register("description" , {
-                                            required: "This field is required"
-                                        })} 
-                                    />
-                                </div>
-                                {errors.description && <p className="form-error">{errors.description.message}</p>}
-                                <div className="sub-group">
-                                    <input type="submit" name="submit" id="session-submit" className="button" value="Create Session"/>
-                                </div>
-                            </form>
-                        </div>
-                    }
+                    <div className="sub-content">
+                        <h3 className="sub-content-title">Edit session</h3>
+                        {error !== null && <p className="form-error">{error}</p>}
+                        <form onSubmit={handleSubmit(onSubmit)} id="session-form">
+                            <div className="sub-group">
+                                <label htmlFor="description" className="text-label">Session description</label>
+                                <input className="form-input" type="text" defaultValue={session.description} placeholder="Session description" name="description" id="description" 
+                                    {...register("description" , {
+                                        required: "This field is required"
+                                    })} 
+                                />
+                            </div>
+                            {errors.description && <p className="form-error">{errors.description.message}</p>}
+                            <div className="sub-group">
+                                <input type="submit" name="submit" id="session-submit" className="button" value="Create Session"/>
+                            </div>
+                        </form>
+                    </div>
                 </div>
             </div>
         </section>

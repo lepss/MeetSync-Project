@@ -4,6 +4,7 @@ import PropTypes from "prop-types"
 import { loadOneEvent } from "../../api/event";
 import { loadOneAppointmentSession } from "../../api/appointmentSession";
 import { deleteAppointmentRequest } from "../../api/appointmentRequest";
+import Popup from "../popup"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
     faPenToSquare,
@@ -17,43 +18,74 @@ const TableRowRequest = ({
     sessionId,
     handleDelete
 }) =>{
-    const [event, setEvent] = useState(null)
-    const [session, setSession] = useState(null)
+    const [event, setEvent] = useState({})
+    const [session, setSession] = useState({})
+    const [popup, setPopup] = useState({
+        show: false,
+        id: null
+    })
+
+    const handleDeleteModal = (id) =>{
+        setPopup({
+            show: true,
+            id
+        })
+    }
+
+    const handleDeleteModalTrue = () =>{
+        if(popup.show && popup.id){
+            deleteAppointmentRequest(popup.id)
+            .then((res)=>{
+                if(res.status === 200){
+                    handleDelete()
+                }
+            })
+            .catch(err=>console.log(err))
+            setPopup({
+                show: false,
+                id: null
+            })
+        }
+    }
+
+    const handleDeleteModalFalse = () =>{
+        setPopup({
+            show: false,
+            id: null
+        })
+    }
 
     const onClickDelete = (id) =>{
-        deleteAppointmentRequest(id)
-        .then((res)=>{
-            if(res.status === 200){
-                handleDelete()
-            }
-        })
-        .catch(err=>console.log(err))
+        handleDeleteModal(id);
     }
 
     useEffect(()=>{
-        loadOneAppointmentSession(sessionId)
-        .then((res)=>{
-            if(res.status === 200){
-                setSession(res.data.result[0])
-                loadOneEvent(res.data.result[0].event_id)
-                .then((res)=>{
-                    if(res.status === 200){
-                        setEvent(res.data.result[0])
-                    }else{
-                        console.log(res.response.data.msg);
-                    }
-                })
-                .catch(err=>console.log(err))
-            }else{
-                console.log(res.response.data.msg);
-            }
-        })
-        .catch(err=>console.log(err))
-    }, [])
+        let isMounted = true;
+        const fetchData = () => {
+            loadOneAppointmentSession(sessionId)
+            .then((res)=>{
+                if(res.status === 200 && isMounted){
+                    setSession(res.data.result[0])
+                    loadOneEvent(res.data.result[0].event_id)
+                    .then((res)=>{
+                        if(res.status === 200 && isMounted){
+                            setEvent(res.data.result[0])
+                        }
+                    })
+                    .catch(err=>console.log(err))
+                }
+            })
+            .catch(err=>console.log(err))
+        }
+        fetchData();
+        return () => {
+            isMounted = false;
+        }
+        
+    }, [sessionId])
 
     return(
         <>
-            {event !== null && session !== null &&
             <tr>
                 <td>{event.name}</td>
                 <td>{session.description}</td>
@@ -61,7 +93,7 @@ const TableRowRequest = ({
                 <td>{status}</td>
                 <td>
                     <Link to={`/editAppointmentRequest/${requestId}`}><FontAwesomeIcon icon={faPenToSquare}/></Link>
-                    <button
+                    <button className="btn-table"
                         onClick={(e)=>{
                             e.preventDefault()
                             onClickDelete(requestId)
@@ -71,7 +103,15 @@ const TableRowRequest = ({
                     </button>
                 </td>
             </tr>
-            }
+            {popup.show && (
+                <>
+                    <Popup 
+                        message={"Are you sure you wan't to delete this request ?"}
+                        handleDeleteTrue={handleDeleteModalTrue}
+                        handleDeleteFalse={handleDeleteModalFalse}
+                    />
+                </>
+            )}
         </>
     )
 }

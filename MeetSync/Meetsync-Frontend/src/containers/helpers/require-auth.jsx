@@ -1,6 +1,6 @@
 import {useState,useEffect} from "react"
 import {useSelector, useDispatch} from "react-redux"
-
+import PropTypes from "prop-types"
 import {selectUser, connectUser} from "../../slices/userSlice"
 import {Navigate, useParams} from "react-router-dom"
 import { checkMyToken } from "../../api/user"
@@ -58,6 +58,12 @@ const RequireAuth = (props) =>{
         return <Navigate to="/"/>
     }
     return (<Child  {...props} params={params}/>)
+}
+
+RequireAuth.propTypes = {
+    child: PropTypes.elementType,
+    auth: PropTypes.bool,
+    admin: PropTypes.bool,
 }
 
 export default RequireAuth

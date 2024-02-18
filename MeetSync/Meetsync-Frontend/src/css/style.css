@@ -362,7 +362,7 @@ footer {
 .dashboard .dashboard-table a, .dashboard .dashboard-table button {
   margin-left: 10px;
 }
-.dashboard .dashboard-table button {
+.dashboard .dashboard-table .btn-table {
   background: none;
   border: none;
   cursor: pointer;
@@ -370,6 +370,37 @@ footer {
   outline: inherit;
   color: inherit;
   font: inherit;
+}
+
+/************* MODAL *************/
+.modal-backdrop {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+}
+.modal-backdrop .modal-content {
+  background-color: #fdfcfe;
+  border: 2px solid #c2b5f5;
+  padding: 20px;
+  border-radius: 5px;
+  width: 50%;
+  text-align: center;
+}
+.modal-backdrop .modal-content p {
+  font-size: 1.8rem;
+}
+.modal-backdrop .modal-content .modal-btn-delete {
+  background: red;
+}
+.modal-backdrop .modal-content .modal-btn-delete:hover {
+  background: #cc0000;
 }
 
 /*# sourceMappingURL=style.css.map */

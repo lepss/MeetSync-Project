@@ -1,38 +1,6 @@
-import { generateAgenda } from "../api/agenda"
-import { deleteAllAppointmentInEvent } from "../api/appointment"
-import { useForm } from "react-hook-form"
 
 const Home = () =>{
-    const {
-        register,
-        handleSubmit,
-        formState: {errors},
-        watch
-    } = useForm()
 
-    const handleClickGenerateAgenda = () =>{
-        generateAgenda(19)
-        .then((res)=>{
-            if(res.status === 200){
-                console.log(res);
-            }else{
-                console.log(res);
-            }
-        })
-        .catch(err=>console.log(err))
-    }
-
-    const handleClickDeleteAgenda = () =>{
-        deleteAllAppointmentInEvent(19)
-        .then((res)=>{
-            if(res.status === 200){
-                console.log(res);
-            }else{
-                console.log(res);
-            }
-        })
-        .catch(err=>console.log(err))
-    }
 
     return(
         <section>
@@ -42,14 +10,6 @@ const Home = () =>{
             Necessitatibus ratione dolore minus debitis aperiam tenetur magni atque expedita, quod fuga tempora ullam quasi, doloribus reprehenderit ut id ipsa eligendi numquam temporibus iste est nemo? Commodi inventore consectetur accusantium?
             Inventore iste expedita veniam doloribus cumque eum ut quidem commodi explicabo quisquam fuga aut libero beatae porro illum amet optio necessitatibus, vel, eveniet veritatis fugit? Animi, eaque nostrum. Id, dolores!
             Ex ipsum delectus, incidunt, optio accusantium eos nihil quo sint nulla fuga necessitatibus quod animi eum, placeat earum vero. Pariatur nam nobis voluptatem distinctio eum voluptatibus laudantium quae cupiditate amet?</p>
-            <div>
-            <button className="button" onClick={handleClickGenerateAgenda}>
-                Generate Agenda
-            </button>
-            <button className="button" onClick={handleClickDeleteAgenda}>
-                Delete Agenda
-            </button>
-        </div>
         </section>
 
     )

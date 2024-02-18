@@ -18,6 +18,7 @@ import EventList from './containers/event/event-list';
 import EventDetail from './containers/event/event-detail';
 import AddEvent from './containers/event/add-event';
 import EditEvent from './containers/event/edit-event';
+import EventDashboard from './containers/event/event-dashboard';
 
 import AddAppointmentSession from './containers/appointmentSession/add-appointment-session';
 import AppointmentSessionDetail from './containers/appointmentSession/appointment-session-detail';
@@ -26,7 +27,7 @@ import EditAppointmentSession from './containers/appointmentSession/edit-appoint
 
 import AddAppointmentRequest from './containers/appointmentRequest/add-appointment-request';
 // import AppointmentRequestDetail from './containers/appointmentRequest/appointment-request-detail';
-// import AppointmentRequestList from './containers/appointmentRequest/appointment-request-list';
+import AppointmentRequestList from './containers/appointmentRequest/appointment-request-list';
 import EditAppointmentRequest from './containers/appointmentRequest/edit-appointment-request';
 
 import Layout from './components/layout';
@@ -73,6 +74,10 @@ function App() {
                         element={<RequireAuth child={EditEvent} auth={true} admin={false} />}
                     />
                     <Route
+                        path="/eventDashboard/:event_id"
+                        element={<RequireAuth child={EventDashboard} auth={true} admin={false} />}
+                    />
+                    <Route
                         path="/appointmentSessions/:event_id"
                         element={<RequireAuth child={AppointmentSessionList} auth={true} admin={false} />}
                     />
@@ -95,6 +100,10 @@ function App() {
                     <Route
                         path="/editAppointmentRequest/:request_id"
                         element={<RequireAuth child={EditAppointmentRequest} auth={true} admin={false} />}
+                    />
+                    <Route
+                        path="/appointmentRequestList/:session_id"
+                        element={<RequireAuth child={AppointmentRequestList} auth={true} admin={false} />}
                     />
                 </Routes>
             </main>

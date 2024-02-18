@@ -8,7 +8,7 @@ const EditAppointmentRequest = () =>{
     const params = useParams()
     const [redirect, setRedirect] = useState(null)
     const [error, setError] = useState(null)
-    const [request, setRequest] = useState(null)
+    const [request, setRequest] = useState({})
     const {
         register,
         handleSubmit,
@@ -33,12 +33,22 @@ const EditAppointmentRequest = () =>{
         if(isNaN(parseInt(params.request_id))){
             setRedirect(true);
         }
-        loadOneAppointmentRequest(params.request_id)
-        .then((res) => {
-            setRequest(res.data.result[0])
-        })
-        .catch((err) => console.log(err));
-    }, [])
+
+        let isMounted = true;
+        const fetchData = () => {
+            loadOneAppointmentRequest(params.request_id)
+            .then((res) => {
+                if(res.status === 200 && isMounted){
+                    setRequest(res.data.result[0])
+                } 
+            })
+            .catch((err) => console.log(err));
+        }
+        fetchData();
+        return () => {
+            isMounted = false;
+        }
+    }, [params.request_id])
 
     if(redirect){
         return <Navigate to={`/dashboard` }/>
@@ -48,26 +58,24 @@ const EditAppointmentRequest = () =>{
         <section className="section form">
             <div className="container">
                 <div className="content">
-                    {request !== null &&
-                        <div className="sub-content">
-                            <h3 className="sub-content-title">Edit request</h3>
-                            {error !== null && <p className="form-error">{error}</p>}
-                            <form onSubmit={handleSubmit(onSubmit)} id="request-form">
-                                <div className="sub-group">
-                                    <label htmlFor="request" className="text-label">Request</label>
-                                    <input className="form-input" type="text" defaultValue={request.request} placeholder="Session Request" name="request" id="request"
-                                        {...register("request", {
-                                            required: "This field is required"
-                                        })} 
-                                    />
-                                </div>
-                                {errors.request && <p className="form-error">{errors.request.message}</p>}
-                                <div className="sub-group">
-                                    <input type="submit" name="submit" id="request-submit" className="button" value="Edit Request"/>
-                                </div>
-                            </form>
-                        </div>
-                    }
+                    <div className="sub-content">
+                        <h3 className="sub-content-title">Edit request</h3>
+                        {error !== null && <p className="form-error">{error}</p>}
+                        <form onSubmit={handleSubmit(onSubmit)} id="request-form">
+                            <div className="sub-group">
+                                <label htmlFor="request" className="text-label">Request</label>
+                                <input className="form-input" type="text" defaultValue={request.request} placeholder="Session Request" name="request" id="request"
+                                    {...register("request", {
+                                        required: "This field is required"
+                                    })} 
+                                />
+                            </div>
+                            {errors.request && <p className="form-error">{errors.request.message}</p>}
+                            <div className="sub-group">
+                                <input type="submit" name="submit" id="request-submit" className="button" value="Edit Request"/>
+                            </div>
+                        </form>
+                    </div>
                 </div>
             </div>
         </section>

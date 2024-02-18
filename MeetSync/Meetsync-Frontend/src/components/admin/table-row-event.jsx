@@ -3,6 +3,7 @@ import {Link} from "react-router-dom"
 import PropTypes from "prop-types"
 import { getEventDays } from "../../api/event";
 import { deleteEvent } from "../../api/event";
+import Popup from "../popup"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
     faPenToSquare,
@@ -20,53 +21,91 @@ const TableRowEvent = ({
     handleDelete
 }) =>{
     const [eventDays, setEventDays] = useState([])
+    const [popup, setPopup] = useState({
+        show: false,
+        id: null
+    })
+
+    const handleDeleteModal = (id) =>{
+        setPopup({
+            show: true,
+            id
+        })
+    }
+
+    const handleDeleteModalTrue = () =>{
+        if(popup.show && popup.id){
+            deleteEvent(popup.id)
+            .then((res)=>{
+                if(res.status === 200){
+                    handleDelete()
+                }
+            })
+            .catch(err=>console.log(err))
+            setPopup({
+                show: false,
+                id: null
+            })
+        }
+    }
+
+    const handleDeleteModalFalse = () =>{
+        setPopup({
+            show: false,
+            id: null
+        })
+    }
 
     const onClickDelete = (id) =>{
-        deleteEvent(id)
-        .then((res)=>{
-            if(res.status === 200){
-                handleDelete()
-            }
-        })
-        .catch(err=>console.log(err))
+        handleDeleteModal(id)
     }
 
     useEffect(()=>{
-        getEventDays(eventId)
-        .then((res)=>{
-            if(res.status === 200){
-                setEventDays(res.data.result)
-            }else{
-                console.log(res.response.data.msg);
-            }
-        })
-        .catch(err=>console.log(err))
-    }, [])
+        let isMounted = true;
+        const fetchData = () => {
+            getEventDays(eventId)
+            .then((res)=>{
+                if(res.status === 200 && isMounted){
+                    setEventDays(res.data.result)
+                }
+            })
+            .catch(err=>console.log(err))
+        }
+        fetchData();
+        return () => {
+            isMounted = false;
+        }
+    }, [eventId])
 
     return(
         <>
-            {eventDays !== null &&
-                <tr>
-                    <td>{name}</td>
-                    <td>{description}</td>
-                    <td>{location}</td>
-                    <td>{appointmentDuration}</td>
-                    <td>{breakDuration}</td>
-                    <td>{eventDays.length}</td>
-                    <td>
-                        <Link to={`/eventDashboard/${eventId}`}><FontAwesomeIcon icon={faCircleArrowRight}/></Link>
-                        <Link to={`/editEvent/${eventId}`}><FontAwesomeIcon icon={faPenToSquare}/></Link>
-                        <button
-                            onClick={(e)=>{
-                                e.preventDefault()
-                                onClickDelete(eventId)
-                            }}
-                        >
-                            <FontAwesomeIcon icon={faTrash}/>
-                        </button>
-                    </td>
-                </tr>
-            }
+            <tr>
+                <td>{name}</td>
+                <td>{description}</td>
+                <td>{location}</td>
+                <td>{appointmentDuration}</td>
+                <td>{breakDuration}</td>
+                <td>{eventDays.length}</td>
+                <td>
+                    <Link to={`/eventDashboard/${eventId}`}><FontAwesomeIcon icon={faCircleArrowRight}/></Link>
+                    <Link to={`/editEvent/${eventId}`}><FontAwesomeIcon icon={faPenToSquare}/></Link>
+                    <button className="btn-table"
+                        onClick={(e)=>{
+                            e.preventDefault()
+                            onClickDelete(eventId)
+                        }}
+                    >
+                        <FontAwesomeIcon icon={faTrash}/>
+                    </button>
+                </td>
+            </tr>
+            {popup.show && (
+                <Popup 
+                    message={"Are you sure you wan't to delete this event ?"}
+                    handleDeleteTrue={handleDeleteModalTrue}
+                    handleDeleteFalse={handleDeleteModalFalse}
+                />
+            )}
         </>
     )
 }
@@ -77,7 +116,8 @@ TableRowEvent.propTypes = {
     description: PropTypes.string,
     location: PropTypes.string,
     appointmentDuration: PropTypes.number,
-    breakDuration: PropTypes.number
+    breakDuration: PropTypes.number,
+    handleDelete: PropTypes.func
 }
 
 export default TableRowEvent;

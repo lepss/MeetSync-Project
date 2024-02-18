@@ -21,7 +21,19 @@ class AppointmentRequestModel{
     }
 
     static getAllEventAppointmentRequest(event_id){
-        //TODO inner join sql
+        return db.query(`
+        SELECT ar.id, ar.request, ar.accepted_status, ar.appointment_session_id, ar.user_id, ar.user_key_id
+        FROM appointment_requests ar
+        JOIN appointment_sessions ass ON ar.appointment_session_id = ass.id
+        WHERE ass.event_id = ?
+        `, [event_id])
+        .then((res)=>{
+            return res
+        })
+        .catch((err)=>{
+            console.log(err);
+            return err
+        })
     }
 
     static getAllSessionAppointmentRequest(appointment_session_id){

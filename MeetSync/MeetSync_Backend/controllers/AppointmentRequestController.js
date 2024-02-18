@@ -91,6 +91,7 @@ class AppointmentRequestController{
     }
 
     static async validateAppointmentRequest(req, res){
+        console.log(req.body.validate);
         const validate = await AppointmentRequestModel.validateAppointmentRequest(req.params.id, req.body.validate);
         if(validate.code){
             res.status(500).json({msg:"Failed to validate appointment request due to a server error", error: validate})

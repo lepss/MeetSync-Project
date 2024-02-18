@@ -11,16 +11,11 @@ const Logout = () => {
         window.localStorage.removeItem("meetsync-token")
         dispatch(logoutUser())
         setRedirect(true)
-    }, [])
+    }, [dispatch])
 
     if(redirect) {
         return <Navigate to="/"/>
     }
-
-    return (
-        <div>
-        </div>
-        )
 }
 
 export default Logout

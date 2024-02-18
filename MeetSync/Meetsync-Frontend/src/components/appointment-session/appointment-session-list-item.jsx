@@ -1,7 +1,6 @@
 import PropTypes from "prop-types"
 import {useState, useEffect} from "react"
 import {Link} from "react-router-dom"
-import moment from "moment";
 import { loadOneUser } from "../../api/user";
 
 const AppointmentSessionListItem = ({
@@ -11,29 +10,32 @@ const AppointmentSessionListItem = ({
     user_key_id
 }) =>{
 
-    const [user, setUser] = useState(null)
+    const [user, setUser] = useState({})
 
     useEffect(()=>{
-        loadOneUser(user_key_id)
-        .then((res)=>{
-            if(res.status === 200){
-                setUser(res.data.user)
-            }else{
-                console.log(res.response.data.msg);
-            }
-        })
-    }, [])
+        let isMounted = true;
+        const fetchData = () => {
+            loadOneUser(user_key_id)
+            .then((res)=>{
+                if(res.status === 200 && isMounted){
+                    setUser(res.data.user)
+                }
+            })
+            .catch(err=>console.log(err))
+        }
+        fetchData();
+        return () => {
+            isMounted = false;
+        }
+
+    }, [user_key_id])
 
     return(
-        <>
-            <Link to={`/appointmentSession/${session_id}`}>
-                <p>{description}</p>
-                <p>{location}</p>
-                {user !== null &&
-                    <p>Organize by {user.username}</p>
-                }
-            </Link>
-        </>
+        <Link to={`/appointmentSession/${session_id}`}>
+            <p>{description}</p>
+            <p>{location}</p>
+            <p>Organize by {user.username}</p>
+        </Link>
     )
 }
 
