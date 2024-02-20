@@ -1,16 +1,18 @@
 import {useState, useEffect} from "react"
-import { Link, useParams } from "react-router-dom";
+import { useParams } from "react-router-dom";
 import { generateAgenda } from "../../api/agenda";
-import { deleteAllAppointmentInEvent } from "../../api/appointment";
+import { deleteAllAppointmentInEvent, loadAllEventAppointments } from "../../api/appointment";
 import { loadAllEventAppointmentSession } from "../../api/appointmentSession";
 import { loadAllEventAppointmentRequests } from "../../api/appointmentRequest";
 import TableRowDashboardEventRequest from "../../components/admin/table-row-dashboard-event-request";
 import TableRowDashboardEventSession from "../../components/admin/table-row-dashboard-event-session";
+import TableRowDashboardEventAppointment from "../../components/admin/table-row-dashboard-event-appointment";
 
 const EventDashboard = () =>{
     const params = useParams();
     const [sessions, setSessions] = useState([])
     const [requests, setRequests] = useState([])
+    const [appointments, setAppointments] = useState([])
     const [statusCounts, setStatusCounts] = useState({ accepted: 0, rejected: 0, pending: 0 });
     
     useEffect(()=>{
@@ -35,6 +37,13 @@ const EventDashboard = () =>{
                 }
             })
             .catch(err=>console.log(err))
+            loadAllEventAppointments(params.event_id)
+            .then((res)=>{
+                if(res.status === 200 && isMounted){
+                    setAppointments(res.data.result)
+                }
+            })
+            .catch(err=>console.log(err))
         }
         fetchData();
         return () => {
@@ -42,11 +51,21 @@ const EventDashboard = () =>{
         }
     }, [params.event_id])
 
+    const fetchAppointments = () => {
+        loadAllEventAppointments(params.event_id)
+        .then((res)=>{
+            if(res.status === 200){
+                setAppointments(res.data.result)
+            }
+        })
+        .catch(err=>console.log(err))
+    }
+
     const handleClickGenerateAgenda = () =>{
         generateAgenda(params.event_id)
         .then((res)=>{
             if(res.status === 200){
-                console.log(res);
+                fetchAppointments()
             }else{
                 console.log(res);
             }
@@ -58,7 +77,7 @@ const EventDashboard = () =>{
         deleteAllAppointmentInEvent(params.event_id)
         .then((res)=>{
             if(res.status === 200){
-                console.log(res);
+                setAppointments([])
             }else{
                 console.log(res);
             }
@@ -120,6 +139,38 @@ const EventDashboard = () =>{
                                     request={request.request}
                                     status={request.accepted_status}
                                     userKeyId={request.user_key_id}
+                                />
+                            )
+                        })}
+                        </tbody>
+                    </table>
+                    </div>
+                </div>
+            </div>
+            <div className="container dashboard">
+                <div className="content">
+                    <h3 className="sub-content-title">Appointments</h3>
+                    <div className="table-wrapper">
+                    <table className="dashboard-table">
+                        <thead>
+                            <tr>
+                            <th>Session</th>
+                                <th>Date Start</th>
+                                <th>Date End</th>
+                                <th>Organizer Id</th>
+                                <th>Participant Id</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                        {appointments.map((appointment, id)=>{
+                            return(
+                                <TableRowDashboardEventAppointment 
+                                    key={id}
+                                    dateStart={appointment.date_start}
+                                    dateEnd={appointment.date_end}
+                                    organizerId={appointment.organizer_id}
+                                    participantId={appointment.participant_id}
+                                    sessionId={appointment.appointment_session_id}
                                 />
                             )
                         })}

@@ -76,10 +76,10 @@ export function validateOneAppointmentRequest(id, data){
 
 export function deleteAppointmentRequest(id) {
     return axios.delete(`${config.api_url}/api/appointmentRequest/delete/${id}`, {headers: {"x-access-token": token}})
-        .then((res)=>{
-            return res
-        })
-        .catch((err) => {
-            return err
-        })
+    .then((res)=>{
+        return res
+    })
+    .catch((err) => {
+        return err
+    })
 }

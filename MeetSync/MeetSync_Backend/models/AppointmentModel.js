@@ -59,7 +59,19 @@ class AppointmentModel{
     }
 
     static getAllEventAppointment(event_id){
-        //TODO Query with inner join
+        return db.query(`
+        SELECT app.id, app.date_start, app.date_end, app.appointment_request_id, app.appointment_session_id, app.organizer_id, app.participant_id
+        FROM appointments app
+        JOIN appointment_sessions ass ON app.appointment_session_id = ass.id
+        WHERE ass.event_id = ?
+        `, [event_id])
+        .then((res)=>{
+            return res
+        })
+        .catch((err)=>{
+            console.log(err);
+            return err
+        })
     }
 
     static getAllSessionAppointment(appointment_session_id){
@@ -78,7 +90,18 @@ class AppointmentModel{
     }
 
     static getAllUserAppointment(user_id){
-        //TODO Query with inner join on appointment_request
+        return db.query(`
+        SELECT *
+        FROM appointments 
+        WHERE organizer_id = ? OR participant_id = ?
+        `, [user_id, user_id])
+        .then((res)=>{
+            return res
+        })
+        .catch((err)=>{
+            console.log(err);
+            return err
+        })
     }
 
     static getOneAppointment(id){

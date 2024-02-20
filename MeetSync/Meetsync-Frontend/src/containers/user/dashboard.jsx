@@ -8,6 +8,8 @@ import Agenda from "../../components/admin/agenda";
 import TableRowRequest from "../../components/admin/table-row-request";
 import TableRowSession from "../../components/admin/table-row-session";
 import TableRowEvent from "../../components/admin/table-row-event";
+import MyCalendar from "../../components/admin/calendar";
+import Calendar from "../../components/admin/fullCalendar";
 
 const Dashboard = () =>{
     const user = useSelector(selectUser)
@@ -60,12 +62,14 @@ const Dashboard = () =>{
     }
 
     return(
-        <section className="section dashboard">
+        <section className="section dashboard agenda">
             <h2 className="section-title">Dashboard</h2>
             <div className="container">
                 <div className="content">
                     <h3 className="sub-content-title">My Schedule</h3>
-                    <Agenda />
+                    {/* <Agenda /> */}
+                    {/* <MyCalendar /> */}
+                    <Calendar />
                 </div>
             </div>
             <div className="container dashboard">

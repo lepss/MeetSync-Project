@@ -43,13 +43,18 @@ footer{
         background-color: $default-black-header;
         height: 65px; // Hauteur nav / header
     }
+
+    #menuDesktop{
+        display: none;
+    }
+
     #menuToggle {
         display: flex;
         flex-direction: column;
         position: relative;
         top: 13px;
         left: 13px;
-        z-index: 1;
+        z-index: 10;
         -webkit-user-select: none;
         user-select: none;
         input{
@@ -100,7 +105,7 @@ footer{
         }
     }
 
-    #menu {
+    #menu-mobile {
         position: absolute;
         width: 90%;
         height: 100vh;

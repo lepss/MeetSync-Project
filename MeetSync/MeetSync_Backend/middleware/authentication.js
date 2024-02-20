@@ -8,7 +8,6 @@ const secret = process.env.SECRET_USER || config.token.secret_user;
 
 const authentication = (req, res, next) =>{
     const token = req.headers["x-access-token"]
-    // console.log(req.headers);
     if(token === undefined){
         res.json({status: 404, msg: "Error, token not found"})
     }else{

@@ -66,10 +66,10 @@ export function updateOneAppointmentSession(event_id, datas){
 
 export function deleteAppointmentSession(id) {
     return axios.delete(`${config.api_url}/api/appointmentSession/delete/${id}`, {headers: {"x-access-token": token}})
-        .then((res)=>{
-            return res
-        })
-        .catch((err) => {
-            return err
-        })
+    .then((res)=>{
+        return res
+    })
+    .catch((err) => {
+        return err
+    })
 }

@@ -32,7 +32,7 @@ const Header = () => {
                             <span></span>
                             <span></span>
                             <span></span>
-                            <ul id="menu">
+                            <ul id="menu-mobile">
                                 <li><h1>MeetSync</h1></li>
                                 <li><Link to="/" onClick={handleLinkClick}><FontAwesomeIcon icon={faHouse}/>Home</Link></li>
                                 <li><Link to="/event" onClick={handleLinkClick}><FontAwesomeIcon icon={faCalendarDays}/>Events</Link></li>
@@ -49,6 +49,28 @@ const Header = () => {
                                         <li><Link to="/admin" onClick={handleLinkClick}><FontAwesomeIcon icon={faScrewdriverWrench}/>Admin</Link></li>
                                     }
                                     <li><Link to="/logout" onClick={handleLinkClick}><FontAwesomeIcon icon={faPowerOff}/>Logout</Link></li>
+                                </>
+                                )}
+                            </ul>
+                        </div>
+                        <div id="menuDesktop">
+                            <ul id="menu">
+                                <li><h1>MeetSync</h1></li>
+                                <li><Link to="/" ><FontAwesomeIcon icon={faHouse}/>Home</Link></li>
+                                <li><Link to="/event" ><FontAwesomeIcon icon={faCalendarDays}/>Events</Link></li>
+                                {user.isLogged === false ? (  
+                                <>                                 
+                                    <li><Link to="/register" ><FontAwesomeIcon icon={faLock}/>Sign up</Link></li>
+                                    <li><Link to="/login" ><FontAwesomeIcon icon={faCircleUser}/>Log in</Link></li>
+                                </>                                     
+                                ) : (
+                                <>  
+                                    <li><Link to="/dashboard" ><FontAwesomeIcon icon={faPersonShelter}/>Dashboard</Link></li>
+                                    <li><Link to="/profil" ><FontAwesomeIcon icon={faUserTie}/>Profil</Link></li>
+                                    {user.infos.role === "admin" && 
+                                        <li><Link to="/admin" ><FontAwesomeIcon icon={faScrewdriverWrench}/>Admin</Link></li>
+                                    }
+                                    <li><Link to="/logout" ><FontAwesomeIcon icon={faPowerOff}/>Logout</Link></li>
                                 </>
                                 )}
                             </ul>

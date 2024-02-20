@@ -26,9 +26,9 @@ const EventList = () =>{
 
     return(
         <section className="section event-list">
-            <h2 className="section-title">Events list</h2>
             <div className="container">
                 <div className="content">
+                    <h2 className="section-title">Events list</h2>  
                     <ul className="sub-content">
                         {events.map((event)=>{
                             return(

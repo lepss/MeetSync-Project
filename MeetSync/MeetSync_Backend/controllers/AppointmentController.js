@@ -60,7 +60,7 @@ class AppointmentController{
             res.status(500).json({msg:"Failed to get appointments due to a server error", error: appointments})
         }else{
             if(appointments.length === 0){
-                res.status(400).json({msg : "No appointment found"})
+                res.status(200).json({msg : "No appointment found"})
             }else{
                 res.status(200).json({msg: "Appointments found", result: appointments})
             }   
