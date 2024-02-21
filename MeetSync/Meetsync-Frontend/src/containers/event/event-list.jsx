@@ -32,7 +32,7 @@ const EventList = () =>{
                     <ul className="sub-content">
                         {events.map((event)=>{
                             return(
-                                <li className="sub-group" key={event.id}>
+                                <li className="sub-group even-list-item" key={event.id}>
                                     <EventListItem
                                         name={event.name}
                                         description={event.description}

@@ -7,6 +7,7 @@ import {
   faLock,
   faEnvelope
 } from "@fortawesome/free-solid-svg-icons";
+import imageRegister from "../../assets/img-login.svg"
 
 const Register = () => {
     const [redirect, setRedirect] = useState(false)
@@ -38,6 +39,11 @@ const Register = () => {
         <section className="section form register">
             <div className="container">
                 <div className="content">
+                 <div className="sub-content signup-image">
+                        <figure>
+                            <img src={imageRegister} alt="sing up image"/>
+                        </figure>
+                    </div>
                     <div className="sub-content">
                         <h2 className="sub-content-title">Sign up</h2>
                         {error !== null && <p className="form-error">{error}</p>} 
@@ -82,11 +88,6 @@ const Register = () => {
                                 <input type="submit" name="Signup" id="signup" className="button" value="Register"/>
                             </div>
                         </form>
-                    </div>
-                    <div className="sub-content signup-image">
-                        <figure>
-                            <img src="https://placehold.co/200x200" alt="sing up image"/>
-                        </figure>
                     </div>
                 </div>
             </div>

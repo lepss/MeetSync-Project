@@ -11,7 +11,6 @@ class EventController{
             res.status(500).json({msg:"Failed to save event due to a server error", error: event})
         }else{
             res.status(200).json({msg: "Event saved", insertId: event.insertId})
-            //TODO add all eventDay (getEvent id => addDay(id) )
         }
     }
 
@@ -52,6 +51,15 @@ class EventController{
 
     static async updateEvent(req, res){
         const updateEvent = await EventModel.updateEvent(req, req.params.event_id)
+        if(updateEvent.code){
+            res.status(500).json({msg:"Failed to update event due to a server error", error: updateEvent})
+        }else{
+            res.status(200).json({msg: "Event updated", result: updateEvent})
+        }
+    }
+
+    static async setEventAgendaGenerated(req, res){
+        const updateEvent = await EventModel.setEventAgendaGenerated(req.body.agenda_generated, req.params.event_id)
         if(updateEvent.code){
             res.status(500).json({msg:"Failed to update event due to a server error", error: updateEvent})
         }else{

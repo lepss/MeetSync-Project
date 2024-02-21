@@ -23,7 +23,6 @@ const EventListItem = ({
         .then((res)=>{
             if(res.status === 200){
                 setEventDays(res.data.result)
-                // console.log(res.data);
             }else{
                 console.log(res.response.data.msg);
             }
@@ -34,7 +33,7 @@ const EventListItem = ({
         <>
             <Link to={`/event/${event_id}`}>
                 <h3 className="sub-content-title">{name}</h3>
-                <p>{description}</p>
+                <p className="single-line-text">{description}</p>
                 <p><FontAwesomeIcon icon={faLocationDot}/>{location}</p>
                 {eventDays.length > 0 &&
                     <>

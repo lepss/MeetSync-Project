@@ -2,6 +2,7 @@ module.exports = (_db) => {
     db = _db
     AgendaModel = require('../models/AgendaModel')(db);
     AppointmentModel = require('../models/AppointmentModel')(db);
+    EventModel = require('../models/EventModel')(db);
     AgendaGenerator = require("../service/agendaGenerator")
     return AgendaController
 }
@@ -24,12 +25,16 @@ class AgendaController{
                     let organizerData = AgendaController.formatSessionData(sessions)
                     let participantData = AgendaController.formatRequestData(requests)
                     const appointmentGenerated = AgendaGenerator.generate(eventData, organizerData, participantData)
-                    // console.log(appointmentGenerated);
                     const appointmentsSaved = await AppointmentModel.saveMultipleAppointments(appointmentGenerated)
                     if(appointmentsSaved.code){
                         res.status(500).json({msg:"Failed to saved agenda due to a server error", error: appointmentsSaved})
                     }else{
-                        res.status(200).json({msg: "Agenda generated and saved"})
+                        const validateEventAgendaGeneration = await EventModel.setEventAgendaGenerated(true, req.params.event_id)
+                        if(validateEventAgendaGeneration.code){
+                            res.status(500).json({msg:"Failed to generate agenda due to a server error", error: validateEventAgendaGeneration})
+                        }else{
+                            res.status(200).json({msg: "Agenda generated and saved"})
+                        }
                     }
                 }
             }
@@ -82,7 +87,7 @@ class AgendaController{
           }, {});
 
           const formattedData = Object.entries(groupedData).map(([participant_id, appointments]) => ({
-            participant_id: parseInt(participant_id), // Convertir la clé en nombre, car les IDs sont généralement des nombres
+            participant_id: parseInt(participant_id),
             accepted_appointments: appointments
           }));
 

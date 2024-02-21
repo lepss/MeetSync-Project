@@ -9,6 +9,7 @@ import {
   faLock,
   faEnvelope
 } from "@fortawesome/free-solid-svg-icons";
+import imageLogin from "../../assets/img-login.svg"
 
 const Login = () =>{
     const dispatch = useDispatch()
@@ -45,7 +46,7 @@ const Login = () =>{
             <div className="container">
                 <div className="content">
                     <div className="sub-content signin-image">
-                        <figure><img src="https://placehold.co/200x200" alt="sing in image"/></figure>
+                        <figure><img src={imageLogin} alt="sing in image"/></figure>
                         {/* <a href="#" class="signup-image-link">Create an account</a> */}
                     </div>
                     <div className="sub-content">

@@ -66,9 +66,24 @@ class EventModel{
     static updateEvent(req, id){
         return db.query (`
         UPDATE events
-        SET name = ?, description = ?, location = ?, appointment_duration = ?, break_duration = ?, event_image_url = ?
+        SET age = ?, description = ?, location = ?, appointment_duration = ?, break_duration = ?, event_image_url = ?
         WHERE id = ?
         `, [req.body.name, req.body.description, req.body.location, req.body.appointment_duration, req.body.break_duration, req.body.event_image_url, id])
+        .then((res)=>{
+            return res
+        })
+        .catch((err)=>{
+            console.log(err);
+            return err
+        })
+    }
+
+    static setEventAgendaGenerated(agenda_generated, id){
+        return db.query (`
+        UPDATE events
+        SET agenda_generated = ?
+        WHERE id = ?
+        `, [agenda_generated, id])
         .then((res)=>{
             return res
         })

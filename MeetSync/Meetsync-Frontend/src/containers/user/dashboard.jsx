@@ -4,11 +4,9 @@ import { selectUser } from "../../slices/userSlice"
 import { loadAllUserEvents } from "../../api/event";
 import { loadAllUserAppointmentSession } from "../../api/appointmentSession";
 import { loadAllUserAppointmentRequest } from "../../api/appointmentRequest";
-import Agenda from "../../components/admin/agenda";
 import TableRowRequest from "../../components/admin/table-row-request";
 import TableRowSession from "../../components/admin/table-row-session";
 import TableRowEvent from "../../components/admin/table-row-event";
-import MyCalendar from "../../components/admin/calendar";
 import Calendar from "../../components/admin/fullCalendar";
 
 const Dashboard = () =>{
@@ -67,8 +65,6 @@ const Dashboard = () =>{
             <div className="container">
                 <div className="content">
                     <h3 className="sub-content-title">My Schedule</h3>
-                    {/* <Agenda /> */}
-                    {/* <MyCalendar /> */}
                     <Calendar />
                 </div>
             </div>

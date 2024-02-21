@@ -9,7 +9,8 @@ module.exports = (app, db) =>{
     app.get("/api/event/all", EventController.getEvents)
     app.get("/api/event/all/:user_id", authentication, EventController.getUserEvent)
     app.get("/api/event/one/:id", EventController.getEvent)
-    app.put("/api/event/update/:event_id", authentication, EventController.updateEvent)
+    app.put("/api/event/update/agendagenerated/:event_id", authentication, EventController.updateEvent)
+    app.put("/api/event/update/:event_id", authentication, EventController.setEventAgendaGenerated)
     app.delete("/api/event/delete/:id", authentication, EventController.deleteEvent)
 
     //Event day

@@ -1,6 +1,17 @@
 // TABLETTE
 @media screen and (min-width: 780px){
+    .signup-image, .signin-image{
+        display: inline;
+        text-align: center;
+        img{
+            width: 400px;
+        }
+    }
+
     .menuContainer{
+        h1{
+            color: $default-9-solid-background;
+        }
         a{
             color: $default-white;
             font-size: 2rem;
@@ -33,6 +44,27 @@
 
 //Desktop
 @media screen and (min-width: 1100px){
+
+    .login, .register{
+        .signup-image, .signin-image{
+            display: inline;
+            text-align: center;
+            img{
+                width: 500px;
+            }
+        }
+        .content{
+            display: flex;
+            // flex-wrap: wrap;
+            // justify-content: space-between;
+            flex-direction: row-reverse;
+            .sub-content{
+                padding: 100px;
+                // width: 20%;
+            }
+        }
+    }
+
     .menuContainer{
         #menuDesktop{
             #menu{

@@ -1,3 +1,7 @@
+@font-face {
+  font-family: "IBM";
+  src: url("../../assets/fonts/IBM_Plex_Sans/IBMPlexSans-Regular.ttf");
+}
 /************* GLOBAL *************/
 * {
   box-sizing: border-box;
@@ -297,15 +301,35 @@ footer {
 }
 
 /************* PAGE *************/
+.event-list h2 {
+  text-align: center;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
 .event-list ul {
   padding: 0;
   margin: 0;
 }
 .event-list p {
+  padding-top: 10px;
   margin: 2px;
 }
 .event-list svg {
   margin-right: 10px;
+}
+.event-list .single-line-text {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.event-list .even-list-item {
+  border-bottom: 1px solid #e1d9ff;
+}
+.event-list .even-list-item p:last-child {
+  margin-bottom: 40px;
+}
+.event-list li:last-child {
+  border: none;
 }
 
 .event-detail .banner {
@@ -407,6 +431,16 @@ footer {
 }
 
 @media screen and (min-width: 780px) {
+  .signup-image, .signin-image {
+    display: inline;
+    text-align: center;
+  }
+  .signup-image img, .signin-image img {
+    width: 400px;
+  }
+  .menuContainer h1 {
+    color: #6e56cf;
+  }
   .menuContainer a {
     color: #FFFFFF;
     font-size: 2rem;
@@ -436,6 +470,20 @@ footer {
   }
 }
 @media screen and (min-width: 1100px) {
+  .login .signup-image, .login .signin-image, .register .signup-image, .register .signin-image {
+    display: inline;
+    text-align: center;
+  }
+  .login .signup-image img, .login .signin-image img, .register .signup-image img, .register .signin-image img {
+    width: 500px;
+  }
+  .login .content, .register .content {
+    display: flex;
+    flex-direction: row-reverse;
+  }
+  .login .content .sub-content, .register .content .sub-content {
+    padding: 100px;
+  }
   .menuContainer #menuDesktop #menu svg {
     display: inline;
     padding-right: 10px;

@@ -163,15 +163,39 @@ footer{
 
 /************* PAGE *************/
 .event-list{
+    h2{
+        text-align: center;
+        text-transform: uppercase;
+        // font-weight: 1000px;
+        letter-spacing: 1px;
+    }
     ul{
         padding: 0;
         margin: 0;
+
     }
     p{
+        padding-top: 10px;
         margin: 2px;
     }
     svg{
         margin-right: 10px;
+    }
+
+    .single-line-text{
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+    }
+
+    .even-list-item{
+        border-bottom: 1px solid $default-5-active-selected-ui-background;
+        p:last-child{
+            margin-bottom: 40px;
+        }
+    }
+    li:last-child{
+        border: none;
     }
 }
 
