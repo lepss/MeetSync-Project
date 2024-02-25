@@ -73,6 +73,16 @@ export function loadAllUser(){
     })
 }
 
+export function getUsersCount(){
+    return axios.get(`${config.api_url}/api/users/count`)
+    .then((res)=>{
+        return res
+    })
+    .catch((err)=>{
+        return err
+    })
+}
+
 export function checkMyToken() {
     return axios.get(`${config.api_url}/api/checkUserToken`, {headers: {"x-access-token": token}})
         .then((res)=>{

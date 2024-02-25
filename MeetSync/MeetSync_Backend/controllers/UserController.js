@@ -202,6 +202,19 @@ class UserController {
         }
     }
 
+    static async getUsersCount(req, res){
+        const users = await UserModel.getAllUsers();
+        if(users.code){
+            res.status(500).json({msg: "Get user failed due to server error", error: users})
+        }else{
+            if(users.length === 0){
+                res.status(400).json({msg : "No users found"})
+            }else{
+                res.status(200).json({msg: "users found", result: users.length})
+            }  
+        }
+    }
+
     static async saveOneCompany(req, res){
         const company = await CompanyModel.saveOneCompany(req, req.body.user_id);
         if(company.code){

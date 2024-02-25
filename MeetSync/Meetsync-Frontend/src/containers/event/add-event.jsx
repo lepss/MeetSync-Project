@@ -1,12 +1,17 @@
 import { useState } from "react"
 import { useForm } from "react-hook-form"
 import { Navigate } from "react-router-dom"
-import { addOneEvent, addEventDay } from "../../api/event";
+import { addOneEvent, addEventDay, saveEventImage } from "../../api/event";
 import { useSelector } from "react-redux"
 import { selectUser } from "../../slices/userSlice"
 import moment from "moment"
 import "moment/locale/fr";
 moment.locale("fr");
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import {
+  faPlus,
+  faXmark
+} from "@fortawesome/free-solid-svg-icons";
 
 const AddEvent = () =>{
 
@@ -28,31 +33,40 @@ const AddEvent = () =>{
     }]);
 
     const onSubmit = (data) =>{
-        data.user_id = user.infos.id
-        addOneEvent(data)
+        const formData = new FormData()
+        formData.append('image', data.event_image_url[0])
+        saveEventImage(formData)
         .then((res)=>{
             if(res.status === 200){
-                dates.map((date) =>{
-                    const newDate = {
-                        event_id: res.data.insertId,
-                        start_time: new Date(date.date + 'T' + date.start_time),
-                        end_time: new Date(date.date + 'T' + date.end_time),
-                        lunch_start_time: new Date(date.date + 'T' + date.lunch_start_time),
-                        lunch_end_time: new Date(date.date + 'T' + date.lunch_end_time)
+                data.user_id = user.infos.id
+                data.event_image_url = res.data.url
+                addOneEvent(data)
+                .then((res)=>{
+                    if(res.status === 200){
+                        dates.map((date) =>{
+                            const newDate = {
+                                event_id: res.data.insertId,
+                                start_time: new Date(date.date + 'T' + date.start_time),
+                                end_time: new Date(date.date + 'T' + date.end_time),
+                                lunch_start_time: new Date(date.date + 'T' + date.lunch_start_time),
+                                lunch_end_time: new Date(date.date + 'T' + date.lunch_end_time)
+                            }
+                            addEventDay(newDate)
+                            .then((res)=>{
+                                if(res.status === 200){
+                                    console.log("Event day saved");
+                                }else{
+                                    setError(res.response.data.msg);
+                                }
+                            })
+                            .catch(err=>console.log(err))
+                        })
+                        setRedirect(true);
+                    }else{
+                        setError(res.response.data.msg);
                     }
-                    addEventDay(newDate)
-                    .then((res)=>{
-                        if(res.status === 200){
-                            console.log("Event day saved");
-                        }else{
-                            setError(res.response.data.msg);
-                        }
-                    })
-                    .catch(err=>console.log(err))
                 })
-                setRedirect(true);
-            }else{
-                setError(res.response.data.msg);
+                .catch(err=>console.log(err))
             }
         })
         .catch(err=>console.log(err))
@@ -92,7 +106,7 @@ const AddEvent = () =>{
                         <form onSubmit={handleSubmit(onSubmit)} id="event-form">
                             <div className="sub-group">
                                 <label htmlFor="event_image" className="text-label">Event image</label>
-                                <input className="form-input" type="file" placeholder="Event Image" name="event_image" id="event_image" {...register("event_image")} />
+                                <input className="form-input" type="file" placeholder="Event Image" name="event_image_url" id="event_image_url" {...register("event_image_url")} />
                                 {/* TODO image input */}
                             </div>
                             <div className="sub-group">
@@ -113,45 +127,53 @@ const AddEvent = () =>{
                                 />
                             </div>
                             {errors.location && <p className="form-error">{errors.location.message}</p>}
-                            <div className="sub-group">
+                            <div className="sub-group days-config">
                                 <label htmlFor="" className="text-label">Event days configuration</label>
                                 {dates.map((date, index) => (
-                                    <div key={date.id}>
-                                    <label>Date {index + 1}:</label>
-                                    <input
-                                        type="date"
-                                        value={date.date}
-                                        onChange={(e) => handleChange(date.id, 'date', e.target.value)}
-                                    />
-                                    <input
-                                        type="time"
-                                        value={date.start_time}
-                                        onChange={(e) => handleChange(date.id, 'start_time', e.target.value)}
-                                    />
-                                    <input
-                                        type="time"
-                                        value={date.end_time}
-                                        onChange={(e) => handleChange(date.id, 'end_time', e.target.value)}
-                                    />
-                                    <label>Lunch break:</label>
-                                    <input
-                                        type="time"
-                                        value={date.lunch_start_time}
-                                        onChange={(e) => handleChange(date.id, 'lunch_start_time', e.target.value)}
-                                    />
-                                    <input
-                                        type="time"
-                                        value={date.lunch_end_time}
-                                        onChange={(e) => handleChange(date.id, 'lunch_end_time', e.target.value)}
-                                    />
-                                    <button type="button" onClick={(e) => deleteDateInput(e, date.id)}>Delete</button>
+                                    <div className="day-config-wrapper" key={date.id}>
+                                        <div>
+                                            <label className="sub-text-label">Day {index + 1}:</label>
+                                            <input
+                                                type="date"
+                                                value={date.date}
+                                                onChange={(e) => handleChange(date.id, 'date', e.target.value)}
+                                            />
+                                        </div>
+                                        <div className="day-hours">
+                                            <label className="sub-text-label">Open :</label>
+                                            <input
+                                                type="time"
+                                                value={date.start_time}
+                                                onChange={(e) => handleChange(date.id, 'start_time', e.target.value)}
+                                            />
+                                            <label className="sub-text-label">Close :</label>
+                                            <input
+                                                type="time"
+                                                value={date.end_time}
+                                                onChange={(e) => handleChange(date.id, 'end_time', e.target.value)}
+                                            />
+                                        </div>
+                                        <div className="day-hours">
+                                            <label className="sub-text-label">Lunch break :</label>
+                                            <input
+                                                type="time"
+                                                value={date.lunch_start_time}
+                                                onChange={(e) => handleChange(date.id, 'lunch_start_time', e.target.value)}
+                                            />
+                                            <input
+                                                type="time"
+                                                value={date.lunch_end_time}
+                                                onChange={(e) => handleChange(date.id, 'lunch_end_time', e.target.value)}
+                                            />
+                                        </div>
+                                        <button type="button" className="button form-remove" onClick={(e) => deleteDateInput(e, date.id)}><FontAwesomeIcon icon={faXmark}/></button>
                                     </div>
                                 ))}
-                                <button onClick={addDateInput}>Add Day</button>
+                                <button className="button form-add" onClick={addDateInput}><FontAwesomeIcon icon={faPlus}/></button>
                             </div>
                             <div className="sub-group">
                                 <label htmlFor="description" className="text-label">Event description</label>
-                                <textarea name="description" id="description" cols="50" rows="5" placeholder="Event Description" 
+                                <textarea name="description" id="description-event" cols="50" rows="5" placeholder="Event Description" 
                                     {...register("description", {
                                         required: "This field is required"
                                     })}

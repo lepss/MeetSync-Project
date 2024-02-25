@@ -131,6 +131,30 @@ footer{
     }
 }
 
+.counter-wrapper{
+    text-align: center;
+    align-items: center;
+    display: flex;
+    justify-content: space-evenly;
+    font-size: 15px;
+    svg{
+        font-size: 25px;
+    }
+    .counter-container {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        margin: 30px 50px;
+        text-align: center;
+      }
+      
+      .counter {
+        // color: $default-11-low-contrast-text;
+        font-size: 30px;
+        margin-top: 10px;
+      }
+}
+
 /************* FORMS *************/
 .form{
     .icon-label{
@@ -154,6 +178,61 @@ footer{
         font-size: $default-small-font-size;
         margin-bottom: 20px;
         color: $default-11-low-contrast-text;
+    }
+
+    #description-event{
+        width: 100%;
+        height: 100px;
+        padding: 12px 20px;
+        box-sizing: border-box;
+        border: 2px solid #ccc;
+        border-radius: 4px;
+        background-color: #f8f8f8;
+        font-size: 16px;
+        resize: none;
+    }
+    .days-config{
+        .day-config-wrapper{
+            margin-top: 20px;
+        }
+        .form-remove, .form-add{
+            // padding: 8px;
+            margin-top: 2px;
+        }
+        .form-remove{
+            padding: 2px 4px;
+            background-color: #f44336;
+            float: right;
+        }
+        .form-add{
+            background-color: #04AA6D;
+            width: 100%;
+            margin: 0 auto;
+            text-align: center;
+            margin-top: 10px;
+            padding: 5px;
+        }
+        div{
+            div{
+                width: 100%;
+                .sub-text-label{
+                    font-size: $default-medium-font-size;
+                }
+                .day-hours{
+                    display: flex;
+                    flex-wrap: wrap;
+                    label{
+                        width: 100%;
+                    }
+                    input{
+                        width: 45%;
+                    }
+                }
+                input{
+                    width: 100%;
+                }
+            }
+        }
     }
 }
 
@@ -271,6 +350,37 @@ footer{
             outline: inherit;
             color: inherit;
             font: inherit;
+        }
+        .btn-table:disabled {
+            color: #666; /* Couleur du texte plus foncée */
+            cursor: not-allowed; /* Change le curseur pour indiquer l'action non autorisée */
+          }
+          .link-disabled{
+            color: #666; /* Couleur du texte plus foncée */
+            cursor: not-allowed; /* Change le curseur pour indiquer l'action non autorisée */
+          }
+
+    }
+
+    .calendar{
+        width: 90%;
+        margin: 0 auto;
+      }
+
+    .event-actions{
+        margin: 0 auto;
+        width: 70%;
+        display: flex;
+        justify-content:space-between;
+
+        button{
+            margin: 0 auto;
+        }
+        .btn-delete{
+            background: red;
+            &:hover {
+                background: darken(red, 10%);
+            }
         }
     }
 }

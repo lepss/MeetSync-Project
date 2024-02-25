@@ -64,6 +64,20 @@ class AppointmentSessionModel{
         })
     }
 
+    static getAllAppointmentSession(){
+        return db.query (`
+        SELECT *
+        FROM appointment_sessions
+        `)
+        .then((res)=>{
+            return res
+        })
+        .catch((err)=>{
+            console.log(err);
+            return err
+        })
+    }
+
     static updateAppointmentSession(req, id){
         return db.query(`
         UPDATE appointment_sessions

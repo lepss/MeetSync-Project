@@ -29,7 +29,7 @@ const Header = () => {
                     <nav role="navigation">
                         <div id="menuToggle">
                             <input type="checkbox" checked={isCheckboxChecked} onChange={() => setIsCheckboxChecked(!isCheckboxChecked)}/>
-                            <span></span>
+                            <span></span> 
                             <span></span>
                             <span></span>
                             <ul id="menu-mobile">

@@ -8,6 +8,7 @@ import {
     faCalendar
 } from "@fortawesome/free-solid-svg-icons";
 import moment from "moment";
+import { config } from "../../config";
 
 const EventDetail = () =>{
     const params = useParams();
@@ -42,7 +43,12 @@ const EventDetail = () =>{
         <section className="section event-detail">
             <div className="banner">
                 <h2 className="section-title">{event.name}</h2>
-                <img src="https://placehold.co/600x200" alt="event image presentation"/>
+                {event.event_image_url !== null ? (
+                    <img src={config.pict_url+event.event_image_url} alt="event image presentation"/>
+                ) : (
+                    <img src="https://placehold.co/600x200" alt="event image presentation"/>
+                )}
+                
             </div>
             <div className="container">
                 <div className="content">
@@ -59,30 +65,45 @@ const EventDetail = () =>{
                     </div>
                 </div>
             </div>
-            <div className="container">
-                <div className="content">
-                    <div className="sub-content">
-                        <div className="sub-group">
-                            <p>Want to organize meeting session during this event ? Join us !</p>
-                            <Link to={`/addAppointmentSession/${event.id}`}>
-                                <button className="button">Organize meeting</button>
-                            </Link>
+            {event.agenda_generated === 0 ? (
+            <>
+                <div className="container">
+                    <div className="content">
+                        <div className="sub-content">
+                            <div className="sub-group">
+                                <p>Want to organize meeting session during this event ? Join us !</p>
+                                <Link to={`/addAppointmentSession/${event.id}`}>
+                                    <button className="button">Organize meeting</button>
+                                </Link>
+                            </div>
                         </div>
                     </div>
                 </div>
-            </div>
-            <div className="container">
-                <div className="content">
-                    <div className="sub-content">
-                        <div className="sub-group">
-                            <p>Want to meet people during this event ? Join us !</p>
-                            <Link to={`/appointmentSessions/${event.id}`}>
-                                <button className="button">Join meetings</button>
-                            </Link>
+                <div className="container">
+                    <div className="content">
+                        <div className="sub-content">
+                            <div className="sub-group">
+                                <p>Want to meet people during this event ? Join us !</p>
+                                <Link to={`/appointmentSessions/${event.id}`}>
+                                    <button className="button">Join meetings</button>
+                                </Link>
+                            </div>
                         </div>
                     </div>
                 </div>
-            </div>
+            </>
+            ) : (
+                <div className="container">
+                    <div className="content">
+                        <div className="sub-content">
+                            <div className="sub-group">
+                                <p>This event is close for registration</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            )}
+            
         </section>
     )
 

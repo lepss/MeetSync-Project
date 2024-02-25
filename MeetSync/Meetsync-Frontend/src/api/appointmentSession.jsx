@@ -44,6 +44,26 @@ export function loadOneAppointmentSession(id){
     })
 }
 
+export function loadAllAppointmentSession(){
+    return axios.get(`${config.api_url}/api/appointmentSession/all`, {headers: {"x-access-token": token}})
+    .then((res)=>{
+        return res
+    })
+    .catch((err)=>{
+        return err
+    })
+}
+
+export function getAppointmentSessionCount(){
+    return axios.get(`${config.api_url}/api/appointmentSession/all/count`)
+    .then((res)=>{
+        return res
+    })
+    .catch((err)=>{
+        return err
+    })
+}
+
 export function getEventIdOfAppointmentSession(session_id){
     return axios.get(`${config.api_url}/api/appointmentSession/event/id/${session_id}`, {headers: {"x-access-token": token}})
     .then((res)=>{

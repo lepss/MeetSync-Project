@@ -72,8 +72,8 @@ const EditEvent = () => {
                         {error !== null && <p className="form-error">{error}</p>}
                         <form onSubmit={handleSubmit(onSubmit)} id="event-form">
                             <div className="sub-group">
-                                <label htmlFor="event_image" className="text-label">Event image</label>
-                                <input className="form-input" type="file" placeholder="Event Image" name="event_image" {...register("event_image")} />
+                                <label htmlFor="event_image_url" className="text-label">Event image</label>
+                                <input className="form-input" type="file" placeholder="Event Image" name="event_image_url" {...register("event_image_url")} />
                             </div>
                             <div className="sub-group">
                                 <label htmlFor="name" className="text-label">Event name</label>

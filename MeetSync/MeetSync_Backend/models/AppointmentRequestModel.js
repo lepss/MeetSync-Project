@@ -81,6 +81,20 @@ class AppointmentRequestModel{
         })
     }
 
+    static getAllAppointmentRequest(){
+        return db.query(`
+        SELECT *
+        FROM appointment_requests 
+        `)
+        .then((res)=>{
+            return res
+        })
+        .catch((err)=>{
+            console.log(err);
+            return err
+        })
+    }
+
     static validateAppointmentRequest(id, validate){
         return db.query(`
         UPDATE appointment_requests

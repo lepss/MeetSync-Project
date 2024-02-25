@@ -11,4 +11,5 @@ module.exports = (app, db) =>{
     app.put("/api/user/updateRole/:key_id", authentication, UserController.updateUserRole);
     app.get("/api/user/:key_id", authentication, UserController.getUser);
     app.get("/api/users", authentication, UserController.getUsers)
+    app.get("/api/users/count", UserController.getUsersCount)
 }

@@ -8,8 +8,8 @@ class EventModel{
         return db.query(`
         INSERT INTO events
         (name, description, appointment_duration, break_duration, created_at, event_image_url, user_id, location)
-        VALUES (?, ?, ?, ?, NOW(), "no-pict.jpg", ?, ?)`,
-        [req.body.name, req.body.description, req.body.appointment_duration, req.body.break_duration, req.body.user_id, req.body.location])
+        VALUES (?, ?, ?, ?, NOW(), ?, ?, ?)`,
+        [req.body.name, req.body.description, req.body.appointment_duration, req.body.break_duration, req.body.event_image_url, req.body.user_id, req.body.location])
         .then((res)=>{
             return res;
         })
@@ -66,7 +66,7 @@ class EventModel{
     static updateEvent(req, id){
         return db.query (`
         UPDATE events
-        SET age = ?, description = ?, location = ?, appointment_duration = ?, break_duration = ?, event_image_url = ?
+        SET name = ?, description = ?, location = ?, appointment_duration = ?, break_duration = ?, event_image_url = ?
         WHERE id = ?
         `, [req.body.name, req.body.description, req.body.location, req.body.appointment_duration, req.body.break_duration, req.body.event_image_url, id])
         .then((res)=>{

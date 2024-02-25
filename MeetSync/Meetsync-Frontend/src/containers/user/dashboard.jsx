@@ -63,7 +63,7 @@ const Dashboard = () =>{
         <section className="section dashboard agenda">
             <h2 className="section-title">Dashboard</h2>
             <div className="container">
-                <div className="content">
+                <div className="content calendar">
                     <h3 className="sub-content-title">My Schedule</h3>
                     <Calendar />
                 </div>

@@ -90,6 +90,32 @@ class AppointmentRequestController{
         }
     }
 
+    static async getAllAppointmentRequest(req, res){
+        const appointmentRequests = await AppointmentRequestModel.getAllAppointmentRequest();
+        if(appointmentRequests.code){
+            res.status(500).json({msg:"Failed to get appointment request due to a server error", error: appointmentRequests})
+        }else{
+            if(appointmentRequests.length === 0){
+                res.status(400).json({msg : "No appointment request found"})
+            }else{
+                res.status(200).json({msg: "Appointment request found", result: appointmentRequests})
+            }   
+        }
+    }
+
+    static async getAppointmentRequestsCount(req, res){
+        const appointmentRequests = await AppointmentRequestModel.getAllAppointmentRequest();
+        if(appointmentRequests.code){
+            res.status(500).json({msg:"Failed to get appointment request due to a server error", error: appointmentRequests})
+        }else{
+            if(appointmentRequests.length === 0){
+                res.status(400).json({msg : "No appointment request found"})
+            }else{
+                res.status(200).json({msg: "Appointment request found", result: appointmentRequests.length})
+            }   
+        }
+    }
+
     static async validateAppointmentRequest(req, res){
         const validate = await AppointmentRequestModel.validateAppointmentRequest(req.params.id, req.body.validate);
         if(validate.code){

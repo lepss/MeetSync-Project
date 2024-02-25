@@ -92,8 +92,18 @@ const TableRowRequest = ({
                 <td>{request}</td>
                 <td>{status}</td>
                 <td>
-                    <Link to={`/editAppointmentRequest/${requestId}`}><FontAwesomeIcon icon={faPenToSquare}/></Link>
+                    {event.agenda_generated === 1 ? (
+                        <Link to={""} title={"This button is disabled because the calendar is already generated."} className="link-disabled">
+                            <FontAwesomeIcon icon={faPenToSquare} />
+                        </Link>
+                    ) : (
+                        <Link to={`/editAppointmentRequest/${requestId}`} title={"Edit this request"}>
+                            <FontAwesomeIcon icon={faPenToSquare} />
+                        </Link>
+                    )}
                     <button className="btn-table"
+                        disabled={event.agenda_generated === 1}
+                        title={event.agenda_generated === 1 ? "This button is disabled because the calendar is already generated." : "Delete this request"}
                         onClick={(e)=>{
                             e.preventDefault()
                             onClickDelete(requestId)

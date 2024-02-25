@@ -81,7 +81,7 @@ const TableRowSession = ({
         return () => {
             isMounted = false;
         }
-        
+
     }, [eventId, sessionId])
 
     return(
@@ -91,10 +91,20 @@ const TableRowSession = ({
                 <td>{sessionDescription}</td>
                 <td>{nbRequest}</td>
                 <td>
-                    <Link to={`/appointmentRequestList/${sessionId}`}><FontAwesomeIcon icon={faCircleArrowRight}/></Link>
-                    <Link to={`/editAppointmentSession/${sessionId}`}><FontAwesomeIcon icon={faPenToSquare}/></Link>
-                    
+                    <Link to={`/appointmentRequestList/${sessionId}`} title={"Session dashboard"}><FontAwesomeIcon icon={faCircleArrowRight}/></Link>
+                    {event.agenda_generated === 1 ? (
+                        <Link to={""} title={"This button is disabled because the calendar is already generated."} className="link-disabled">
+                            <FontAwesomeIcon icon={faPenToSquare} />
+                        </Link>
+                    ) : (
+                        <Link to={`/editAppointmentSession/${sessionId}`} title={"Edit this session"}>
+                            <FontAwesomeIcon icon={faPenToSquare} />
+                        </Link>
+                    )}
+
                     <button className="btn-table"
+                        disabled={event.agenda_generated === 1}
+                        title={event.agenda_generated === 1 ? "This button is disabled because the calendar is already generated." : "Delete this session"}
                         onClick={(e)=>{
                             e.preventDefault()
                             onClickDelete(sessionId)

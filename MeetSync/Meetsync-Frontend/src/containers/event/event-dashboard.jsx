@@ -4,6 +4,7 @@ import { generateAgenda } from "../../api/agenda";
 import { deleteAllAppointmentInEvent, loadAllEventAppointments } from "../../api/appointment";
 import { loadAllEventAppointmentSession } from "../../api/appointmentSession";
 import { loadAllEventAppointmentRequests } from "../../api/appointmentRequest";
+import { updateEventGenerated } from "../../api/event";
 import TableRowDashboardEventRequest from "../../components/admin/table-row-dashboard-event-request";
 import TableRowDashboardEventSession from "../../components/admin/table-row-dashboard-event-session";
 import TableRowDashboardEventAppointment from "../../components/admin/table-row-dashboard-event-appointment";
@@ -77,7 +78,13 @@ const EventDashboard = () =>{
         deleteAllAppointmentInEvent(params.event_id)
         .then((res)=>{
             if(res.status === 200){
-                setAppointments([])
+                const data = {agenda_generated : false}
+                updateEventGenerated(data, params.event_id)
+                if(res.status === 200){
+                    setAppointments([])
+                }else{
+                    console.log(res)
+                }
             }else{
                 console.log(res);
             }
@@ -182,12 +189,14 @@ const EventDashboard = () =>{
             <div className="container">
                 <div className="content">
                     <h3 className="sub-content-title">Event Actions</h3>
-                    <button className="button" onClick={handleClickGenerateAgenda}>
-                        Generate Agenda
-                    </button>
-                    <button className="button" onClick={handleClickDeleteAgenda}>
-                        Delete Agenda
-                    </button>
+                    <div className="event-actions">
+                        <button className="button" onClick={handleClickGenerateAgenda}>
+                            Generate Agenda
+                        </button>
+                        <button className="button btn-delete" onClick={handleClickDeleteAgenda}>
+                            Delete Agenda
+                        </button>
+                    </div>
                 </div>
             </div>
         </section>

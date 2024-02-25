@@ -13,8 +13,36 @@ export function addOneEvent(datas){
     })
 }
 
+export function saveEventImage(formData){
+    return axios({
+        method: "post",
+        url: `${config.api_url}/api/event/saveImage`,
+        data: formData,
+        headers: {
+            'Content-Type': 'multipart/form-data',
+            "x-access-token": token
+        }
+    })
+    .then((res)=>{
+        return res
+    })
+    .catch((err) => {
+        return err
+    })
+}
+
 export function loadAllEvents(){
     return axios.get(`${config.api_url}/api/event/all`)
+    .then((res)=>{
+        return res
+    })
+    .catch((err)=>{
+        return err
+    })
+}
+
+export function getEventsCount(){
+    return axios.get(`${config.api_url}/api/event/all/count`)
     .then((res)=>{
         return res
     })
@@ -45,12 +73,23 @@ export function loadOneEvent(id){
 
 export function updateEvent(datas, event_id) {
     return axios.put(`${config.api_url}/api/event/update/${event_id}`, datas, {headers: {"x-access-token": token}})
-        .then((res)=>{
-            return res
-        })
-        .catch((err) => {
-            return err
-        })
+    .then((res)=>{
+        return res
+    })
+    .catch((err) => {
+        return err
+    })
+}
+
+export function updateEventGenerated(datas, event_id) {
+    console.log(datas);
+    return axios.put(`${config.api_url}/api/event/update/agendagenerated/${event_id}`, datas, {headers: {"x-access-token": token}})
+    .then((res)=>{
+        return res
+    })
+    .catch((err) => {
+        return err
+    })
 }
 
 export function deleteEvent(id) {

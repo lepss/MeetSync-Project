@@ -8,6 +8,8 @@ module.exports = (app, db) =>{
     app.get("/api/appointmentRequest/all/appointmentSession/:session_id", authentication, AppointmentRequestController.getAllSessionAppointmentRequest)
     app.get("/api/appointmentRequest/all/user/:user_id", authentication, AppointmentRequestController.getAllUserAppointmentRequest)
     app.get("/api/appointmentRequest/one/:id", authentication, AppointmentRequestController.getAppointmentRequest)
+    app.get("/api/appointmentRequest/all", authentication, AppointmentRequestController.getAllAppointmentRequest)
+    app.get("/api/appointmentRequest/all/count", AppointmentRequestController.getAppointmentRequestsCount)
     app.put("/api/appointmentRequest/update/:id", authentication, AppointmentRequestController.updateAppointmentRequest)
     app.put("/api/appointmentRequest/validate/:id", authentication, AppointmentRequestController.validateAppointmentRequest)
     app.delete("/api/appointmentRequest/delete/:id", authentication, AppointmentRequestController.deleteAppointmentRequest)

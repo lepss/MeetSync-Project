@@ -54,6 +54,26 @@ export function loadOneAppointmentRequest(id){
     })
 }
 
+export function loadAllAppointmentRequest(){
+    return axios.get(`${config.api_url}/api/appointmentRequest/all`, {headers: {"x-access-token": token}})
+    .then((res)=>{
+        return res
+    })
+    .catch((err)=>{
+        return err
+    })
+}
+
+export function getAppointmentRequestCount(){
+    return axios.get(`${config.api_url}/api/appointmentRequest/all/count`)
+    .then((res)=>{
+        return res
+    })
+    .catch((err)=>{
+        return err
+    })
+}
+
 export function updateOneAppointmentRequest(id, datas){
     return axios.put(`${config.api_url}/api/appointmentRequest/update/${id}`, datas, {headers: {"x-access-token": token}})
     .then((res)=>{

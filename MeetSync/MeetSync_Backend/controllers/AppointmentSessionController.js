@@ -82,6 +82,24 @@ class AppointmentSessionController{
         }
     }
 
+    static async getAllAppointmentSession(req, res){
+        const appointmentSessions = await AppointmentSessionModel.getAllAppointmentSession();
+        if(appointmentSessions.code){
+            res.status(500).json({msg:"Failed to get appointments sessions due to a server error", error: appointmentSessions})
+        }else{
+            res.status(200).json({msg: "Appointment sessions found", result: appointmentSessions})
+        }
+    }
+
+    static async getAppointmentSessionsCount(req, res){
+        const appointmentSessions = await AppointmentSessionModel.getAllAppointmentSession();
+        if(appointmentSessions.code){
+            res.status(500).json({msg:"Failed to get appointments sessions due to a server error", error: appointmentSessions})
+        }else{
+            res.status(200).json({msg: "Appointment sessions found", result: appointmentSessions.length})
+        }
+    }
+
     static async updateAppointmentSession(req, res){
         const updateAppointmentSession = await AppointmentSessionModel.updateAppointmentSession(req, req.params.session_id);
         if(updateAppointmentSession.code){
