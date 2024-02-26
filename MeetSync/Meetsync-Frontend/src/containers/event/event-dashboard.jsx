@@ -161,7 +161,7 @@ const EventDashboard = () =>{
                     <table className="dashboard-table">
                         <thead>
                             <tr>
-                            <th>Session</th>
+                                <th>Session</th>
                                 <th>Date Start</th>
                                 <th>Date End</th>
                                 <th>Organizer Id</th>
@@ -169,7 +169,7 @@ const EventDashboard = () =>{
                             </tr>
                         </thead>
                         <tbody>
-                        {appointments.map((appointment, id)=>{
+                        {appointments !== undefined && appointments.length > 0 && appointments.map((appointment, id)=>{
                             return(
                                 <TableRowDashboardEventAppointment 
                                     key={id}

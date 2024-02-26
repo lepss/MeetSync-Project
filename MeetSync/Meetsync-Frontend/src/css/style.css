@@ -450,6 +450,10 @@ footer {
 .dashboard .dashboard-table td {
   border: 1px solid #e1d9ff;
   font-size: 12px;
+  max-width: 150px; /* Largeur fixe ou max-width */
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 .dashboard .dashboard-table thead th {
   color: #FFFFFF;

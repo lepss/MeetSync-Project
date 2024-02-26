@@ -325,10 +325,15 @@ footer{
         td, th{
             text-align: center;
             padding: 8px;
+
         }
         td{
             border: 1px solid $default-5-active-selected-ui-background;
             font-size: 12px;
+            max-width: 150px; /* Largeur fixe ou max-width */
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
         }
         thead th {
             color: $default-white;

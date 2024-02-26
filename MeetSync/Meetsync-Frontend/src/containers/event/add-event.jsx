@@ -1,4 +1,4 @@
-import { useState } from "react"
+import { useState, useEffect } from "react"
 import { useForm } from "react-hook-form"
 import { Navigate } from "react-router-dom"
 import { addOneEvent, addEventDay, saveEventImage } from "../../api/event";
@@ -21,7 +21,12 @@ const AddEvent = () =>{
     const {
         register,
         handleSubmit,
-        formState: {errors}
+        formState: {errors},
+        setValue,
+        getValues,
+        trigger,
+        setErrors,
+        clearErrors
     } = useForm()
     const [dates, setDates] = useState([{ 
         id: Date.now(),
@@ -32,44 +37,74 @@ const AddEvent = () =>{
         lunch_end_time: '' 
     }]);
 
-    const onSubmit = (data) =>{
-        const formData = new FormData()
-        formData.append('image', data.event_image_url[0])
-        saveEventImage(formData)
+    useEffect(() => {
+        register('datesValid', { validate: value => value === true || "At least one date with times must be provided" });
+
+        checkDatesValidity();
+    }, [register, dates]);
+
+    const checkDatesValidity = () => {
+        const isValid = dates.some(date => date.date && date.start_time && date.end_time && date.lunch_start_time && date.lunch_end_time);
+        setValue('datesValid', isValid);
+        if(isValid) {
+            clearErrors('datesValid');
+        } else {
+            setError('datesValid', { type: "manual", message: "At least one date with times must be provided" });
+        }
+    };
+
+    const saveEventData = (data) => {
+        data.user_id = user.infos.id
+        addOneEvent(data)
         .then((res)=>{
             if(res.status === 200){
-                data.user_id = user.infos.id
-                data.event_image_url = res.data.url
-                addOneEvent(data)
-                .then((res)=>{
-                    if(res.status === 200){
-                        dates.map((date) =>{
-                            const newDate = {
-                                event_id: res.data.insertId,
-                                start_time: new Date(date.date + 'T' + date.start_time),
-                                end_time: new Date(date.date + 'T' + date.end_time),
-                                lunch_start_time: new Date(date.date + 'T' + date.lunch_start_time),
-                                lunch_end_time: new Date(date.date + 'T' + date.lunch_end_time)
-                            }
-                            addEventDay(newDate)
-                            .then((res)=>{
-                                if(res.status === 200){
-                                    console.log("Event day saved");
-                                }else{
-                                    setError(res.response.data.msg);
-                                }
-                            })
-                            .catch(err=>console.log(err))
-                        })
-                        setRedirect(true);
-                    }else{
-                        setError(res.response.data.msg);
+                dates.map((date) =>{
+                    const newDate = {
+                        event_id: res.data.insertId,
+                        start_time: new Date(date.date + 'T' + date.start_time),
+                        end_time: new Date(date.date + 'T' + date.end_time),
+                        lunch_start_time: new Date(date.date + 'T' + date.lunch_start_time),
+                        lunch_end_time: new Date(date.date + 'T' + date.lunch_end_time)
                     }
+                    addEventDay(newDate)
+                    .then((res)=>{
+                        if(res.status === 200){
+                            console.log("Event day saved");
+                        }else{
+                            setError(res.response.data.msg);
+                        }
+                    })
+                    .catch(err=>console.log(err))
                 })
-                .catch(err=>console.log(err))
+                setRedirect(true);
+            }else{
+                setError(res.response.data.msg);
             }
         })
         .catch(err=>console.log(err))
+    }
+
+    const onSubmit = async (data) =>{
+        if(!getValues('datesValid')) {
+            await trigger('datesValid');
+            return;
+        }
+        console.log(data);
+        if(data.event_image_url.length === 0){
+            data.event_image_url = null
+            saveEventData(data)
+        }else{
+            const formData = new FormData()
+            formData.append('image', data.event_image_url[0])
+            saveEventImage(formData)
+            .then((res)=>{
+                if(res.status === 200){
+                    data.event_image_url = res.data.url
+                    saveEventData(data)
+                }
+            })
+            .catch(err=>console.log(err))
+        }
     }
 
     const addDateInput = (e) =>{
@@ -102,7 +137,7 @@ const AddEvent = () =>{
                 <div className="content">
                     <div className="sub-content">
                         <h3 className="sub-content-title">Add your own event</h3>
-                        {error !== null && <p className="form-error">{error}</p>}
+                        {/* {error !== null && <p className="form-error">{error}</p>} */}
                         <form onSubmit={handleSubmit(onSubmit)} id="event-form">
                             <div className="sub-group">
                                 <label htmlFor="event_image" className="text-label">Event image</label>
@@ -171,6 +206,7 @@ const AddEvent = () =>{
                                 ))}
                                 <button className="button form-add" onClick={addDateInput}><FontAwesomeIcon icon={faPlus}/></button>
                             </div>
+                            {errors.datesValid && <p className="form-error">{errors.datesValid.message}</p>}
                             <div className="sub-group">
                                 <label htmlFor="description" className="text-label">Event description</label>
                                 <textarea name="description" id="description-event" cols="50" rows="5" placeholder="Event Description" 

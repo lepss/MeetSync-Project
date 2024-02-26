@@ -12,7 +12,7 @@ import Logout from './containers/user/logout';
 import Register from './containers/user/register';
 import Profil from './containers/user/profil';
 import Dashboard from './containers/user/dashboard';
-// import AdminDashboard from './containers/admin/admin-dashboard';
+import AdminDashboard from './containers/admin/admin-dashboard';
 
 import EventList from './containers/event/event-list';
 import EventDetail from './containers/event/event-detail';
@@ -56,6 +56,10 @@ function App() {
                     <Route
                         path="/dashboard"
                         element={<RequireAuth child={Dashboard} auth={true} admin={false} />}
+                    />
+                    <Route
+                        path="/admin"
+                        element={<RequireAuth child={AdminDashboard} auth={true} admin={true} />}
                     />
                     <Route
                         path="/event"

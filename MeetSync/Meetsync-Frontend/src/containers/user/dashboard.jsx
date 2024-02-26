@@ -85,7 +85,7 @@ const Dashboard = () =>{
                                 </tr>
                             </thead>
                             <tbody>
-                            {events.length > 0 && events.map((event, id)=>{
+                            {events !== undefined && events.length > 0 && events.map((event, id)=>{
                                 return(
                                     <TableRowEvent 
                                         key={id}
@@ -118,7 +118,7 @@ const Dashboard = () =>{
                                 </tr>
                             </thead>
                             <tbody>
-                            {sessions.length > 0 && sessions.map((session, id)=>{
+                            {sessions !== undefined && sessions.length > 0 && sessions.map((session, id)=>{
                                 return(
                                     <TableRowSession
                                         key={id}
@@ -149,7 +149,7 @@ const Dashboard = () =>{
                                 </tr>
                             </thead>
                             <tbody>
-                            {requests.length > 0 && requests.map((request, id)=>{
+                            {requests !== undefined && requests.length > 0 && requests.map((request, id)=>{
                                 return(
                                     <TableRowRequest 
                                         key={id}
