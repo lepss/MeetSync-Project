@@ -7,5 +7,5 @@ SETUP:
 
 INFORMATIONS: 
 - Les données de la bdd sont des datas fictives
-- Tous les comptes ont le même mot de passe : 1234 (utile pour effectuer des test) avec l'email en nom identifiant
+- Tous les comptes ont le même mot de passe : 1234 (utile pour effectuer des test) avec l'email en identifiant
 - Un compte admin est present pour visualiser le dashboard admin -> email : admin@admin.com / mdp : 1234
