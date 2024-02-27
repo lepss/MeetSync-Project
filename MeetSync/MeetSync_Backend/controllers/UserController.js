@@ -18,7 +18,7 @@ class UserController {
     static async register(req, res){
         const check = await UserModel.getUserByEmail(req.body.email)
         if(check.code){
-            res.status(500).json({msg: "Email verification server error", error: check})
+            res.status(500).json({msg: "Email verification failed server error", error: check})
         }else{
             if(check.length > 0){
                 if(check[0].email === req.body.email){

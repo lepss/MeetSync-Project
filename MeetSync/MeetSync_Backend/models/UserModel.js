@@ -12,7 +12,7 @@ module.exports = (_db) => {
 class UserModel{
     static saveOneUser(req){
         let key_id  = randomId(len, pattern)
-        let username = req.body.email.split("@")[0]
+        let username = req.body.email.split("@")[0] //Set first part of email as username
         return bcrypt.hash(req.body.password, saltRounds)
         .then((hash)=>{
             return db.query(`

@@ -49,7 +49,6 @@ class AgendaController{
             default_break_duration: data[0]?.break_duration,
         };
         data.forEach(row => {
-            // Extraire la date à partir de start_time pour le champ `day`
             const day = row.start_time.toISOString().split('T')[0]; // Convertit la date en string et extrait la partie date
         
             // Ajouter chaque jour au tableau de schedule

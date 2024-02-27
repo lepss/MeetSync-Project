@@ -1,3 +1,4 @@
+.
 # Ignore Mac system files
 .DS_store
 
@@ -15,3 +16,5 @@ node_modules
 
 # Ignore all files in directory Doc
 Doc
+Agenda-Algo
+Schedule_Algo_v2
