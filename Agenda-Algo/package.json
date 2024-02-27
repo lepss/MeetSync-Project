@@ -1,6 +1,0 @@
-{
-  "devDependencies": {
-    "@event-calendar/core": "^2.4.1",
-    "@event-calendar/list": "^2.4.1"
-  }
-}
