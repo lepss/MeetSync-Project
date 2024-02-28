@@ -8,39 +8,31 @@ const AppointmentSessionList = () =>{
     const params = useParams();
     const [appointmentSessions, setAppointmentSessions] = useState([]);
     const [event, setEvent] = useState({});
-    const [isLoading, setIsLoading] = useState(true);
 
-    useEffect(() => {
+    useEffect(()=>{
         let isMounted = true;
         const fetchData = async () => {
-            try {
-                const sessionPromise = loadAllEventAppointmentSession(params.event_id);
-                const eventPromise = loadOneEvent(params.event_id);
-
-                const [sessionRes, eventRes] = await Promise.all([sessionPromise, eventPromise]);
-
-                if (isMounted) {
-                    if (sessionRes.status === 200) {
-                        setAppointmentSessions(sessionRes.data.result);
-                    }
-                    if (eventRes.status === 200) {
-                        setEvent(eventRes.data.result[0]);
-                    }
-                    setIsLoading(false); // Les données sont chargées, on peut cesser le chargement
+            loadAllEventAppointmentSession(params.event_id)
+            .then(async (res)=>{
+                if(res.status === 200 && isMounted){
+                    await setAppointmentSessions(res.data.result)
                 }
-            } catch (err) {
-                console.log(err);
-            }
-        };
+            })
+            .catch(err=>console.log(err))
+            loadOneEvent(params.event_id)
+            .then(async (res)=>{
+                if(res.status === 200 && isMounted){
+                    await setEvent(res.data.result[0])
+                }
+            })
+            .catch(err=>console.log(err))
+        }
         fetchData();
         return () => {
             isMounted = false;
-        };
-    }, [params.event_id]);
+        }
 
-    if (isLoading) {
-        return <div>Loading...</div>;
-    }
+    }, [params.event_id])
 
     return(
         <section className="section session-list">
@@ -48,20 +40,17 @@ const AppointmentSessionList = () =>{
             <div className="container">
                 <div className="content">
                     <ul className="sub-content">
-                        {appointmentSessions !== undefined && appointmentSessions.length > 0 ? (
-                            appointmentSessions.map((session) => {
-                                return(
-                                    <li className="sub-group" key={session.id}>
-                                        <AppointmentSessionListItem
-                                            description={session.description}
-                                            session_id={session.id}
-                                            user_key_id={session.user_key_id}
-                                        />
-                                    </li>
-                                )})
-                        ) : (
-                            <li>No sessions found</li>
-                        )}
+                        {appointmentSessions !== undefined && appointmentSessions.length > 0 && appointmentSessions.map((session) => {
+                            return(
+                                <li className="sub-group" key={session.id}>
+                                    <AppointmentSessionListItem
+                                        description={session.description}
+                                        session_id={session.id}
+                                        user_key_id={session.user_key_id}
+                                    />
+                                </li>
+                            )
+                        })}
                     </ul>
                 </div>
             </div>
