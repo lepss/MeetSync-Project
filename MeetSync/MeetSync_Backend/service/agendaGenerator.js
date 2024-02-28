@@ -11,8 +11,6 @@ class AgendaGenerator{
         const meetingPool = new MeetingPool(organizersData, participantsData, globalEventSchedule)
         const meetingPoolSetup = meetingPool.generateMeetingPool()
         const eventAppointments = meetingPoolSetup.appointments
-        const organizersSetup = meetingPoolSetup.organizers
-        const participantsSetup = meetingPoolSetup.participants
 
         return eventAppointments
     }

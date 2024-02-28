@@ -10,6 +10,7 @@ import TableRowSession from "../../components/dashboard/table-row-session";
 import TableRowRequest from "../../components/dashboard/table-row-request";
 import TableRowUser from "../../components/dashboard/table-row-user";
 import TableRowDashboardEventAppointment from "../../components/dashboard/table-row-dashboard-event-appointment";
+import AdminCalendar from "../../components/adminCalendar";
 
 const AdminDashboard = () =>{
     const [events, setEvents] = useState([])
@@ -218,6 +219,12 @@ const AdminDashboard = () =>{
                         </tbody>
                     </table>
                     </div>
+                </div>
+            </div>
+            <div className="container">
+                <div className="content calendar">
+                    <h3 className="sub-content-title">Schedule</h3>
+                    <AdminCalendar />
                 </div>
             </div>
             <div className="container dashboard">
