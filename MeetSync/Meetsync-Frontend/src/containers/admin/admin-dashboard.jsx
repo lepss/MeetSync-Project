@@ -5,11 +5,11 @@ import { loadAllAppointmentRequest } from "../../api/appointmentRequest";
 import { loadAllAppointmentSession } from "../../api/appointmentSession";
 import { loadAllEvents } from "../../api/event";
 
-import TableRowEvent from "../../components/admin/table-row-event";
-import TableRowSession from "../../components/admin/table-row-session";
-import TableRowRequest from "../../components/admin/table-row-request";
-import TableRowUser from "../../components/admin/table-row-user";
-import TableRowDashboardEventAppointment from "../../components/admin/table-row-dashboard-event-appointment";
+import TableRowEvent from "../../components/dashboard/table-row-event";
+import TableRowSession from "../../components/dashboard/table-row-session";
+import TableRowRequest from "../../components/dashboard/table-row-request";
+import TableRowUser from "../../components/dashboard/table-row-user";
+import TableRowDashboardEventAppointment from "../../components/dashboard/table-row-dashboard-event-appointment";
 
 const AdminDashboard = () =>{
     const [events, setEvents] = useState([])

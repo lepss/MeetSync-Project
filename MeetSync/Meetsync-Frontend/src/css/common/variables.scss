@@ -1,7 +1,10 @@
 // DEFAULT
 @font-face {
     font-family: "IBM";
-    src: url('../../assets/fonts/IBM_Plex_Sans/IBMPlexSans-Regular.ttf');
+    src: url('../assets/fonts/IBM_Plex_Sans/IBMPlexSans-Bold.ttf') format("truetype");
+    font-weight: normal;
+    font-style: normal;
+    font-display: swap;
 }
 
 // General
@@ -17,7 +20,7 @@ $line-height: 1.5;
 
 // Fonts
 $default-font: Helvetica, Avenir, Inter, system-ui,;
-$title-font: Helvetica, Avenir, Inter, system-ui,;
+$title-font: IBM;
 
 // Colors
 $default-black: #000000;

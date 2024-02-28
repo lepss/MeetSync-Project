@@ -4,10 +4,10 @@ import { selectUser } from "../../slices/userSlice"
 import { loadAllUserEvents } from "../../api/event";
 import { loadAllUserAppointmentSession } from "../../api/appointmentSession";
 import { loadAllUserAppointmentRequest } from "../../api/appointmentRequest";
-import TableRowRequest from "../../components/admin/table-row-request";
-import TableRowSession from "../../components/admin/table-row-session";
-import TableRowEvent from "../../components/admin/table-row-event";
-import Calendar from "../../components/admin/fullCalendar";
+import TableRowRequest from "../../components/dashboard/table-row-request";
+import TableRowSession from "../../components/dashboard/table-row-session";
+import TableRowEvent from "../../components/dashboard/table-row-event";
+import Calendar from "../../components/dashboard/fullCalendar";
 
 const Dashboard = () =>{
     const user = useSelector(selectUser)

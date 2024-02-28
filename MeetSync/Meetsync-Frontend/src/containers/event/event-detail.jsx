@@ -54,7 +54,7 @@ const EventDetail = () =>{
                 <div className="content">
                     <div className="sub-content">
                         <div className="sub-group">
-                            <p><FontAwesomeIcon icon={faLocationDot}/>Paris, Palais des congrès</p>
+                            <p><FontAwesomeIcon icon={faLocationDot}/>{event.location}</p>
                             {eventDay.length > 1 ? (
                                 <p><FontAwesomeIcon icon={faCalendar}/>From {moment(eventDay[0].start_time).format('LLL')} to {moment(eventDay[eventDay.length - 1].start_time).format('LLL')}</p>
                             ) : (

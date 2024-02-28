@@ -5,9 +5,9 @@ import { deleteAllAppointmentInEvent, loadAllEventAppointments } from "../../api
 import { loadAllEventAppointmentSession } from "../../api/appointmentSession";
 import { loadAllEventAppointmentRequests } from "../../api/appointmentRequest";
 import { updateEventGenerated } from "../../api/event";
-import TableRowDashboardEventRequest from "../../components/admin/table-row-dashboard-event-request";
-import TableRowDashboardEventSession from "../../components/admin/table-row-dashboard-event-session";
-import TableRowDashboardEventAppointment from "../../components/admin/table-row-dashboard-event-appointment";
+import TableRowDashboardEventRequest from "../../components/dashboard/table-row-dashboard-event-request";
+import TableRowDashboardEventSession from "../../components/dashboard/table-row-dashboard-event-session";
+import TableRowDashboardEventAppointment from "../../components/dashboard/table-row-dashboard-event-appointment";
 
 const EventDashboard = () =>{
     const params = useParams();

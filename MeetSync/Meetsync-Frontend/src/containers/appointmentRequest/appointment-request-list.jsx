@@ -1,7 +1,7 @@
 import {useState, useEffect} from "react"
 import { useParams, Navigate } from "react-router-dom";
 import { loadAllSessionAppointmentRequest } from "../../api/appointmentRequest";
-import TableRowDashboardRequest from "../../components/admin/table-row-dashboard-request";
+import TableRowDashboardRequest from "../../components/dashboard/table-row-dashboard-request";
 
 const AppointmentRequestList = () =>{
     const params = useParams();
@@ -45,7 +45,7 @@ const AppointmentRequestList = () =>{
                         </tr>
                     </thead>
                     <tbody>
-                        {requests.map((request, id)=>{
+                        {requests !== undefined && requests.length > 0 && requests.map((request, id)=>{
                             return(
                                 <TableRowDashboardRequest 
                                     key={id}
