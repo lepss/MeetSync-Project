@@ -46,7 +46,6 @@ mysql.createConnection({ //TODO Modifier pour publication sur wecode
     console.log("Connected to MeetSync database");
     setInterval(async function () {
 		let res = await db.query('SELECT 1');
-		//console.log(res);
 	}, 5000);
     app.get('/', (req,res,next)=>{
         res.json({status: 200, results: "Welcome to MeetSync API!"})

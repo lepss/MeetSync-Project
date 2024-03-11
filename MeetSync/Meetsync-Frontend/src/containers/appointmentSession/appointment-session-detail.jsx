@@ -40,7 +40,7 @@ const AppointmentSessionDetail = () =>{
             <div className="container">
                 <div className="content">
                     <div className="sub-content">
-                        <h3 className="sub-content-title">Sub Content Title</h3>
+                        {/* <h3 className="sub-content-title">Sub Content Title</h3> */}
                         <div className="sub-group">
                             <p>{appointmentSession.description}</p>
                             <p>Created at {moment(appointmentSession.created_at).format("LLL")}</p>

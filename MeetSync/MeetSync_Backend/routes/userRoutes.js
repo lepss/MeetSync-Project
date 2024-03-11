@@ -2,7 +2,6 @@ const authentication = require("../middleware/authentication")
 
 module.exports = (app, db) =>{
     const UserController = require("../controllers/UserController")(db)
-    // const CompanyController = require("../controllers/CompanyController")(db)
 
     app.post("/api/user/register", UserController.register);
     app.post("/api/user/login", UserController.login);
